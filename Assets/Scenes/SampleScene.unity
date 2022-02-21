@@ -896,7 +896,6 @@ MonoBehaviour:
   movementMultiplier: 10
   rbDrag: 6
   rotationSpeed: 15
-  isGrounded: 0
 --- !u!114 &919132148516302890
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -928,7 +927,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CurrentState: 
-  IsGrounded: 0
   inputManager: {fileID: 919132148516302890}
   playerLocamotion: {fileID: 919132148516302889}
   anim: {fileID: 968534776}

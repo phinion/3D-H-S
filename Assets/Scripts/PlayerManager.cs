@@ -7,6 +7,7 @@ public class PlayerManager : MonoBehaviour
     PlayerStateMachine stateMachine;
 
     public string CurrentState;
+    public bool IsGrounded;
 
     public InputManager inputManager;
     CameraManager cameraManager;
@@ -41,7 +42,7 @@ public class PlayerManager : MonoBehaviour
         attackState = new PlayerAttack(this, stateMachine, "attack");
         dodgeState = new PlayerDodge(this, stateMachine, "dodge");
 
-        //fallState = new PlayerFall(this, stateMachine, "fall");
+        fallState = new PlayerFall(this, stateMachine, "fall");
     }
 
     private void Start()
@@ -55,6 +56,7 @@ public class PlayerManager : MonoBehaviour
         stateMachine.CurrentState.LogicUpdate();
 
         CurrentState = stateMachine.CurrentState.ToString();
+        IsGrounded = playerLocamotion.isGrounded;
     }
 
     private void FixedUpdate()

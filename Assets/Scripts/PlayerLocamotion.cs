@@ -18,7 +18,7 @@ public class PlayerLocamotion : MonoBehaviour
 
     public float rotationSpeed = 15f;
 
-    //public bool isGrounded = false;
+    public bool isGrounded = false;
 
     private void Awake()
     {
@@ -27,17 +27,16 @@ public class PlayerLocamotion : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         cameraObject = Camera.main.transform;
     }
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawLine(transform.position, transform.position + (Vector3.down * 0.1f));
+    }
 
-    //private void OnDrawGizmos()
-    //{
-    //    Gizmos.color = Color.red;
-    //    Gizmos.DrawLine(transform.position, transform.position + (Vector3.down *0.1f));
-    //}
-
-    //public void DoPhysicsChecks()
-    //{
-    //    isGrounded = Physics.Raycast(transform.position + (Vector3.up * 0.5f), Vector3.down, 0.5f + 0.1f);
-    //}
+    public void DoPhysicsChecks()
+    {
+        isGrounded = Physics.Raycast(transform.position + (Vector3.up * 0.5f), Vector3.down, 0.5f + 0.1f);
+    }
 
     public void HandleAllMovement()
     {

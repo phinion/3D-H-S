@@ -37,11 +37,11 @@ public class PlayerFall : PlayerState
     {
         base.LogicUpdate();
 
-        //if (player.playerLocamotion.isGrounded)
-        //{
-        //    player.anim.SetBool(animBoolName, false);
-        //    //stateMachine.ChangeState(player.idleState);
-        //}
+        if (player.playerLocamotion.isGrounded)
+        {
+            player.anim.SetBool(animBoolName, false);
+            stateMachine.ChangeState(player.idleState);
+        }
     }
 
     public override void PhysicsUpdate()
