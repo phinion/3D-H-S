@@ -23,14 +23,14 @@ public class PlayerFall : PlayerState
     {
         base.Enter();
 
-        player.anim.applyRootMotion = true;
+        //player.anim.applyRootMotion = true;
     }
 
     public override void Exit()
     {
         base.Exit();
 
-        player.anim.applyRootMotion = false;
+        //player.anim.applyRootMotion = false;
     }
 
     public override void LogicUpdate()

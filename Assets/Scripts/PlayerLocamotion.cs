@@ -70,9 +70,51 @@ public class PlayerLocamotion : MonoBehaviour
         rb.drag = rbDrag;
     }
 
-    public void Dash(Vector3 _force, Vector3 _dir)
+    public void Dash(float _force, Vector2 _dir)
     {
+        Vector3 targetDirection = Vector3.zero;
 
+        targetDirection = cameraObject.forward * _dir.y;
+        targetDirection = targetDirection + cameraObject.right * _dir.x;
+        targetDirection.Normalize();
+        targetDirection.y = 0;
+
+        if (targetDirection == Vector3.zero)
+        {
+            targetDirection = transform.forward;
+        }
+
+        Quaternion targetRotation = Quaternion.LookRotation(targetDirection);
+        transform.rotation = targetRotation;
+
+        rb.AddForce(_force * targetDirection, ForceMode.Acceleration);
+
+        rb.velocity = Vector3.ClampMagnitude(rb.velocity, 5f);
+    }
+
+    public void HandleDirMovement(Vector2 _dir)
+    {
+        Vector3 targetDirection = Vector3.zero;
+
+        targetDirection = cameraObject.forward * _dir.y;
+        targetDirection = targetDirection + cameraObject.right * _dir.x;
+        targetDirection.Normalize();
+        targetDirection.y = 0;
+
+        if (targetDirection == Vector3.zero)
+        {
+            targetDirection = transform.forward;
+        }
+
+        Quaternion targetRotation = Quaternion.LookRotation(targetDirection);
+        transform.rotation = targetRotation;
+
+        Vector3 movementVelocity = targetDirection * movementSpeed;
+
+
+        //rb.velocity = movementVelocity;
+        rb.AddForce(movementVelocity * 5, ForceMode.Acceleration);
+        ControlDrag();
     }
 
     private void HandleRotation()

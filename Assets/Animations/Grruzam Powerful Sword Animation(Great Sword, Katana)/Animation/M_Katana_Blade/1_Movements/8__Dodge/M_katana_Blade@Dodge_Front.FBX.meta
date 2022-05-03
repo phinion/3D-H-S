@@ -1084,6 +1084,13 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
+      - time: 0.49954954
+        functionName: SetAnimationComboTrigger
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: 1c3445ec70d65e54ebfa46442ec0f656, type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       - time: 1
         functionName: SetAnimationFinishedTrigger
         data: 

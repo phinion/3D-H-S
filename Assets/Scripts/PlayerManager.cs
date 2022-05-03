@@ -70,5 +70,5 @@ public class PlayerManager : MonoBehaviour
     }
 
     public void SetAnimationFinishedTrigger() => stateMachine.CurrentState.AnimationFinishTrigger();
-
+    public void SetAnimationComboTrigger() => stateMachine.CurrentState.AnimationComboTrigger();
 }

@@ -38,6 +38,7 @@ public class PlayerState
     public virtual void Exit()
     {
         //player.anim.SetBool(animBoolName, false);
+        player.anim.SetBool("combo", false);
         isExitingState = true;
     }
 
@@ -68,6 +69,11 @@ public class PlayerState
     {
         isAnimationFinished = true;
         player.anim.SetBool(animBoolName, false);
+    }
+
+    public virtual void AnimationComboTrigger()
+    {
+        player.anim.SetBool("combo", true);
     }
 
     public bool ExitingState
