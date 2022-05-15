@@ -43,18 +43,18 @@ public class PlayerMove : PlayerState
 
         //if (!isExitingState)
         //{
-            if (input.movementInput == Vector2.zero)
-            {
-                stateMachine.ChangeState(player.idleState);
-            }
-            else if (input.attack)
-            {
-                stateMachine.ChangeState(player.attackState);
-            }
-            else if (input.dodge)
-            {
-                stateMachine.ChangeState(player.dodgeState);
-            }
+        if (input.movementInput == Vector2.zero && player.playerLocamotion.rb.velocity.magnitude < 0.8f)
+        {
+            stateMachine.ChangeState(player.idleState);
+        }
+        else if (input.attack)
+        {
+            stateMachine.ChangeState(player.attackState);
+        }
+        else if (input.dodge)
+        {
+            stateMachine.ChangeState(player.dodgeState);
+        }
         //}
     }
 
@@ -63,5 +63,7 @@ public class PlayerMove : PlayerState
         base.PhysicsUpdate();
 
         player.playerLocamotion.HandleAllMovement();
+
+        Debug.Log("Current Magnitude: " + player.playerLocamotion.rb.velocity.magnitude);
     }
 }

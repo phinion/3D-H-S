@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerDodge : PlayerState
 {
-    Vector2 inputDir;
+    Vector3 normalizedMoveDir;
 
     public PlayerDodge(PlayerManager _player, PlayerStateMachine _stateMachine, string _animBoolName) : base(_player, _stateMachine, _animBoolName)
     {
@@ -14,14 +14,14 @@ public class PlayerDodge : PlayerState
     {
         base.AnimationFinishTrigger();
 
-        if (input.movementInput == Vector2.zero)
-        {
-            stateMachine.ChangeState(player.idleState);
-        }
-        else
-        {
+        //if (input.movementInput == Vector2.zero)
+        //{
+        //    stateMachine.ChangeState(player.idleState);
+        //}
+        //else
+        //{
             stateMachine.ChangeState(player.moveState);
-        }
+        //}
 
     }
 
@@ -34,14 +34,15 @@ public class PlayerDodge : PlayerState
     {
         base.Enter();
 
-        inputDir = new Vector2(player.inputManager.horizontalInput, player.inputManager.verticalInput);
+        //inputDir = new Vector2(player.inputManager.horizontalInput, player.inputManager.verticalInput);
+        normalizedMoveDir = player.playerLocamotion.GetNormalizedMoveDirection();
     }
 
     public override void Exit()
     {
         base.Exit();
 
-        inputDir = Vector2.zero;
+        normalizedMoveDir = Vector3.zero;
     }
 
     public override void LogicUpdate()
@@ -63,11 +64,13 @@ public class PlayerDodge : PlayerState
 
         if (!player.anim.GetBool("combo"))
         {
-            player.playerLocamotion.Dash(500f, inputDir);
+            player.playerLocamotion.Dash(20f, normalizedMoveDir);
         }
         else
         {
-            player.playerLocamotion.HandleDirMovement(inputDir);
+            player.playerLocamotion.HandleMovement(normalizedMoveDir);
         }
+
+        player.playerLocamotion.HandleRotation(normalizedMoveDir);
     }
 }

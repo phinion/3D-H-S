@@ -46,7 +46,7 @@ public class PlayerLocamotion : MonoBehaviour
         //HandleMovementAnimation();
     }
 
-    private Vector3 GetNormalizedMoveDirection()
+    public Vector3 GetNormalizedMoveDirection()
     {
         Vector3 moveDirection;
         moveDirection = cameraObject.forward * inputManager.verticalInput;
@@ -55,7 +55,7 @@ public class PlayerLocamotion : MonoBehaviour
         moveDirection.y = 0;
         return moveDirection;
     }
-
+    #region Movement and Rotation given input
     private void HandleMovement()
     {
         Vector3 movementVelocity = GetNormalizedMoveDirection() * movementSpeed;
@@ -69,62 +69,9 @@ public class PlayerLocamotion : MonoBehaviour
     {
         rb.drag = rbDrag;
     }
-
-    public void Dash(float _force, Vector2 _dir)
-    {
-        Vector3 targetDirection = Vector3.zero;
-
-        targetDirection = cameraObject.forward * _dir.y;
-        targetDirection = targetDirection + cameraObject.right * _dir.x;
-        targetDirection.Normalize();
-        targetDirection.y = 0;
-
-        if (targetDirection == Vector3.zero)
-        {
-            targetDirection = transform.forward;
-        }
-
-        Quaternion targetRotation = Quaternion.LookRotation(targetDirection);
-        transform.rotation = targetRotation;
-
-        rb.AddForce(_force * targetDirection, ForceMode.Acceleration);
-
-        rb.velocity = Vector3.ClampMagnitude(rb.velocity, 5f);
-    }
-
-    public void HandleDirMovement(Vector2 _dir)
-    {
-        Vector3 targetDirection = Vector3.zero;
-
-        targetDirection = cameraObject.forward * _dir.y;
-        targetDirection = targetDirection + cameraObject.right * _dir.x;
-        targetDirection.Normalize();
-        targetDirection.y = 0;
-
-        if (targetDirection == Vector3.zero)
-        {
-            targetDirection = transform.forward;
-        }
-
-        Quaternion targetRotation = Quaternion.LookRotation(targetDirection);
-        transform.rotation = targetRotation;
-
-        Vector3 movementVelocity = targetDirection * movementSpeed;
-
-
-        //rb.velocity = movementVelocity;
-        rb.AddForce(movementVelocity * 5, ForceMode.Acceleration);
-        ControlDrag();
-    }
-
     private void HandleRotation()
     {
-        Vector3 targetDirection = Vector3.zero;
-
-        targetDirection = cameraObject.forward * inputManager.verticalInput;
-        targetDirection = targetDirection + cameraObject.right * inputManager.horizontalInput;
-        targetDirection.Normalize();
-        targetDirection.y = 0;
+        Vector3 targetDirection = GetNormalizedMoveDirection();
 
         if (targetDirection == Vector3.zero)
         {
@@ -137,6 +84,46 @@ public class PlayerLocamotion : MonoBehaviour
         transform.rotation = playerRotation;
     }
 
+    #endregion
+
+    #region Movement and Rotation given direction
+    public void HandleMovement(Vector3 _normalizedTargetDirection)
+    {
+        Vector3 movementVelocity = _normalizedTargetDirection * movementSpeed;
+
+        //rb.velocity = movementVelocity;
+        rb.AddForce(movementVelocity * movementMultiplier, ForceMode.Acceleration);
+        ControlDrag();
+    }
+
+    // might need to change these to public so that we can call when we are targetting enemy but moving separately
+    public void HandleRotation(Vector3 _normalizedTargetDirection)
+    {
+        Quaternion targetRotation = Quaternion.LookRotation(_normalizedTargetDirection);
+        Quaternion playerRotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+
+        transform.rotation = playerRotation;
+    }
+
+    public void HandleAllMovement(Vector3 _normalizedTargetDirection)
+    {
+        HandleMovement(_normalizedTargetDirection);
+        HandleRotation(_normalizedTargetDirection);
+    }
+
+    #endregion
+
+    public void Dash(float _force, Vector3 _normalizedTargetDirection)
+    {
+        //Quaternion targetRotation = Quaternion.LookRotation(targetDirection);
+        //transform.rotation = targetRotation;
+
+        rb.AddForce(_force * movementMultiplier * _normalizedTargetDirection, ForceMode.Acceleration);
+
+        rb.velocity = Vector3.ClampMagnitude(rb.velocity, 5f);
+    }
+
+    
     //private void HandleMovementAnimation()
     //{
     //    //Vector2 test = Vector2.zero;

@@ -13,9 +13,6 @@ public class PlayerAttack : PlayerState
     public override void AnimationFinishTrigger()
     {
         base.AnimationFinishTrigger();
-        Debug.Log("Set animation trigger false");
-
-        Debug.Log("input attack:" + input.attack);
 
         if (input.attack && combocount < 3)
         {
@@ -44,7 +41,6 @@ public class PlayerAttack : PlayerState
     public override void AnimationTrigger()
     {
         base.AnimationTrigger();
-        Debug.Log("Set animation trigger true");
     }
 
     public override void DoChecks()
