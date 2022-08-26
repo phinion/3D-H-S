@@ -25,7 +25,7 @@ public class InputManager : MonoBehaviour
 
     private void Awake()
     {
-        animatorManager = GetComponent<AnimatorManager>();
+        animatorManager = GetComponentInChildren<AnimatorManager>();
         playerLocamotion = GetComponent<PlayerLocamotion>();
     }
 

@@ -4,12 +4,14 @@ using UnityEngine;
 
 public class AnimatorManager : MonoBehaviour
 {
+    PlayerManager playerManager;
     Animator animator;
     int horizontal;
     int vertical;
 
     private void Awake()
     {
+        playerManager = GetComponentInParent<PlayerManager>();
         animator = GetComponentInChildren<Animator>();
         horizontal = Animator.StringToHash("Horizontal");
         vertical = Animator.StringToHash("Vertical");
@@ -72,5 +74,8 @@ public class AnimatorManager : MonoBehaviour
         animator.SetFloat(vertical, snappedVertical, 0.1f, Time.deltaTime);
 
     }
+
+    public void SetAnimationFinishedTrigger() => playerManager.SetAnimationFinishedTrigger();
+    public void SetAnimationComboTrigger() => playerManager.SetAnimationComboTrigger();
 
 }
