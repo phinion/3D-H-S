@@ -14,9 +14,6 @@ public class PlayerManager : MonoBehaviour
     public PlayerLocamotion playerLocamotion;
     public Animator anim;
 
-    public DamageManager damageManager;
-    public EntityHealth playerHealth;
-
     public PlayerIdle idleState;
     public PlayerMove moveState;
     public PlayerFall fallState;

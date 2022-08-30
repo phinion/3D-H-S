@@ -1,35 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &5217010371655967499
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 3031094228562192872}
-  m_Layer: 0
-  m_Name: DefenceCollider
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &3031094228562192872
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5217010371655967499}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 8216879937448159103}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5542330048860363574
 GameObject:
   m_ObjectHideFlags: 0
@@ -4477,8 +4447,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8216879937448159103}
   - component: {fileID: 8216630236203811975}
-  - component: {fileID: 692602322964504260}
-  - component: {fileID: 6471604518629821290}
   - component: {fileID: 8216630236203811969}
   - component: {fileID: 8216630236203811968}
   - component: {fileID: 8216630236203812028}
@@ -4503,8 +4471,6 @@ Transform:
   m_LocalScale: {x: 0.35, y: 0.35, z: 0.35}
   m_Children:
   - {fileID: 7742853944069931480}
-  - {fileID: 6968998882834727040}
-  - {fileID: 3031094228562192872}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
@@ -4525,33 +4491,8 @@ MonoBehaviour:
   inputManager: {fileID: 8216630236203811968}
   playerLocamotion: {fileID: 8216630236203811969}
   anim: {fileID: 2009013804803792605}
-  damageManager: {fileID: 692602322964504260}
-  playerHealth: {fileID: 6471604518629821290}
---- !u!114 &692602322964504260
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8215381508536638991}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5557bb6e52913f47900c870ff530149, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &6471604518629821290
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8215381508536638991}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fec37daba0509d40826674eec580f9e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  health: 100
+  damageManager: {fileID: 0}
+  playerHealth: {fileID: 0}
 --- !u!114 &8216630236203811969
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7437,33 +7378,3 @@ SkinnedMeshRenderer:
     m_Center: {x: -0.000049893628, y: -0.0013084151, z: 0.08535729}
     m_Extent: {x: 0.0023925612, y: 0.0015484046, z: 0.0012644865}
   m_DirtyAABB: 0
---- !u!1 &8496475790839243503
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 6968998882834727040}
-  m_Layer: 0
-  m_Name: AttackCollider
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &6968998882834727040
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8496475790839243503}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 8216879937448159103}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
