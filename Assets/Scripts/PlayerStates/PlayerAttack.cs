@@ -46,11 +46,16 @@ public class PlayerAttack : PlayerState
     public override void DoChecks()
     {
         base.DoChecks();
+
+        player.hitbox.CheckHit();
     }
 
     public override void Enter()
     {
         base.Enter();
+
+        player.objectsHit.Clear();
+        Debug.Log("PlayerAttack");
     }
 
     public override void Exit()

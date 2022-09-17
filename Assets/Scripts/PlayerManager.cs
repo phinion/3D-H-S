@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerManager : MonoBehaviour
+public class PlayerManager : MonoBehaviour, IHitResponder
 {
     PlayerStateMachine stateMachine;
 
@@ -21,6 +21,12 @@ public class PlayerManager : MonoBehaviour
     public PlayerAttack attackState;
     public PlayerDodge dodgeState;
 
+    [Header("Attacking")]
+    [SerializeField] private int damage = 10;
+    [HideInInspector] public Hitbox hitbox;
+    [HideInInspector] public List<GameObject> objectsHit = new List<GameObject>();
+
+    int IHitResponder.Damage { get => damage; }
 
     private void Awake()
     {
@@ -48,6 +54,9 @@ public class PlayerManager : MonoBehaviour
     private void Start()
     {
         stateMachine.Initialize(idleState);
+
+        hitbox = GetComponentInChildren<Hitbox>();
+        hitbox.HitResponder = this;
     }
 
     private void Update()
@@ -71,4 +80,16 @@ public class PlayerManager : MonoBehaviour
 
     public void SetAnimationFinishedTrigger() => stateMachine.CurrentState.AnimationFinishTrigger();
     public void SetAnimationComboTrigger() => stateMachine.CurrentState.AnimationComboTrigger();
+
+    bool IHitResponder.CheckHit(HitData _data)
+    {
+        if (_data.hurtbox.Owner == gameObject)              { return false; }
+        else if (objectsHit.Contains(_data.hurtbox.Owner))  { return false; }
+        else                                                { return true; }
+    }
+
+    void IHitResponder.Response(HitData _data)
+    {
+        objectsHit.Add(_data.hurtbox.Owner);
+    }
 }

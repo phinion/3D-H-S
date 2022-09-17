@@ -18,6 +18,6 @@ public class PlayerStateMachine
         CurrentState.Exit();
         CurrentState = _newState;
         CurrentState.Enter();
-        Debug.Log("change state: " + CurrentState);
+        //Debug.Log("change state: " + CurrentState);
     }
 }

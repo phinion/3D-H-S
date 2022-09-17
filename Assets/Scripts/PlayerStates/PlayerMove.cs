@@ -64,6 +64,6 @@ public class PlayerMove : PlayerState
 
         player.playerLocamotion.HandleAllMovement();
 
-        Debug.Log("Current Magnitude: " + player.playerLocamotion.rb.velocity.magnitude);
+        //Debug.Log("Current Magnitude: " + player.playerLocamotion.rb.velocity.magnitude);
     }
 }
