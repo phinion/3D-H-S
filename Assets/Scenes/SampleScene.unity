@@ -246,21 +246,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.20846304, y: 1.9992012, z: 0.085479714}
   m_Center: {x: 0.00000040255676, y: 0.70948887, z: -0.00003992605}
---- !u!114 &264583470
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 264583464}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 88f68f676572f1a4f8433dd034dcddc4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  attack: 1
-  damage: 10
-  hitbox: {fileID: 264583465}
 --- !u!1 &611239931
 GameObject:
   m_ObjectHideFlags: 0
@@ -1249,6 +1234,9 @@ MonoBehaviour:
   inputManager: {fileID: 919132148516302890}
   playerLocamotion: {fileID: 919132148516302889}
   anim: {fileID: 968534776}
+  damage: 10
+  hitbox: {fileID: 0}
+  objectsHit: []
 --- !u!114 &919132148516302892
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2265,12 +2253,20 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2009013804803792605, guid: 2a3ce65c965a4ff4d807d3c146a3fb65, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: fbb0ef89e5231144e906ea199730cfbf, type: 2}
     - target: {fileID: 8215381508536638991, guid: 2a3ce65c965a4ff4d807d3c146a3fb65, type: 3}
       propertyPath: m_Name
       value: Itsune_elaine
       objectReference: {fileID: 0}
     - target: {fileID: 8215381508536638991, guid: 2a3ce65c965a4ff4d807d3c146a3fb65, type: 3}
       propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8216630236203811971, guid: 2a3ce65c965a4ff4d807d3c146a3fb65, type: 3}
+      propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8216630236203812028, guid: 2a3ce65c965a4ff4d807d3c146a3fb65, type: 3}
