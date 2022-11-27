@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Interactions;
 
 public class InputManager : MonoBehaviour
 {
@@ -20,7 +22,7 @@ public class InputManager : MonoBehaviour
     public bool attack;
     public bool dodge;
     //public bool run;
-    
+
     private float moveAmount;
 
     private void Awake()
@@ -40,10 +42,10 @@ public class InputManager : MonoBehaviour
 
             playerControls.PlayerCombat.Dodge.performed += i => dodge = true;
             playerControls.PlayerCombat.Dodge.canceled += i => dodge = false;
-
-            playerControls.PlayerCombat.Attack.performed += i => attack = true;
-            playerControls.PlayerCombat.Attack.canceled += i => attack = false;
-
+            Debug.Log("Enable 1");
+            playerControls.PlayerCombat.Attack.performed += i => PrimaryAttack(i);
+            playerControls.PlayerCombat.Attack.canceled += i => PrimaryAttack(i);
+            Debug.Log("Enable 2");
             //playerControls.PlayerMovement.Run.performed += i => run = true;
             //playerControls.PlayerMovement.Run.canceled += i => run = false;
         }
@@ -51,9 +53,51 @@ public class InputManager : MonoBehaviour
         playerControls.Enable();
     }
 
+    private void PrimaryAttack(InputAction.CallbackContext context)
+    {
+        //switch (context.interaction)
+        //{
+        //    case HoldInteraction:
+        //        break;
+        //    default:
+        //        break;
+        //}
+
+        if (context.performed)
+        {
+            //Check if hold threshhold is reached then
+            // call primary hold
+
+            attack = true;
+
+
+
+            //call activationcheck for attack
+        }
+        //else if (context.canceled)
+        //{
+
+        //}
+
+        //if (context.interaction is HoldInteraction)
+        //{
+        //    Debug.Log("Hold performed");
+        //}
+        //if (context.interaction is SlowTapInteraction)
+        //{
+        //    Debug.Log("Slow Tap performed");
+        //}
+        //if (context.interaction is TapInteraction)
+        //{
+        //    Debug.Log("Tap performed");
+        //}
+
+    }
+
     private void OnDisable()
     {
         playerControls.Disable();
+        Debug.Log("Disable");
     }
 
     public void HandleAllInput()

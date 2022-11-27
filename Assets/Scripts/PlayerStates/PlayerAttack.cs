@@ -10,9 +10,26 @@ public class PlayerAttack : PlayerState
     {
     }
 
+    //activationcheckfunction
+    public override void ActivationCheck()
+    {
+
+        // is the character in a place where they are able to do an attack
+
+        //if they are then changestate(attack)
+
+        //otherwise ignore
+
+    }
+
     public override void AnimationFinishTrigger()
     {
         base.AnimationFinishTrigger();
+
+        //if movesmanager.canmove
+        // move
+        // else 
+        //return to idle or movestate
 
         if (input.attack && combocount < 3)
         {
@@ -34,7 +51,6 @@ public class PlayerAttack : PlayerState
 
 
         }
-
 
     }
 

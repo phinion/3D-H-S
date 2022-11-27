@@ -9,7 +9,7 @@ public class PlayerStateMachine
     public void Initialize(PlayerState _startingState)
     {
         CurrentState = _startingState;
-        Debug.Log(CurrentState);
+        //Debug.Log(CurrentState);
         CurrentState.Enter();
     }
 
