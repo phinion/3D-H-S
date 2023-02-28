@@ -9,6 +9,7 @@ public class InputManager : MonoBehaviour
     PlayerControls playerControls;
     AnimatorManager animatorManager;
     PlayerLocamotion playerLocamotion;
+    MovesManager movesManager;
 
     public Vector2 movementInput { get; private set; }
     public Vector2 cameraInput { get; private set; }
@@ -29,6 +30,7 @@ public class InputManager : MonoBehaviour
     {
         animatorManager = GetComponentInChildren<AnimatorManager>();
         playerLocamotion = GetComponent<PlayerLocamotion>();
+        movesManager = GetComponent<MovesManager>();
     }
 
     private void OnEnable()
@@ -68,16 +70,23 @@ public class InputManager : MonoBehaviour
             //Check if hold threshhold is reached then
             // call primary hold
 
-            attack = true;
+            //attack = true;
+
+
+            if (movesManager.CheckAvailableMoves(AttackType.light))
+            {
+                movesManager.DoMove();
+            }
+
 
 
 
             //call activationcheck for attack
         }
-        //else if (context.canceled)
-        //{
-
-        //}
+        else if (context.canceled)
+        {
+            attack = false;
+        }
 
         //if (context.interaction is HoldInteraction)
         //{

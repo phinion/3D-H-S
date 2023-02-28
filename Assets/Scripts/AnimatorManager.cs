@@ -76,6 +76,6 @@ public class AnimatorManager : MonoBehaviour
     }
 
     public void SetAnimationFinishedTrigger() => playerManager.SetAnimationFinishedTrigger();
-    public void SetAnimationComboTrigger() => playerManager.SetAnimationComboTrigger();
+    //public void SetAnimationComboTrigger() => playerManager.SetAnimationComboTrigger();
 
 }

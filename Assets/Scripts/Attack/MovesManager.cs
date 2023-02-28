@@ -7,12 +7,16 @@ public class MovesManager : MonoBehaviour
     [SerializeField] List<AttackCombo> Moves; // All available moves
     List<AttackCombo> availableMoves;
 
+    PlayerManager player;
+
     int comboCount = 0;
 
     // Start is called before the first frame update
     void Start()
     {
         availableMoves = new List<AttackCombo>();
+
+        player = GetComponent<PlayerManager>();
     }
 
     // Update is called once per frame
@@ -57,4 +61,9 @@ public class MovesManager : MonoBehaviour
         }
     }
 
+
+    public void DoMove()
+    {
+        player.attackState.ActivationCheck();
+    }
 }

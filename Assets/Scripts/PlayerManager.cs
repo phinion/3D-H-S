@@ -9,6 +9,7 @@ public class PlayerManager : MonoBehaviour, IHitResponder
     public string CurrentState;
     public bool IsGrounded;
 
+    public MovesManager movesManager;
     public InputManager inputManager;
     CameraManager cameraManager;
     public PlayerLocamotion playerLocamotion;
@@ -79,7 +80,7 @@ public class PlayerManager : MonoBehaviour, IHitResponder
     }
 
     public void SetAnimationFinishedTrigger() => stateMachine.CurrentState.AnimationFinishTrigger();
-    public void SetAnimationComboTrigger() => stateMachine.CurrentState.AnimationComboTrigger();
+    //public void SetAnimationComboTrigger() => stateMachine.CurrentState.AnimationComboTrigger();
 
     bool IHitResponder.CheckHit(HitData _data)
     {

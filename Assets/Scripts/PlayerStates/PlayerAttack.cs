@@ -20,44 +20,51 @@ public class PlayerAttack : PlayerState
 
         //otherwise ignore
 
+        stateMachine.ChangeState(this);
+
     }
 
     public override void AnimationFinishTrigger()
     {
-        base.AnimationFinishTrigger();
+        //base.AnimationFinishTrigger();
+
+        isAnimationFinished = true;
 
         //if movesmanager.canmove
         // move
         // else 
         //return to idle or movestate
 
-        if (input.attack && combocount < 3)
+        //if (input.attack && combocount < 3)
+        //{
+        //    combocount++;
+        //    stateMachine.ChangeState(player.attackState);
+        //}
+        //else
+        //{
+        combocount = 1;
+
+        if (input.movementInput == Vector2.zero)
         {
-            combocount++;
-            stateMachine.ChangeState(player.attackState);
+            stateMachine.ChangeState(player.idleState);
         }
         else
         {
-            combocount = 1;
-
-            if (input.movementInput == Vector2.zero)
-            {
-                stateMachine.ChangeState(player.idleState);
-            }
-            else
-            {
-                stateMachine.ChangeState(player.moveState);
-            }
-
-
+            stateMachine.ChangeState(player.moveState);
         }
+
+
+        //}
 
     }
 
     public override void AnimationTrigger()
     {
-        base.AnimationTrigger();
+        //base.AnimationTrigger();
+        player.anim.SetTrigger(animBoolName);
     }
+
+
 
     public override void DoChecks()
     {
@@ -77,6 +84,9 @@ public class PlayerAttack : PlayerState
     public override void Exit()
     {
         base.Exit();
+
+
+        player.anim.ResetTrigger(animBoolName);
     }
 
     public override void LogicUpdate()
