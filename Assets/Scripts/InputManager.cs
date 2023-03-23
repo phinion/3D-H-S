@@ -75,7 +75,11 @@ public class InputManager : MonoBehaviour
 
             if (movesManager.CheckAvailableMoves(AttackType.light))
             {
-                movesManager.DoMove();
+                //movesManager.DoNextMove();
+            }
+            else
+            {
+                movesManager.ClearAvailableMoves();
             }
 
 

@@ -25,11 +25,6 @@ public class PlayerState
         anim = this.player.GetComponent<Animator>();
     }
 
-    public virtual void ActivationCheck()
-    {
-
-    }
-
     public virtual void Enter()
     {
         DoChecks();

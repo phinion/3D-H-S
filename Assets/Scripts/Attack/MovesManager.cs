@@ -5,11 +5,15 @@ using UnityEngine;
 public class MovesManager : MonoBehaviour
 {
     [SerializeField] List<AttackCombo> Moves; // All available moves
-    List<AttackCombo> availableMoves;
+    [SerializeField]  List<AttackCombo> availableMoves;
 
     PlayerManager player;
 
     int comboCount = 0;
+
+    AttackCombo nextMove = null;
+
+    bool inCombo = false;
 
     // Start is called before the first frame update
     void Start()
@@ -25,21 +29,64 @@ public class MovesManager : MonoBehaviour
         
     }
 
+    public void ResetAvailableMoves()
+    {
+        availableMoves.AddRange(Moves);
+    }
+
+    public void ClearAvailableMoves()
+    {
+        availableMoves.Clear();
+        comboCount = 0;
+        player.anim.SetInteger("comboCount", comboCount);
+    }
+
     public bool CheckAvailableMoves(AttackType _type)
     {
         ComboInput currentComboInput = new ComboInput(_type);
+
+        //List<AttackCombo> listToUse;
+        //if(availableMoves.Count == 0)
+        //{
+        //    listToUse = Moves;
+        //}
+        //else
+        //{
+        //    listToUse = availableMoves;
+        //}
+
+        //foreach (AttackCombo _c in listToUse)
+        //{
+        //    if (_c.ContinueCombo(currentComboInput, comboCount) && !availableMoves.Contains(_c))
+        //    {
+        //        availableMoves.Add(_c);
+        //        newMove = true;
+        //    }
+
+        //}
+
+        //if (availableMoves.Count > 0)
+        //{
+        //    return true;
+        //}
+        //else
+        //{
+        //    return false;
+        //}
+
+
 
         List<AttackCombo> remove = new List<AttackCombo>();
 
         if (availableMoves.Count == 0)
         {
-            availableMoves.AddRange(Moves);
+            ResetAvailableMoves();
         }
 
 
         foreach (AttackCombo _c in availableMoves)
         {
-            if (_c.ContinueCombo(currentComboInput))
+            if (_c.ContinueCombo(currentComboInput,comboCount))
             {
 
             }
@@ -53,6 +100,7 @@ public class MovesManager : MonoBehaviour
 
         if (availableMoves.Count > 0)
         {
+            inCombo = true;
             return true;
         }
         else
@@ -60,10 +108,19 @@ public class MovesManager : MonoBehaviour
             return false;
         }
     }
-
-
-    public void DoMove()
+    public bool IsMoveAvailable()
     {
-        player.attackState.ActivationCheck();
+        if(availableMoves.Count > 0 && inCombo)
+        {
+            return true;
+        }
+        return false;
+    }
+
+    public void DoNextMove()
+    {
+        player.anim.SetInteger("comboCount", comboCount);
+        comboCount++;
+        inCombo = false;
     }
 }

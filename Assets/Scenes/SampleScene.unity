@@ -930,30 +930,6 @@ MonoBehaviour:
   m_RequiresDepthTexture: 0
   m_RequiresColorTexture: 0
   m_Version: 2
---- !u!1 &1691844558 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8215381508536638991, guid: 2a3ce65c965a4ff4d807d3c146a3fb65, type: 3}
-  m_PrefabInstance: {fileID: 8216630236930550499}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1691844559
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1691844558}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dfc7418437d1c7f4fbe9ea2e7989369a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Moves:
-  - comboAttack:
-      name: 1 Hit
-      length: 1
-    inputs:
-    - type: 0
-    - type: 0
 --- !u!4 &1856941182 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8217132842972241189, guid: 2a3ce65c965a4ff4d807d3c146a3fb65, type: 3}
@@ -2282,6 +2258,54 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: fbb0ef89e5231144e906ea199730cfbf, type: 2}
+    - target: {fileID: 2888728660263822409, guid: 2a3ce65c965a4ff4d807d3c146a3fb65, type: 3}
+      propertyPath: Moves.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2888728660263822409, guid: 2a3ce65c965a4ff4d807d3c146a3fb65, type: 3}
+      propertyPath: Moves.Array.data[0].name
+      value: 2 Hit light
+      objectReference: {fileID: 0}
+    - target: {fileID: 2888728660263822409, guid: 2a3ce65c965a4ff4d807d3c146a3fb65, type: 3}
+      propertyPath: Moves.Array.data[1].name
+      value: 3 hit light
+      objectReference: {fileID: 0}
+    - target: {fileID: 2888728660263822409, guid: 2a3ce65c965a4ff4d807d3c146a3fb65, type: 3}
+      propertyPath: Moves.Array.data[0].combo.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2888728660263822409, guid: 2a3ce65c965a4ff4d807d3c146a3fb65, type: 3}
+      propertyPath: Moves.Array.data[1].combo.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2888728660263822409, guid: 2a3ce65c965a4ff4d807d3c146a3fb65, type: 3}
+      propertyPath: Moves.Array.data[0].inputs.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2888728660263822409, guid: 2a3ce65c965a4ff4d807d3c146a3fb65, type: 3}
+      propertyPath: Moves.Array.data[0].attackCombo.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2888728660263822409, guid: 2a3ce65c965a4ff4d807d3c146a3fb65, type: 3}
+      propertyPath: Moves.Array.data[0].combo.Array.data[0].name
+      value: Light 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2888728660263822409, guid: 2a3ce65c965a4ff4d807d3c146a3fb65, type: 3}
+      propertyPath: Moves.Array.data[0].combo.Array.data[1].name
+      value: Light 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2888728660263822409, guid: 2a3ce65c965a4ff4d807d3c146a3fb65, type: 3}
+      propertyPath: Moves.Array.data[1].combo.Array.data[0].name
+      value: Light 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2888728660263822409, guid: 2a3ce65c965a4ff4d807d3c146a3fb65, type: 3}
+      propertyPath: Moves.Array.data[1].combo.Array.data[1].name
+      value: Light 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2888728660263822409, guid: 2a3ce65c965a4ff4d807d3c146a3fb65, type: 3}
+      propertyPath: Moves.Array.data[1].combo.Array.data[2].name
+      value: Light 3
+      objectReference: {fileID: 0}
     - target: {fileID: 8215381508536638991, guid: 2a3ce65c965a4ff4d807d3c146a3fb65, type: 3}
       propertyPath: m_Name
       value: Itsune_elaine
@@ -2294,10 +2318,6 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 8216630236203811975, guid: 2a3ce65c965a4ff4d807d3c146a3fb65, type: 3}
-      propertyPath: movesManager
-      value: 
-      objectReference: {fileID: 1691844559}
     - target: {fileID: 8216630236203812028, guid: 2a3ce65c965a4ff4d807d3c146a3fb65, type: 3}
       propertyPath: m_Interpolate
       value: 1

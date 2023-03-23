@@ -4,24 +4,9 @@ using UnityEngine;
 
 public class PlayerAttack : PlayerState
 {
-    int combocount = 1;
 
     public PlayerAttack(PlayerManager _player, PlayerStateMachine _stateMachine, string _animBoolName) : base(_player, _stateMachine, _animBoolName)
     {
-    }
-
-    //activationcheckfunction
-    public override void ActivationCheck()
-    {
-
-        // is the character in a place where they are able to do an attack
-
-        //if they are then changestate(attack)
-
-        //otherwise ignore
-
-        stateMachine.ChangeState(this);
-
     }
 
     public override void AnimationFinishTrigger()
@@ -42,15 +27,21 @@ public class PlayerAttack : PlayerState
         //}
         //else
         //{
-        combocount = 1;
+        if (player.movesManager.IsMoveAvailable())
+        {
+            stateMachine.ChangeState(this);
+            player.movesManager.DoNextMove();
+        } else
 
         if (input.movementInput == Vector2.zero)
         {
             stateMachine.ChangeState(player.idleState);
+            player.movesManager.ClearAvailableMoves();
         }
         else
         {
             stateMachine.ChangeState(player.moveState);
+            player.movesManager.ClearAvailableMoves();
         }
 
 

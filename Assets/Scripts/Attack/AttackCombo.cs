@@ -8,7 +8,8 @@ public enum AttackType { light = 0, heavy = 1 }
 public class Attack
 {
     public string name;
-    public float length;
+    public string anim;
+    public ComboInput input;
 }
 
 [System.Serializable]
@@ -24,7 +25,14 @@ public class ComboInput
 
     public bool IsSameAs(ComboInput _i)
     {
-        return (type == _i.type);
+        if (_i != null)
+        {
+            return (type == _i.type);
+        }
+        else
+        {
+            return false;
+        }
     }
 }
 
@@ -32,38 +40,33 @@ public class ComboInput
 
 public class AttackCombo
 {
-    public Attack comboAttack;
-    public List<ComboInput> inputs;
+    public string name;
 
-    int curInput = 0;
+    public List<Attack> combo;
+    //public List<ComboInput> inputs;
 
-    public bool ContinueCombo(ComboInput _i)
+    public bool ContinueCombo(ComboInput _i, int comboCount)
     {
-        if (_i.IsSameAs(inputs[curInput])) // add && i.movement = inputs[cuInput].movement
+        if (_i.IsSameAs(CurrentComboInput(comboCount))) // add && i.movement = inputs[cuInput].movement
         {
-            curInput++;
-            if (curInput >= inputs.Count) //Finishes the inputs and we should do the attack
-            {
-                //invoke event
-                ResetCombo();
-            }
+
+            //if (curInput >= inputs.Count) //Finishes the inputs and we should do the attack
+            //{
+            //    //invoke event
+            //    ResetCombo();
+            //}
+
             return true;
         }
         else
         {
-            ResetCombo();
             return false;
         }
     }
 
-    public ComboInput CurrentComboInput()
+    public ComboInput CurrentComboInput(int comboCount)
     {
-        if (curInput >= inputs.Count) return null;
-        return inputs[curInput];
-    }
-
-    public void ResetCombo()
-    {
-        curInput = 0;
+        if (comboCount >= combo.Count) return null;
+        return combo[comboCount].input;
     }
 }
