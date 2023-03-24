@@ -26,6 +26,8 @@ public class PlayerMove : PlayerState
     public override void Enter()
     {
         base.Enter();
+
+        player.movesManager.ResetAvailableMoves();
     }
 
     public override void Exit()

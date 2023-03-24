@@ -31,6 +31,7 @@ public class MovesManager : MonoBehaviour
 
     public void ResetAvailableMoves()
     {
+        availableMoves.Clear();
         availableMoves.AddRange(Moves);
     }
 
@@ -75,28 +76,31 @@ public class MovesManager : MonoBehaviour
         //}
 
 
-
-        List<AttackCombo> remove = new List<AttackCombo>();
-
-        if (availableMoves.Count == 0)
+        if (availableMoves.Count != 0)
         {
-            ResetAvailableMoves();
-        }
+            List<AttackCombo> remove = new List<AttackCombo>();
+
+            //if (availableMoves.Count == 0)
+            //{
+            //    ResetAvailableMoves();
+            //}
 
 
-        foreach (AttackCombo _c in availableMoves)
-        {
-            if (_c.ContinueCombo(currentComboInput,comboCount))
+            foreach (AttackCombo _c in availableMoves)
             {
+                if (_c.ContinueCombo(currentComboInput, comboCount))
+                {
 
+                }
+                else
+                {
+                    remove.Add(_c);
+                }
             }
-            else
-            {
-                remove.Add(_c);
-            }
+
+            foreach (AttackCombo _c in remove) availableMoves.Remove(_c);
+
         }
-
-        foreach (AttackCombo _c in remove) availableMoves.Remove(_c);
 
         if (availableMoves.Count > 0)
         {

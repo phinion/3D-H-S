@@ -10,6 +10,7 @@ public class PlayerState
     protected Animator anim;
 
     protected bool isAnimationFinished;
+    protected bool canCombo;
     protected bool isExitingState;
 
     protected float startTime;
@@ -33,6 +34,7 @@ public class PlayerState
         //Debug.Log(animBoolName);
         isAnimationFinished = false;
         isExitingState = false;
+        canCombo = false;
     }
 
     public virtual void Exit()
@@ -40,6 +42,7 @@ public class PlayerState
         //player.anim.SetBool(animBoolName, false);
         player.anim.SetBool("combo", false);
         isExitingState = true;
+        canCombo = false;
     }
 
     public virtual void LogicUpdate()
@@ -73,7 +76,8 @@ public class PlayerState
 
     public virtual void AnimationComboTrigger()
     {
-        player.anim.SetBool("combo", true);
+        //player.anim.SetBool("combo", true);
+        canCombo = true;
     }
 
     public bool ExitingState

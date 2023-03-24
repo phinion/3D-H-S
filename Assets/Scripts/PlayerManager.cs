@@ -68,7 +68,6 @@ public class PlayerManager : MonoBehaviour, IHitResponder
         CurrentState = stateMachine.CurrentState.ToString();
         IsGrounded = playerLocamotion.isGrounded;
     }
-
     private void FixedUpdate()
     {
         stateMachine.CurrentState.PhysicsUpdate();
@@ -79,8 +78,17 @@ public class PlayerManager : MonoBehaviour, IHitResponder
         cameraManager.HandleAllCameraMovement();
     }
 
+    public void OnAnimatorMove()
+    {
+        //Vector3 rootMotionVelocity = anim.deltaPosition / Time.deltaTime;
+        Vector3 rootMotionPosition = transform.position - anim.rootPosition;
+        transform.position += anim.deltaPosition;
+        //transform.rotation *= anim.deltaRotation;
+        //GetComponent<Rigidbody>().velocity = rootMotionVelocity;
+    }
+
     public void SetAnimationFinishedTrigger() => stateMachine.CurrentState.AnimationFinishTrigger();
-    //public void SetAnimationComboTrigger() => stateMachine.CurrentState.AnimationComboTrigger();
+    public void SetAnimationComboTrigger() => stateMachine.CurrentState.AnimationComboTrigger();
 
     bool IHitResponder.CheckHit(HitData _data)
     {

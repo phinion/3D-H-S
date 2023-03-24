@@ -27,22 +27,23 @@ public class PlayerAttack : PlayerState
         //}
         //else
         //{
-        if (player.movesManager.IsMoveAvailable())
-        {
-            stateMachine.ChangeState(this);
-            player.movesManager.DoNextMove();
-        } else
+        //if (player.movesManager.IsMoveAvailable())
+        //{
+        //    stateMachine.ChangeState(this);
+        //    player.movesManager.DoNextMove();
+        //} else
 
-        if (input.movementInput == Vector2.zero)
-        {
+        //if (input.movementInput == Vector2.zero)
+        //{
+        //    stateMachine.ChangeState(player.idleState);
+        //    player.movesManager.ClearAvailableMoves();
+        //}
+        //else
+        //{
+        player.movesManager.ClearAvailableMoves();
             stateMachine.ChangeState(player.idleState);
-            player.movesManager.ClearAvailableMoves();
-        }
-        else
-        {
-            stateMachine.ChangeState(player.moveState);
-            player.movesManager.ClearAvailableMoves();
-        }
+            
+        //}
 
 
         //}
@@ -61,7 +62,10 @@ public class PlayerAttack : PlayerState
     {
         base.DoChecks();
 
-        player.hitbox.CheckHit();
+        if (!canCombo)
+        {
+            player.hitbox.CheckHit();
+        }
     }
 
     public override void Enter()
@@ -83,6 +87,21 @@ public class PlayerAttack : PlayerState
     public override void LogicUpdate()
     {
         base.LogicUpdate();
+
+        if (canCombo)
+        {
+            if (player.movesManager.IsMoveAvailable())
+            {
+                stateMachine.ChangeState(this);
+                player.movesManager.DoNextMove();
+            }
+            else if (input.movementInput != Vector2.zero)
+            {
+                player.movesManager.ClearAvailableMoves();
+                stateMachine.ChangeState(player.moveState);
+                
+            }
+        }
     }
 
     public override void PhysicsUpdate()

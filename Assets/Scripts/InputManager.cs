@@ -44,10 +44,10 @@ public class InputManager : MonoBehaviour
 
             playerControls.PlayerCombat.Dodge.performed += i => dodge = true;
             playerControls.PlayerCombat.Dodge.canceled += i => dodge = false;
-            Debug.Log("Enable 1");
+            //Debug.Log("Enable 1");
             playerControls.PlayerCombat.Attack.performed += i => PrimaryAttack(i);
             playerControls.PlayerCombat.Attack.canceled += i => PrimaryAttack(i);
-            Debug.Log("Enable 2");
+            //Debug.Log("Enable 2");
             //playerControls.PlayerMovement.Run.performed += i => run = true;
             //playerControls.PlayerMovement.Run.canceled += i => run = false;
         }
@@ -79,7 +79,7 @@ public class InputManager : MonoBehaviour
             }
             else
             {
-                movesManager.ClearAvailableMoves();
+                //movesManager.ClearAvailableMoves();
             }
 
 

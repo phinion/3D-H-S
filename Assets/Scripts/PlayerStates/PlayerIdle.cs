@@ -28,6 +28,8 @@ public class PlayerIdle : PlayerState
         base.Enter();
 
         player.playerLocamotion.rb.velocity = Vector3.zero;
+
+        player.movesManager.ResetAvailableMoves();
     }
 
     public override void Exit()
