@@ -479,7 +479,7 @@ ModelImporter:
       loopBlend: 0
       loopBlendOrientation: 1
       loopBlendPositionY: 1
-      loopBlendPositionXZ: 1
+      loopBlendPositionXZ: 0
       keepOriginalOrientation: 1
       keepOriginalPositionY: 1
       keepOriginalPositionXZ: 0
@@ -489,6 +489,13 @@ ModelImporter:
       curves: []
       events:
       - time: 0.49868765
+        functionName: SetAnimationComboTrigger
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: 1c3445ec70d65e54ebfa46442ec0f656, type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 1
         functionName: SetAnimationFinishedTrigger
         data: 
         objectReferenceParameter: {fileID: 11500000, guid: 1c3445ec70d65e54ebfa46442ec0f656, type: 3}
