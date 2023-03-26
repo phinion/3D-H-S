@@ -18,8 +18,10 @@ public class PlayerManager : MonoBehaviour, IHitResponder
     public PlayerIdle idleState;
     public PlayerMove moveState;
     public PlayerFall fallState;
+    
 
     public PlayerAttack attackState;
+    public PlayerDefend defendState;
     public PlayerDodge dodgeState;
 
     [Header("Attacking")]
@@ -48,6 +50,7 @@ public class PlayerManager : MonoBehaviour, IHitResponder
         moveState = new PlayerMove(this, stateMachine, "move");
         attackState = new PlayerAttack(this, stateMachine, "attack");
         dodgeState = new PlayerDodge(this, stateMachine, "dodge");
+        defendState = new PlayerDefend(this, stateMachine, "defend");
 
         fallState = new PlayerFall(this, stateMachine, "fall");
     }

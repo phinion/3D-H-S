@@ -246,6 +246,14 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
+                    ""name"": ""Defend"",
+                    ""type"": ""Button"",
+                    ""id"": ""b284f005-0e98-442b-996d-1889d432055b"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
                     ""name"": ""Dodge"",
                     ""type"": ""Button"",
                     ""id"": ""68c51999-83d2-4693-af72-9dea36cdcfa1"",
@@ -298,6 +306,28 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""action"": ""Dodge"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""22e573bc-7cf6-4512-8f4f-6dc9d6c04e06"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Defend"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""41265578-d802-425a-bd0c-d41310345928"",
+                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Defend"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -312,6 +342,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         // PlayerCombat
         m_PlayerCombat = asset.FindActionMap("PlayerCombat", throwIfNotFound: true);
         m_PlayerCombat_Attack = m_PlayerCombat.FindAction("Attack", throwIfNotFound: true);
+        m_PlayerCombat_Defend = m_PlayerCombat.FindAction("Defend", throwIfNotFound: true);
         m_PlayerCombat_Dodge = m_PlayerCombat.FindAction("Dodge", throwIfNotFound: true);
     }
 
@@ -412,12 +443,14 @@ public class @PlayerControls : IInputActionCollection, IDisposable
     private readonly InputActionMap m_PlayerCombat;
     private IPlayerCombatActions m_PlayerCombatActionsCallbackInterface;
     private readonly InputAction m_PlayerCombat_Attack;
+    private readonly InputAction m_PlayerCombat_Defend;
     private readonly InputAction m_PlayerCombat_Dodge;
     public struct PlayerCombatActions
     {
         private @PlayerControls m_Wrapper;
         public PlayerCombatActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
         public InputAction @Attack => m_Wrapper.m_PlayerCombat_Attack;
+        public InputAction @Defend => m_Wrapper.m_PlayerCombat_Defend;
         public InputAction @Dodge => m_Wrapper.m_PlayerCombat_Dodge;
         public InputActionMap Get() { return m_Wrapper.m_PlayerCombat; }
         public void Enable() { Get().Enable(); }
@@ -431,6 +464,9 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @Attack.started -= m_Wrapper.m_PlayerCombatActionsCallbackInterface.OnAttack;
                 @Attack.performed -= m_Wrapper.m_PlayerCombatActionsCallbackInterface.OnAttack;
                 @Attack.canceled -= m_Wrapper.m_PlayerCombatActionsCallbackInterface.OnAttack;
+                @Defend.started -= m_Wrapper.m_PlayerCombatActionsCallbackInterface.OnDefend;
+                @Defend.performed -= m_Wrapper.m_PlayerCombatActionsCallbackInterface.OnDefend;
+                @Defend.canceled -= m_Wrapper.m_PlayerCombatActionsCallbackInterface.OnDefend;
                 @Dodge.started -= m_Wrapper.m_PlayerCombatActionsCallbackInterface.OnDodge;
                 @Dodge.performed -= m_Wrapper.m_PlayerCombatActionsCallbackInterface.OnDodge;
                 @Dodge.canceled -= m_Wrapper.m_PlayerCombatActionsCallbackInterface.OnDodge;
@@ -441,6 +477,9 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @Attack.started += instance.OnAttack;
                 @Attack.performed += instance.OnAttack;
                 @Attack.canceled += instance.OnAttack;
+                @Defend.started += instance.OnDefend;
+                @Defend.performed += instance.OnDefend;
+                @Defend.canceled += instance.OnDefend;
                 @Dodge.started += instance.OnDodge;
                 @Dodge.performed += instance.OnDodge;
                 @Dodge.canceled += instance.OnDodge;
@@ -457,6 +496,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
     public interface IPlayerCombatActions
     {
         void OnAttack(InputAction.CallbackContext context);
+        void OnDefend(InputAction.CallbackContext context);
         void OnDodge(InputAction.CallbackContext context);
     }
 }

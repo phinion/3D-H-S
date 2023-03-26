@@ -23,7 +23,7 @@ public class PlayerState
         this.stateMachine = _stateMachine;
         this.animBoolName = _animBoolName;
         input = player.inputManager;
-        anim = this.player.GetComponent<Animator>();
+        anim = this.player.anim;
     }
 
     public virtual void Enter()

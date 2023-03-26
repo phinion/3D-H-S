@@ -58,6 +58,10 @@ public class PlayerMove : PlayerState
         {
             stateMachine.ChangeState(player.dodgeState);
         }
+        else if (input.defend)
+        {
+            stateMachine.ChangeState(player.defendState);
+        }
         //}
     }
 

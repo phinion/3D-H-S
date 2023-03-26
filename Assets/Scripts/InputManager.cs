@@ -22,6 +22,7 @@ public class InputManager : MonoBehaviour
 
     public bool attack;
     public bool dodge;
+    public bool defend;
     //public bool run;
 
     private float moveAmount;
@@ -44,6 +45,9 @@ public class InputManager : MonoBehaviour
 
             playerControls.PlayerCombat.Dodge.performed += i => dodge = true;
             playerControls.PlayerCombat.Dodge.canceled += i => dodge = false;
+
+            playerControls.PlayerCombat.Defend.performed += i => defend = true;
+            playerControls.PlayerCombat.Defend.canceled += i => defend = false;
             //Debug.Log("Enable 1");
             playerControls.PlayerCombat.Attack.performed += i => PrimaryAttack(i);
             playerControls.PlayerCombat.Attack.canceled += i => PrimaryAttack(i);

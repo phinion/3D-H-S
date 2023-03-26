@@ -49,6 +49,10 @@ public class PlayerIdle : PlayerState
             stateMachine.ChangeState(player.attackState);
             player.movesManager.DoNextMove();
         }
+        else if (input.defend)
+        {
+            stateMachine.ChangeState(player.defendState);
+        }
     }
 
     public override void PhysicsUpdate()
