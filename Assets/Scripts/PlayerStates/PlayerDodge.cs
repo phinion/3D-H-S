@@ -20,7 +20,7 @@ public class PlayerDodge : PlayerState
         //}
         //else
         //{
-            stateMachine.ChangeState(player.moveState);
+        stateMachine.ChangeState(player.moveState);
         //}
 
     }
@@ -49,7 +49,7 @@ public class PlayerDodge : PlayerState
     {
         base.LogicUpdate();
 
-        if (player.anim.GetBool("combo"))
+        if (canCombo)
         {
             if (input.dodge)
             {
@@ -57,12 +57,11 @@ public class PlayerDodge : PlayerState
             }
         }
     }
-
     public override void PhysicsUpdate()
     {
         base.PhysicsUpdate();
 
-        if (!player.anim.GetBool("combo"))
+        if (!canCombo)
         {
             player.playerLocamotion.Dash(20f, normalizedMoveDir);
         }
