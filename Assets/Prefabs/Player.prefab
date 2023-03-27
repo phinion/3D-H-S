@@ -4510,6 +4510,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 8216630236203812028}
   movementSpeed: 7
+  runningSpeed: 14
   movementMultiplier: 10
   rbDrag: 6
   rotationSpeed: 15
@@ -4531,7 +4532,8 @@ MonoBehaviour:
   verticalInput: 0
   horizontalInput: 0
   attack: 0
-  dodge: 0
+  defend: 0
+  run: 0
 --- !u!54 &8216630236203812028
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -4625,12 +4627,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Moves:
-  - comboAttack:
-      name: 1 Hit
-      length: 1
-    inputs:
-    - type: 0
-    - type: 0
+  - name: 
+    combo: []
+  availableMoves: []
 --- !u!1 &8215400532918638927
 GameObject:
   m_ObjectHideFlags: 0

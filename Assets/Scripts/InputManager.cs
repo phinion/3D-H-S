@@ -21,9 +21,8 @@ public class InputManager : MonoBehaviour
     public float horizontalInput;
 
     public bool attack;
-    public bool dodge;
     public bool defend;
-    //public bool run;
+    public bool run;
 
     private float moveAmount;
 
@@ -43,8 +42,8 @@ public class InputManager : MonoBehaviour
             playerControls.PlayerMovement.Movement.performed += i => movementInput = i.ReadValue<Vector2>();
             playerControls.PlayerMovement.Camera.performed += i => cameraInput = i.ReadValue<Vector2>();
 
-            playerControls.PlayerCombat.Dodge.performed += i => dodge = true;
-            playerControls.PlayerCombat.Dodge.canceled += i => dodge = false;
+            //playerControls.PlayerCombat.Dodge.performed += i => dodge = true;
+            //playerControls.PlayerCombat.Dodge.canceled += i => dodge = false;
 
             playerControls.PlayerCombat.Defend.performed += i => defend = true;
             playerControls.PlayerCombat.Defend.canceled += i => defend = false;
@@ -52,8 +51,8 @@ public class InputManager : MonoBehaviour
             playerControls.PlayerCombat.Attack.performed += i => PrimaryAttack(i);
             playerControls.PlayerCombat.Attack.canceled += i => PrimaryAttack(i);
             //Debug.Log("Enable 2");
-            //playerControls.PlayerMovement.Run.performed += i => run = true;
-            //playerControls.PlayerMovement.Run.canceled += i => run = false;
+            playerControls.PlayerMovement.Run.performed += i => run = true;
+            playerControls.PlayerMovement.Run.canceled += i => run = false;
         }
 
         playerControls.Enable();
@@ -134,6 +133,9 @@ public class InputManager : MonoBehaviour
         cameraInputX = cameraInput.x;
 
         moveAmount = Mathf.Clamp01(Mathf.Abs(horizontalInput) + Mathf.Abs(verticalInput));
-        animatorManager.UpdateAnimatorValues(0, moveAmount);
+
+        //Vector3 relativeDirection = CameraManager.instance.transform.InverseTransformDirection(playerLocamotion.GetNormalizedMoveDirection());
+
+        animatorManager.UpdateAnimatorValues(0f, verticalInput);
     }
 }

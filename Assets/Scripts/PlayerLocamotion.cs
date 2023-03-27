@@ -13,6 +13,7 @@ public class PlayerLocamotion : MonoBehaviour
     public Rigidbody rb;
 
     public float movementSpeed = 7f;
+    public float runningSpeed = 14f;
     public float movementMultiplier = 10f;
     public float rbDrag = 6f;
 
@@ -38,9 +39,9 @@ public class PlayerLocamotion : MonoBehaviour
         isGrounded = Physics.Raycast(transform.position + (Vector3.up * 0.5f), Vector3.down, 0.5f + 0.1f);
     }
 
-    public void HandleAllMovement()
+    public void HandleAllMovement(float _speed)
     {
-        HandleMovement();
+        HandleMovement(_speed);
         HandleRotation();
 
         //HandleMovementAnimation();
@@ -56,9 +57,9 @@ public class PlayerLocamotion : MonoBehaviour
         return moveDirection;
     }
     #region Movement and Rotation given input
-    private void HandleMovement()
+    private void HandleMovement(float _speed)
     {
-        Vector3 movementVelocity = GetNormalizedMoveDirection() * movementSpeed;
+        Vector3 movementVelocity = GetNormalizedMoveDirection() * _speed;
 
         //rb.velocity = movementVelocity;
         rb.AddForce(movementVelocity * movementMultiplier, ForceMode.Acceleration);

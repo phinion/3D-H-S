@@ -1290,6 +1290,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 0}
   movementSpeed: 7
+  runningSpeed: 14
   movementMultiplier: 10
   rbDrag: 6
   rotationSpeed: 15
@@ -1311,7 +1312,8 @@ MonoBehaviour:
   verticalInput: 0
   horizontalInput: 0
   attack: 0
-  dodge: 0
+  defend: 0
+  run: 0
 --- !u!114 &919132148516302891
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2412,6 +2414,34 @@ PrefabInstance:
     - target: {fileID: 8216630236203811971, guid: 2a3ce65c965a4ff4d807d3c146a3fb65, type: 3}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8216630236203811971, guid: 2a3ce65c965a4ff4d807d3c146a3fb65, type: 3}
+      propertyPath: m_ActionEvents.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8216630236203811971, guid: 2a3ce65c965a4ff4d807d3c146a3fb65, type: 3}
+      propertyPath: m_ActionEvents.Array.data[3].m_ActionId
+      value: 12483f25-a235-4ae5-aa47-6860252ff8e3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8216630236203811971, guid: 2a3ce65c965a4ff4d807d3c146a3fb65, type: 3}
+      propertyPath: m_ActionEvents.Array.data[4].m_ActionId
+      value: 2de90704-b6ad-4b72-8b91-14558b76a3cc
+      objectReference: {fileID: 0}
+    - target: {fileID: 8216630236203811971, guid: 2a3ce65c965a4ff4d807d3c146a3fb65, type: 3}
+      propertyPath: m_ActionEvents.Array.data[5].m_ActionId
+      value: b284f005-0e98-442b-996d-1889d432055b
+      objectReference: {fileID: 0}
+    - target: {fileID: 8216630236203811971, guid: 2a3ce65c965a4ff4d807d3c146a3fb65, type: 3}
+      propertyPath: m_ActionEvents.Array.data[3].m_ActionName
+      value: PlayerMovement/Jump[/Keyboard/space]
+      objectReference: {fileID: 0}
+    - target: {fileID: 8216630236203811971, guid: 2a3ce65c965a4ff4d807d3c146a3fb65, type: 3}
+      propertyPath: m_ActionEvents.Array.data[4].m_ActionName
+      value: PlayerMovement/Run[/Keyboard/shift,/XInputControllerWindows/leftTrigger]
+      objectReference: {fileID: 0}
+    - target: {fileID: 8216630236203811971, guid: 2a3ce65c965a4ff4d807d3c146a3fb65, type: 3}
+      propertyPath: m_ActionEvents.Array.data[5].m_ActionName
+      value: PlayerCombat/Defend[/Mouse/rightButton,/XInputControllerWindows/buttonWest]
       objectReference: {fileID: 0}
     - target: {fileID: 8216630236203812028, guid: 2a3ce65c965a4ff4d807d3c146a3fb65, type: 3}
       propertyPath: m_Interpolate

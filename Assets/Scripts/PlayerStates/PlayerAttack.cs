@@ -95,12 +95,12 @@ public class PlayerAttack : PlayerState
                 stateMachine.ChangeState(this);
                 player.movesManager.DoNextMove();
             }
-            else if (input.movementInput != Vector2.zero)
-            {
-                player.movesManager.ClearAvailableMoves();
-                stateMachine.ChangeState(player.moveState);
+            //else if (input.movementInput != Vector2.zero)
+            //{
+            //    player.movesManager.ClearAvailableMoves();
+            //    stateMachine.ChangeState(player.moveState);
                 
-            }
+            //}
         }
     }
 

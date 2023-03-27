@@ -49,13 +49,13 @@ public class PlayerDodge : PlayerState
     {
         base.LogicUpdate();
 
-        if (canCombo)
-        {
-            if (input.dodge)
-            {
-                stateMachine.ChangeState(player.dodgeState);
-            }
-        }
+        //if (canCombo)
+        //{
+        //    if (input.dodge)
+        //    {
+        //        stateMachine.ChangeState(player.dodgeState);
+        //    }
+        //}
     }
     public override void PhysicsUpdate()
     {

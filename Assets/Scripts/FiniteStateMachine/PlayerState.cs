@@ -68,6 +68,11 @@ public class PlayerState
         player.anim.SetBool(animBoolName, true);
     }
 
+    public virtual void OnAnimatorMove()
+    {
+        player.transform.position += player.anim.deltaPosition;
+    }
+
     public virtual void AnimationFinishTrigger() 
     {
         isAnimationFinished = true;

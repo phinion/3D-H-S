@@ -68,7 +68,7 @@ public class AnimatorManager : MonoBehaviour
         }
         #endregion
 
-        //Debug.Log("snapped Vertical " + snappedVertical);
+        Debug.Log("snapped Horizontal " + snappedHorizontal + "snapped Vertical " + snappedVertical);
 
         animator.SetFloat(horizontal, snappedHorizontal, 0.1f,Time.deltaTime);
         animator.SetFloat(vertical, snappedVertical, 0.1f, Time.deltaTime);

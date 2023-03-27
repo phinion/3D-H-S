@@ -84,10 +84,11 @@ public class PlayerManager : MonoBehaviour, IHitResponder
     public void OnAnimatorMove()
     {
         //Vector3 rootMotionVelocity = anim.deltaPosition / Time.deltaTime;
-        Vector3 rootMotionPosition = transform.position - anim.rootPosition;
-        transform.position += anim.deltaPosition;
+        //Vector3 rootMotionPosition = transform.position - anim.rootPosition;
+        //transform.position += anim.deltaPosition;
         //transform.rotation *= anim.deltaRotation;
         //GetComponent<Rigidbody>().velocity = rootMotionVelocity;
+        stateMachine.CurrentState.OnAnimatorMove();
     }
 
     public void SetAnimationFinishedTrigger() => stateMachine.CurrentState.AnimationFinishTrigger();

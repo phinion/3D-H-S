@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class CameraManager : MonoBehaviour
 {
+    public static CameraManager instance;
+
     InputManager inputManager;
 
     public Transform targetTransform;
@@ -21,6 +23,8 @@ public class CameraManager : MonoBehaviour
 
     private void Awake()
     {
+        instance = this;
+
         inputManager = FindObjectOfType<InputManager>();
         targetTransform = FindObjectOfType<PlayerManager>().transform;
     }

@@ -8,21 +8,6 @@ public class PlayerMove : PlayerState
     {
     }
 
-    public override void AnimationFinishTrigger()
-    {
-        base.AnimationFinishTrigger();
-    }
-
-    public override void AnimationTrigger()
-    {
-        base.AnimationTrigger();
-    }
-
-    public override void DoChecks()
-    {
-        base.DoChecks();
-    }
-
     public override void Enter()
     {
         base.Enter();
@@ -37,6 +22,12 @@ public class PlayerMove : PlayerState
         player.anim.SetBool(animBoolName, false);
 
         player.playerLocamotion.rb.velocity = Vector3.zero;
+    }
+
+    public override void OnAnimatorMove()
+    {
+        //base.OnAnimatorMove();
+        //override without the base so that values are not added;
     }
 
     public override void LogicUpdate()
@@ -54,7 +45,7 @@ public class PlayerMove : PlayerState
             stateMachine.ChangeState(player.attackState);
             player.movesManager.DoNextMove();
         }
-        else if (input.dodge)
+        else if (input.run && input.defend)
         {
             stateMachine.ChangeState(player.dodgeState);
         }
@@ -69,8 +60,10 @@ public class PlayerMove : PlayerState
     {
         base.PhysicsUpdate();
 
-        player.playerLocamotion.HandleAllMovement();
-
+        if(input.run)
+            player.playerLocamotion.HandleAllMovement(player.playerLocamotion.runningSpeed);
+        else
+            player.playerLocamotion.HandleAllMovement(player.playerLocamotion.movementSpeed);
         //Debug.Log("Current Magnitude: " + player.playerLocamotion.rb.velocity.magnitude);
     }
 }
