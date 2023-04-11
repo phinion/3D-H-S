@@ -11,6 +11,7 @@ public class InputManager : MonoBehaviour
     PlayerLocamotion playerLocamotion;
     MovesManager movesManager;
 
+    EnemyLockOn enemyTargetting;
     public Vector2 movementInput { get; private set; }
     public Vector2 cameraInput { get; private set; }
 
@@ -31,6 +32,8 @@ public class InputManager : MonoBehaviour
         animatorManager = GetComponentInChildren<AnimatorManager>();
         playerLocamotion = GetComponent<PlayerLocamotion>();
         movesManager = GetComponent<MovesManager>();
+
+        enemyTargetting = GetComponent<EnemyLockOn>();
     }
 
     private void OnEnable()
@@ -53,9 +56,16 @@ public class InputManager : MonoBehaviour
             //Debug.Log("Enable 2");
             playerControls.PlayerMovement.Run.performed += i => run = true;
             playerControls.PlayerMovement.Run.canceled += i => run = false;
+
+            playerControls.PlayerCombat.TargetLock.performed += i => TargetLock(i);
         }
 
         playerControls.Enable();
+    }
+
+    private void TargetLock(InputAction.CallbackContext context)
+    {
+        enemyTargetting.TryTargetLock();
     }
 
     private void PrimaryAttack(InputAction.CallbackContext context)
@@ -136,6 +146,6 @@ public class InputManager : MonoBehaviour
 
         //Vector3 relativeDirection = CameraManager.instance.transform.InverseTransformDirection(playerLocamotion.GetNormalizedMoveDirection());
 
-        animatorManager.UpdateAnimatorValues(0f, verticalInput);
+        //animatorManager.UpdateAnimatorValues(0f, verticalInput);
     }
 }

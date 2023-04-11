@@ -282,6 +282,14 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""TargetLock"",
+                    ""type"": ""Button"",
+                    ""id"": ""6e521834-0781-4913-bd8f-d102d24cc37d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -328,6 +336,28 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""action"": ""Defend"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4b9c51f1-3a27-4205-b488-bea5a054a8d9"",
+                    ""path"": ""<Keyboard>/ctrl"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""TargetLock"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3f1f1429-41ea-49df-ad3b-b13555158d3c"",
+                    ""path"": ""<Gamepad>/rightStickPress"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""TargetLock"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -344,6 +374,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         m_PlayerCombat = asset.FindActionMap("PlayerCombat", throwIfNotFound: true);
         m_PlayerCombat_Attack = m_PlayerCombat.FindAction("Attack", throwIfNotFound: true);
         m_PlayerCombat_Defend = m_PlayerCombat.FindAction("Defend", throwIfNotFound: true);
+        m_PlayerCombat_TargetLock = m_PlayerCombat.FindAction("TargetLock", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -452,12 +483,14 @@ public class @PlayerControls : IInputActionCollection, IDisposable
     private IPlayerCombatActions m_PlayerCombatActionsCallbackInterface;
     private readonly InputAction m_PlayerCombat_Attack;
     private readonly InputAction m_PlayerCombat_Defend;
+    private readonly InputAction m_PlayerCombat_TargetLock;
     public struct PlayerCombatActions
     {
         private @PlayerControls m_Wrapper;
         public PlayerCombatActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
         public InputAction @Attack => m_Wrapper.m_PlayerCombat_Attack;
         public InputAction @Defend => m_Wrapper.m_PlayerCombat_Defend;
+        public InputAction @TargetLock => m_Wrapper.m_PlayerCombat_TargetLock;
         public InputActionMap Get() { return m_Wrapper.m_PlayerCombat; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -473,6 +506,9 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @Defend.started -= m_Wrapper.m_PlayerCombatActionsCallbackInterface.OnDefend;
                 @Defend.performed -= m_Wrapper.m_PlayerCombatActionsCallbackInterface.OnDefend;
                 @Defend.canceled -= m_Wrapper.m_PlayerCombatActionsCallbackInterface.OnDefend;
+                @TargetLock.started -= m_Wrapper.m_PlayerCombatActionsCallbackInterface.OnTargetLock;
+                @TargetLock.performed -= m_Wrapper.m_PlayerCombatActionsCallbackInterface.OnTargetLock;
+                @TargetLock.canceled -= m_Wrapper.m_PlayerCombatActionsCallbackInterface.OnTargetLock;
             }
             m_Wrapper.m_PlayerCombatActionsCallbackInterface = instance;
             if (instance != null)
@@ -483,6 +519,9 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @Defend.started += instance.OnDefend;
                 @Defend.performed += instance.OnDefend;
                 @Defend.canceled += instance.OnDefend;
+                @TargetLock.started += instance.OnTargetLock;
+                @TargetLock.performed += instance.OnTargetLock;
+                @TargetLock.canceled += instance.OnTargetLock;
             }
         }
     }
@@ -498,5 +537,6 @@ public class @PlayerControls : IInputActionCollection, IDisposable
     {
         void OnAttack(InputAction.CallbackContext context);
         void OnDefend(InputAction.CallbackContext context);
+        void OnTargetLock(InputAction.CallbackContext context);
     }
 }

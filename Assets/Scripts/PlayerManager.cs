@@ -78,7 +78,7 @@ public class PlayerManager : MonoBehaviour, IHitResponder
 
     private void LateUpdate()
     {
-        cameraManager.HandleAllCameraMovement();
+        //cameraManager.HandleAllCameraMovement();
     }
 
     public void OnAnimatorMove()

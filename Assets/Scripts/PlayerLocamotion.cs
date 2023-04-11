@@ -8,6 +8,8 @@ public class PlayerLocamotion : MonoBehaviour
     InputManager inputManager;
     AnimatorManager animatorManager;
 
+    EnemyLockOn enemyTargetting;
+
     Vector3 moveDirection;
     Transform cameraObject;
     public Rigidbody rb;
@@ -24,9 +26,11 @@ public class PlayerLocamotion : MonoBehaviour
     private void Awake()
     {
         inputManager = GetComponent<InputManager>();
-        animatorManager = GetComponent<AnimatorManager>();
+        animatorManager = GetComponentInChildren<AnimatorManager>();
         rb = GetComponent<Rigidbody>();
         cameraObject = Camera.main.transform;
+
+        enemyTargetting = GetComponent<EnemyLockOn>();
     }
     private void OnDrawGizmos()
     {
@@ -44,17 +48,17 @@ public class PlayerLocamotion : MonoBehaviour
         HandleMovement(_speed);
         HandleRotation();
 
-        //HandleMovementAnimation();
+        HandleMovementAnimation();
     }
 
     public Vector3 GetNormalizedMoveDirection()
     {
-        Vector3 moveDirection;
-        moveDirection = cameraObject.forward * inputManager.verticalInput;
-        moveDirection = moveDirection + cameraObject.right * inputManager.horizontalInput;
-        moveDirection.Normalize();
-        moveDirection.y = 0;
-        return moveDirection;
+        Vector3 moveDir;
+        moveDir = cameraObject.forward * inputManager.verticalInput;
+        moveDir = moveDir + cameraObject.right * inputManager.horizontalInput;
+        moveDir.Normalize();
+        moveDir.y = 0;
+        return moveDir;
     }
     #region Movement and Rotation given input
     private void HandleMovement(float _speed)
@@ -72,6 +76,18 @@ public class PlayerLocamotion : MonoBehaviour
     }
     private void HandleRotation()
     {
+        if (enemyTargetting.enemyLocked)
+        {
+            LockedRotation();
+        }
+        else
+        {
+            BasicRotation();
+        }
+    }
+
+    private void BasicRotation()
+    {
         Vector3 targetDirection = GetNormalizedMoveDirection();
 
         if (targetDirection == Vector3.zero)
@@ -80,6 +96,17 @@ public class PlayerLocamotion : MonoBehaviour
         }
 
         Quaternion targetRotation = Quaternion.LookRotation(targetDirection);
+        Quaternion playerRotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+
+        transform.rotation = playerRotation;
+    }
+
+    private void LockedRotation()
+    {
+        Vector3 targetDirection = (enemyTargetting.currentTarget.transform.position - transform.position).normalized;
+
+        Quaternion targetRotation = Quaternion.LookRotation(targetDirection);
+
         Quaternion playerRotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
 
         transform.rotation = playerRotation;
@@ -124,23 +151,27 @@ public class PlayerLocamotion : MonoBehaviour
         rb.velocity = Vector3.ClampMagnitude(rb.velocity, 5f);
     }
 
-    
-    //private void HandleMovementAnimation()
-    //{
-    //    //Vector2 test = Vector2.zero;
-    //    //test.y = (transform.forward * moveDirection.z).z;
 
-    //    //Vector3 cameraDir = cameraObject.forward;
-    //    //cameraDir.y = 0f;
-    //    //Quaternion residentialShift = Quaternion.FromToRotation(transform.forward, moveDirection);
+    private void HandleMovementAnimation()
+    {
+        //Vector2 test = Vector2.zero;
+        //test.y = (transform.forward * moveDirection.z).z;
 
-    //    //Vector3 moveDir = residentialShift * transform.forward;
+        //Vector3 cameraDir = cameraObject.forward;
+        //cameraDir.y = 0f;
+        //Quaternion residentialShift = Quaternion.FromToRotation(transform.forward, moveDirection);
 
-    //    //float angle = Vector3.Angle(transform.forward, moveDirection);
+        //Vector3 moveDir = residentialShift * transform.forward;
 
-    //    //float y = moveDirection.magnitude * Mathf.Cos(angle);
-    //    //float x = moveDirection.magnitude * Mathf.Sin(angle);
+        //float angle = Vector3.Angle(transform.forward, moveDirection);
 
-    //    animatorManager.UpdateAnimatorValues(0f, y);
-    //}
+        //float y = moveDirection.magnitude * Mathf.Cos(angle);
+        //float x = moveDirection.magnitude * Mathf.Sin(angle);
+
+        Vector3 moveDir = GetNormalizedMoveDirection();
+
+        moveDir = transform.InverseTransformDirection(moveDir);
+
+        animatorManager.UpdateAnimatorValues(moveDir.x, moveDir.z);
+    }
 }
