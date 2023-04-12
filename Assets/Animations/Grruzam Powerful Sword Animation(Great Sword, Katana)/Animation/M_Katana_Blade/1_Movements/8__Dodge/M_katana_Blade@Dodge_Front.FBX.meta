@@ -1091,7 +1091,7 @@ ModelImporter:
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 1
+      - time: 0.9943343
         functionName: SetAnimationFinishedTrigger
         data: 
         objectReferenceParameter: {fileID: 11500000, guid: 1c3445ec70d65e54ebfa46442ec0f656, type: 3}

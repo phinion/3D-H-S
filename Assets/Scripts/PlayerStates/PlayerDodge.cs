@@ -14,6 +14,8 @@ public class PlayerDodge : PlayerState
     {
         base.AnimationFinishTrigger();
 
+        anim.ResetTrigger("dodge");
+
         //if (input.movementInput == Vector2.zero)
         //{
         //    stateMachine.ChangeState(player.idleState);
@@ -70,6 +72,6 @@ public class PlayerDodge : PlayerState
             player.playerLocamotion.HandleMovement(normalizedMoveDir);
         }
 
-        player.playerLocamotion.HandleRotation(normalizedMoveDir);
+        //player.playerLocamotion.HandleRotation(normalizedMoveDir);
     }
 }

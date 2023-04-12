@@ -45,7 +45,7 @@ public class PlayerMove : PlayerState
             stateMachine.ChangeState(player.attackState);
             player.movesManager.DoNextMove();
         }
-        else if (input.run && input.defend)
+        else if (input.dodge)
         {
             stateMachine.ChangeState(player.dodgeState);
         }
