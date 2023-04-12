@@ -23,6 +23,8 @@ public class PlayerLocamotion : MonoBehaviour
 
     public bool isGrounded = false;
 
+    public float animatorSpeedModifier = 0.5f;
+
     private void Awake()
     {
         inputManager = GetComponent<InputManager>();
@@ -171,6 +173,8 @@ public class PlayerLocamotion : MonoBehaviour
         Vector3 moveDir = GetNormalizedMoveDirection();
 
         moveDir = transform.InverseTransformDirection(moveDir);
+
+        moveDir *= (rb.velocity.magnitude * animatorSpeedModifier);
 
         animatorManager.UpdateAnimatorValues(moveDir.x, moveDir.z);
     }

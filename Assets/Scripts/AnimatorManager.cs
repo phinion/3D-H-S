@@ -23,52 +23,55 @@ public class AnimatorManager : MonoBehaviour
         float snappedHorizontal;
         float snappedVertical;
 
-        #region Snapped Horizontal
-        if (horizontalMovement > 0 && horizontalMovement < 0.55f)
-        {
-            snappedHorizontal = 0.5f;
-        } 
-        else if (horizontalMovement > 0.55f)
-        {
-            snappedHorizontal = 1f;
-        }
-        else if (horizontalMovement < 0 && horizontalMovement > -0.55f)
-        {
-            snappedHorizontal = -0.5f;
-        }
-        else if (horizontalMovement < -0.55f)
-        {
-            snappedHorizontal = -1f;
-        }
-        else
-        {
-            snappedHorizontal = 0f;
-        }
-        #endregion
-        #region Snapped Vertical
-        if (verticalMovement > 0 && verticalMovement < 0.55f)
-        {
-            snappedVertical = 0.5f;
-        }
-        else if (verticalMovement > 0.55f)
-        {
-            snappedVertical = 1f;
-        }
-        else if (verticalMovement < 0 && verticalMovement > -0.55f)
-        {
-            snappedVertical = -0.5f;
-        }
-        else if (verticalMovement < -0.55f)
-        {
-            snappedVertical = -1f;
-        }
-        else
-        {
-            snappedVertical = 0f;
-        }
-        #endregion
+        //#region Snapped Horizontal
+        //if (horizontalMovement > 0 && horizontalMovement < 0.55f)
+        //{
+        //    snappedHorizontal = 0.5f;
+        //} 
+        //else if (horizontalMovement > 0.55f)
+        //{
+        //    snappedHorizontal = 1f;
+        //}
+        //else if (horizontalMovement < 0 && horizontalMovement > -0.55f)
+        //{
+        //    snappedHorizontal = -0.5f;
+        //}
+        //else if (horizontalMovement < -0.55f)
+        //{
+        //    snappedHorizontal = -1f;
+        //}
+        //else
+        //{
+        //    snappedHorizontal = 0f;
+        //}
+        //#endregion
+        //#region Snapped Vertical
+        //if (verticalMovement > 0 && verticalMovement < 0.55f)
+        //{
+        //    snappedVertical = 0.5f;
+        //}
+        //else if (verticalMovement > 0.55f)
+        //{
+        //    snappedVertical = 1f;
+        //}
+        //else if (verticalMovement < 0 && verticalMovement > -0.55f)
+        //{
+        //    snappedVertical = -0.5f;
+        //}
+        //else if (verticalMovement < -0.55f)
+        //{
+        //    snappedVertical = -1f;
+        //}
+        //else
+        //{
+        //    snappedVertical = 0f;
+        //}
+        //#endregion
 
-        Debug.Log("snapped Horizontal " + snappedHorizontal + "snapped Vertical " + snappedVertical);
+        //Debug.Log("snapped Horizontal " + snappedHorizontal + "snapped Vertical " + snappedVertical);
+
+        snappedHorizontal = horizontalMovement;
+        snappedVertical = verticalMovement;
 
         animator.SetFloat(horizontal, snappedHorizontal, 0.1f,Time.deltaTime);
         animator.SetFloat(vertical, snappedVertical, 0.1f, Time.deltaTime);

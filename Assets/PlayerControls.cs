@@ -290,6 +290,14 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Dodge"",
+                    ""type"": ""Button"",
+                    ""id"": ""7dbfc15b-0e76-4d89-9844-a569172a0d40"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -307,7 +315,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""2d052219-c236-4a32-b6b6-eeac430167d1"",
-                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""path"": ""<Gamepad>/buttonWest"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -329,7 +337,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""41265578-d802-425a-bd0c-d41310345928"",
-                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -358,6 +366,17 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""action"": ""TargetLock"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""605d3d1f-62cf-4a49-bb9c-11c107c0384c"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Dodge"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -375,6 +394,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         m_PlayerCombat_Attack = m_PlayerCombat.FindAction("Attack", throwIfNotFound: true);
         m_PlayerCombat_Defend = m_PlayerCombat.FindAction("Defend", throwIfNotFound: true);
         m_PlayerCombat_TargetLock = m_PlayerCombat.FindAction("TargetLock", throwIfNotFound: true);
+        m_PlayerCombat_Dodge = m_PlayerCombat.FindAction("Dodge", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -484,6 +504,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
     private readonly InputAction m_PlayerCombat_Attack;
     private readonly InputAction m_PlayerCombat_Defend;
     private readonly InputAction m_PlayerCombat_TargetLock;
+    private readonly InputAction m_PlayerCombat_Dodge;
     public struct PlayerCombatActions
     {
         private @PlayerControls m_Wrapper;
@@ -491,6 +512,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         public InputAction @Attack => m_Wrapper.m_PlayerCombat_Attack;
         public InputAction @Defend => m_Wrapper.m_PlayerCombat_Defend;
         public InputAction @TargetLock => m_Wrapper.m_PlayerCombat_TargetLock;
+        public InputAction @Dodge => m_Wrapper.m_PlayerCombat_Dodge;
         public InputActionMap Get() { return m_Wrapper.m_PlayerCombat; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -509,6 +531,9 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @TargetLock.started -= m_Wrapper.m_PlayerCombatActionsCallbackInterface.OnTargetLock;
                 @TargetLock.performed -= m_Wrapper.m_PlayerCombatActionsCallbackInterface.OnTargetLock;
                 @TargetLock.canceled -= m_Wrapper.m_PlayerCombatActionsCallbackInterface.OnTargetLock;
+                @Dodge.started -= m_Wrapper.m_PlayerCombatActionsCallbackInterface.OnDodge;
+                @Dodge.performed -= m_Wrapper.m_PlayerCombatActionsCallbackInterface.OnDodge;
+                @Dodge.canceled -= m_Wrapper.m_PlayerCombatActionsCallbackInterface.OnDodge;
             }
             m_Wrapper.m_PlayerCombatActionsCallbackInterface = instance;
             if (instance != null)
@@ -522,6 +547,9 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @TargetLock.started += instance.OnTargetLock;
                 @TargetLock.performed += instance.OnTargetLock;
                 @TargetLock.canceled += instance.OnTargetLock;
+                @Dodge.started += instance.OnDodge;
+                @Dodge.performed += instance.OnDodge;
+                @Dodge.canceled += instance.OnDodge;
             }
         }
     }
@@ -538,5 +566,6 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         void OnAttack(InputAction.CallbackContext context);
         void OnDefend(InputAction.CallbackContext context);
         void OnTargetLock(InputAction.CallbackContext context);
+        void OnDodge(InputAction.CallbackContext context);
     }
 }

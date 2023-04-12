@@ -277,6 +277,14 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "Dodge",
+                    "type": "Button",
+                    "id": "7dbfc15b-0e76-4d89-9844-a569172a0d40",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -294,7 +302,7 @@
                 {
                     "name": "",
                     "id": "2d052219-c236-4a32-b6b6-eeac430167d1",
-                    "path": "<Gamepad>/buttonEast",
+                    "path": "<Gamepad>/buttonWest",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -316,7 +324,7 @@
                 {
                     "name": "",
                     "id": "41265578-d802-425a-bd0c-d41310345928",
-                    "path": "<Gamepad>/buttonWest",
+                    "path": "<Gamepad>/rightTrigger",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -343,6 +351,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "TargetLock",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "605d3d1f-62cf-4a49-bb9c-11c107c0384c",
+                    "path": "<Gamepad>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Dodge",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
