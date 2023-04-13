@@ -24,12 +24,6 @@ public class PlayerMove : PlayerState
         player.playerLocamotion.rb.velocity = Vector3.zero;
     }
 
-    public override void OnAnimatorMove()
-    {
-        //base.OnAnimatorMove();
-        //override without the base so that values are not added;
-    }
-
     public override void LogicUpdate()
     {
         base.LogicUpdate();

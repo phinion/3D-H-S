@@ -21,6 +21,7 @@ public class PlayerLocamotion : MonoBehaviour
 
     public float rotationSpeed = 15f;
 
+    public float groundedDistanceCheck = 0.2f;
     public bool isGrounded = false;
 
     public float animatorSpeedModifier = 0.5f;
@@ -37,20 +38,18 @@ public class PlayerLocamotion : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawLine(transform.position, transform.position + (Vector3.down * 0.1f));
+        Gizmos.DrawLine(transform.position, transform.position + (Vector3.down * groundedDistanceCheck));
     }
 
     public void DoPhysicsChecks()
     {
-        isGrounded = Physics.Raycast(transform.position + (Vector3.up * 0.5f), Vector3.down, 0.5f + 0.1f);
+        isGrounded = Physics.Raycast(transform.position + (Vector3.up * 0.5f), Vector3.down, 0.5f + groundedDistanceCheck);
     }
 
     public void HandleAllMovement(float _speed)
     {
         HandleMovement(_speed);
         HandleRotation();
-
-        HandleMovementAnimation();
     }
 
     public Vector3 GetNormalizedMoveDirection()
@@ -70,13 +69,15 @@ public class PlayerLocamotion : MonoBehaviour
         //rb.velocity = movementVelocity;
         rb.AddForce(movementVelocity * movementMultiplier, ForceMode.Acceleration);
         ControlDrag();
+
+        HandleMovementAnimation();
     }
 
     private void ControlDrag()
     {
         rb.drag = rbDrag;
     }
-    private void HandleRotation()
+    public void HandleRotation()
     {
         if (enemyTargetting.enemyLocked)
         {
@@ -106,9 +107,9 @@ public class PlayerLocamotion : MonoBehaviour
     private void LockedRotation()
     {
         Vector3 targetDirection = (enemyTargetting.currentTarget.transform.position - transform.position).normalized;
+        targetDirection.y = 0;
 
         Quaternion targetRotation = Quaternion.LookRotation(targetDirection);
-
         Quaternion playerRotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
 
         transform.rotation = playerRotation;
@@ -124,6 +125,8 @@ public class PlayerLocamotion : MonoBehaviour
         //rb.velocity = movementVelocity;
         rb.AddForce(movementVelocity * movementMultiplier, ForceMode.Acceleration);
         ControlDrag();
+
+        HandleMovementAnimation();
     }
 
     // might need to change these to public so that we can call when we are targetting enemy but moving separately
@@ -177,5 +180,10 @@ public class PlayerLocamotion : MonoBehaviour
         moveDir *= (rb.velocity.magnitude * animatorSpeedModifier);
 
         animatorManager.UpdateAnimatorValues(moveDir.x, moveDir.z);
+    }
+
+    public void RootAnimMove(Vector3 animDeltaPosition)
+    {
+        transform.position += new Vector3(animDeltaPosition.x,0, animDeltaPosition.z);
     }
 }

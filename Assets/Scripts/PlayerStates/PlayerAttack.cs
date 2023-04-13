@@ -68,6 +68,11 @@ public class PlayerAttack : PlayerState
         }
     }
 
+    public override void OnAnimatorMove()
+    {
+        player.playerLocamotion.RootAnimMove(player.anim.deltaPosition);
+    }
+
     public override void Enter()
     {
         base.Enter();

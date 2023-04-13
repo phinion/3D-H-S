@@ -31,7 +31,9 @@ public class PlayerState
         DoChecks();
         AnimationTrigger();
         startTime = Time.time;
-        //Debug.Log(animBoolName);
+
+        Debug.Log(this.ToString());
+
         isAnimationFinished = false;
         isExitingState = false;
         canCombo = false;
@@ -70,7 +72,8 @@ public class PlayerState
 
     public virtual void OnAnimatorMove()
     {
-        player.transform.position += player.anim.deltaPosition;
+        //override without the base so that values are not added;
+        //player.playerLocamotion.RootAnimMove(player.anim.deltaPosition);
     }
 
     public virtual void AnimationFinishTrigger() 

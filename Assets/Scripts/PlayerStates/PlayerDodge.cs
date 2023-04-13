@@ -38,6 +38,23 @@ public class PlayerDodge : PlayerState
 
         //inputDir = new Vector2(player.inputManager.horizontalInput, player.inputManager.verticalInput);
         normalizedMoveDir = player.playerLocamotion.GetNormalizedMoveDirection();
+
+        Vector3 dodgeDir = player.gameObject.transform.InverseTransformDirection(normalizedMoveDir);
+
+        if (Mathf.Abs(dodgeDir.z) > Mathf.Abs(dodgeDir.x))
+        {
+            if (dodgeDir.z > 0)
+                player.anim.SetInteger("comboCount", 0);
+            else
+                player.anim.SetInteger("comboCount", 1);
+        }
+        else
+        {
+            if (dodgeDir.x < 0)
+                player.anim.SetInteger("comboCount", 2);
+            else
+                player.anim.SetInteger("comboCount", 3);
+        }
     }
 
     public override void Exit()
@@ -45,6 +62,7 @@ public class PlayerDodge : PlayerState
         base.Exit();
 
         normalizedMoveDir = Vector3.zero;
+        player.anim.SetInteger("comboCount", 0);
     }
 
     public override void LogicUpdate()
@@ -72,6 +90,6 @@ public class PlayerDodge : PlayerState
             player.playerLocamotion.HandleMovement(normalizedMoveDir);
         }
 
-        //player.playerLocamotion.HandleRotation(normalizedMoveDir);
+        player.playerLocamotion.HandleRotation();
     }
 }
