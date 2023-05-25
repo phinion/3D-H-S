@@ -4,14 +4,33 @@ using UnityEngine;
 
 public class PlayerMove : PlayerState
 {
+    private bool UseRootAnim = false;
+
     public PlayerMove(PlayerManager _player, PlayerStateMachine _stateMachine, string _animBoolName) : base(_player, _stateMachine, _animBoolName)
     {
+    }
+    public override void AnimationFinishTrigger()
+    {
+        base.AnimationFinishTrigger();
+
+        stateMachine.ChangeState(player.idleState);
+    }
+
+    public override void AnimationComboTrigger()
+    {
+        base.AnimationComboTrigger();
+    }
+
+    public override void OnAnimatorMove()
+    {
+        if (UseRootAnim)
+            player.playerLocamotion.RootAnimMove(player.anim.deltaPosition);
     }
 
     public override void Enter()
     {
         base.Enter();
-
+        UseRootAnim = false;
         player.movesManager.ResetAvailableMoves();
     }
 
@@ -30,11 +49,7 @@ public class PlayerMove : PlayerState
 
         //if (!isExitingState)
         //{
-        if (input.movementInput == Vector2.zero && player.playerLocamotion.rb.velocity.magnitude < 0.8f)
-        {
-            stateMachine.ChangeState(player.idleState);
-        }
-        else if (player.movesManager.IsMoveAvailable())
+        if (player.movesManager.IsMoveAvailable())
         {
             stateMachine.ChangeState(player.attackState);
             player.movesManager.DoNextMove();
@@ -47,6 +62,16 @@ public class PlayerMove : PlayerState
         {
             stateMachine.ChangeState(player.defendState);
         }
+        else if (input.movementInput == Vector2.zero && UseRootAnim == false)
+        {
+            player.anim.SetBool(animBoolName, false);
+            UseRootAnim = true;
+        }
+        else if (input.movementInput != Vector2.zero && UseRootAnim == true)
+        {
+            player.anim.SetBool(animBoolName, true);
+            UseRootAnim = false;
+        }
         //}
     }
 
@@ -54,10 +79,21 @@ public class PlayerMove : PlayerState
     {
         base.PhysicsUpdate();
 
-        if(input.run)
-            player.playerLocamotion.HandleAllMovement(player.playerLocamotion.runningSpeed);
+        //if (player.anim.GetBool(animBoolName) == false)
+        //    return;
+
+        if (input.run)
+        {
+            player.playerLocamotion.HandleMovement(player.playerLocamotion.runningSpeed);
+            player.playerLocamotion.HandleRotation(true, true);
+        }
         else
+        {
             player.playerLocamotion.HandleAllMovement(player.playerLocamotion.movementSpeed);
-        //Debug.Log("Current Magnitude: " + player.playerLocamotion.rb.velocity.magnitude);
+            //Debug.Log("Current Magnitude: " + player.playerLocamotion.rb.velocity.magnitude);
+        }
+
     }
+
+
 }

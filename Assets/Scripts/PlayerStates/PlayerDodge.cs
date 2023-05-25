@@ -90,6 +90,6 @@ public class PlayerDodge : PlayerState
             player.playerLocamotion.HandleMovement(normalizedMoveDir);
         }
 
-        player.playerLocamotion.HandleRotation();
+        player.playerLocamotion.HandleRotation(false);
     }
 }

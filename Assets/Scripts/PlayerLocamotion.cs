@@ -62,7 +62,7 @@ public class PlayerLocamotion : MonoBehaviour
         return moveDir;
     }
     #region Movement and Rotation given input
-    private void HandleMovement(float _speed)
+    public void HandleMovement(float _speed)
     {
         Vector3 movementVelocity = GetNormalizedMoveDirection() * _speed;
 
@@ -77,13 +77,13 @@ public class PlayerLocamotion : MonoBehaviour
     {
         rb.drag = rbDrag;
     }
-    public void HandleRotation()
+    public void HandleRotation(bool useDefault = true, bool ignoreTarget = false)
     {
-        if (enemyTargetting.enemyLocked)
+        if (enemyTargetting.enemyLocked && !ignoreTarget)
         {
             LockedRotation();
         }
-        else
+        else if(useDefault)
         {
             BasicRotation();
         }
