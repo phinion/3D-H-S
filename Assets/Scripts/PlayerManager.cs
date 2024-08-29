@@ -18,6 +18,7 @@ public class PlayerManager : MonoBehaviour, IHitResponder
     public PlayerIdle idleState;
     public PlayerMove moveState;
     public PlayerFall fallState;
+    public PlayerJump jumpState;
     
 
     public PlayerAttack attackState;
@@ -52,6 +53,7 @@ public class PlayerManager : MonoBehaviour, IHitResponder
         dodgeState = new PlayerDodge(this, stateMachine, "dodge");
         defendState = new PlayerDefend(this, stateMachine, "defend");
 
+        jumpState = new PlayerJump(this, stateMachine, "jump");
         fallState = new PlayerFall(this, stateMachine, "fall");
     }
 

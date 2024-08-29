@@ -11,6 +11,8 @@ public class PlayerJump : PlayerState
     public override void AnimationFinishTrigger()
     {
         base.AnimationFinishTrigger();
+
+        stateMachine.ChangeState(player.fallState);
     }
 
     public override void DoChecks()
@@ -36,5 +38,7 @@ public class PlayerJump : PlayerState
     public override void PhysicsUpdate()
     {
         base.PhysicsUpdate();
+
+        player.playerLocamotion.Dash(150f, Vector3.up);
     }
 }

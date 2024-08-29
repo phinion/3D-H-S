@@ -72,7 +72,10 @@ public class PlayerMove : PlayerState
             player.anim.SetBool(animBoolName, true);
             UseRootAnim = false;
         }
-        //}
+        else if (input.jump && player.playerLocamotion.isGrounded)
+        {
+            stateMachine.ChangeState(player.jumpState);
+        }
     }
 
     public override void PhysicsUpdate()
