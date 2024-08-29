@@ -8,6 +8,13 @@ public class PlayerJump : PlayerState
     {
     }
 
+    public override void AnimationComboTrigger()
+    {
+        base.AnimationComboTrigger();
+        
+        player.playerLocamotion.Dash(100f, Vector3.up);
+    }
+
     public override void AnimationFinishTrigger()
     {
         base.AnimationFinishTrigger();
@@ -38,7 +45,5 @@ public class PlayerJump : PlayerState
     public override void PhysicsUpdate()
     {
         base.PhysicsUpdate();
-
-        player.playerLocamotion.Dash(150f, Vector3.up);
     }
 }
