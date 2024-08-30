@@ -40,7 +40,7 @@ public class PlayerMove : PlayerState
 
         player.anim.SetBool(animBoolName, false);
 
-        player.playerLocamotion.rb.velocity = Vector3.zero;
+        //player.playerLocamotion.rb.velocity = Vector3.zero;
     }
 
     public override void LogicUpdate()

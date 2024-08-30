@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,22 +6,27 @@ using UnityEditor;
 
 public class PlayerLocamotion : MonoBehaviour
 {
-    InputManager inputManager;
-    AnimatorManager animatorManager;
-
-    EnemyLockOn enemyTargetting;
-
-    Vector3 moveDirection;
-    Transform cameraObject;
     public Rigidbody rb;
 
+    InputManager inputManager;
+    AnimatorManager animatorManager;
+    EnemyLockOn enemyTargetting;
+    Transform cameraObject;
+
+    [Header("Movement Settings")]
     public float movementSpeed = 7f;
     public float runningSpeed = 14f;
-    public float movementMultiplier = 10f;
-    public float rbDrag = 6f;
-
+    
     public float rotationSpeed = 15f;
-
+    
+    public float jumpForce = 5f;     
+    
+    public float movementMultiplier = 10f;
+    public float groundDrag = 6f;
+    public float airDrag = 0.5f;
+    public float fallMultiplier = 2.5f;
+    
+    [Header("Ground Check Settings")] 
     public float groundedDistanceCheck = 0.2f;
     public bool isGrounded = false;
 
@@ -35,6 +41,12 @@ public class PlayerLocamotion : MonoBehaviour
 
         enemyTargetting = GetComponent<EnemyLockOn>();
     }
+
+    private void FixedUpdate()
+    {
+        HandleDragAndGravity();
+    }
+
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
@@ -43,7 +55,8 @@ public class PlayerLocamotion : MonoBehaviour
 
     public void DoPhysicsChecks()
     {
-        isGrounded = Physics.Raycast(transform.position + (Vector3.up * 0.5f), Vector3.down, 0.5f + groundedDistanceCheck);
+        isGrounded = Physics.Raycast(transform.position + (Vector3.up * 0.5f), Vector3.down,
+            0.5f + groundedDistanceCheck);
     }
 
     public void HandleAllMovement(float _speed)
@@ -61,29 +74,46 @@ public class PlayerLocamotion : MonoBehaviour
         moveDir.y = 0;
         return moveDir;
     }
+
     #region Movement and Rotation given input
+
     public void HandleMovement(float _speed)
     {
         Vector3 movementVelocity = GetNormalizedMoveDirection() * _speed;
 
         //rb.velocity = movementVelocity;
         rb.AddForce(movementVelocity * movementMultiplier, ForceMode.Acceleration);
-        ControlDrag();
 
         HandleMovementAnimation();
     }
 
-    private void ControlDrag()
+    private void HandleDragAndGravity()
     {
-        rb.drag = rbDrag;
+        if (isGrounded)
+        {
+            // Apply ground drag
+            rb.drag = groundDrag;
+        }
+        else
+        {
+            // Apply air drag
+            rb.drag = airDrag;
+
+            // Apply additional gravity when falling
+            if (rb.velocity.y < 0)
+            {
+                rb.AddForce(Vector3.down * (fallMultiplier - 1) * Physics.gravity.magnitude, ForceMode.Acceleration);
+            }
+        }
     }
+
     public void HandleRotation(bool useDefault = true, bool ignoreTarget = false)
     {
         if (enemyTargetting.enemyLocked && !ignoreTarget)
         {
             LockedRotation();
         }
-        else if(useDefault)
+        else if (useDefault)
         {
             BasicRotation();
         }
@@ -99,7 +129,8 @@ public class PlayerLocamotion : MonoBehaviour
         }
 
         Quaternion targetRotation = Quaternion.LookRotation(targetDirection);
-        Quaternion playerRotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+        Quaternion playerRotation =
+            Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
 
         transform.rotation = playerRotation;
     }
@@ -110,7 +141,8 @@ public class PlayerLocamotion : MonoBehaviour
         targetDirection.y = 0;
 
         Quaternion targetRotation = Quaternion.LookRotation(targetDirection);
-        Quaternion playerRotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+        Quaternion playerRotation =
+            Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
 
         transform.rotation = playerRotation;
     }
@@ -118,22 +150,22 @@ public class PlayerLocamotion : MonoBehaviour
     #endregion
 
     #region Movement and Rotation given direction
+
     public void HandleMovement(Vector3 _normalizedTargetDirection)
     {
         Vector3 movementVelocity = _normalizedTargetDirection * movementSpeed;
 
         //rb.velocity = movementVelocity;
         rb.AddForce(movementVelocity * movementMultiplier, ForceMode.Acceleration);
-        ControlDrag();
 
         HandleMovementAnimation();
     }
 
-    // might need to change these to public so that we can call when we are targetting enemy but moving separately
     public void HandleRotation(Vector3 _normalizedTargetDirection)
     {
         Quaternion targetRotation = Quaternion.LookRotation(_normalizedTargetDirection);
-        Quaternion playerRotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+        Quaternion playerRotation =
+            Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
 
         transform.rotation = playerRotation;
     }
@@ -156,6 +188,11 @@ public class PlayerLocamotion : MonoBehaviour
         rb.velocity = Vector3.ClampMagnitude(rb.velocity, 5f);
     }
 
+    public void Jump()
+    {
+        rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z); // Reset y velocity before jumping
+        rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+    }
 
     private void HandleMovementAnimation()
     {
@@ -184,6 +221,6 @@ public class PlayerLocamotion : MonoBehaviour
 
     public void RootAnimMove(Vector3 animDeltaPosition)
     {
-        transform.position += new Vector3(animDeltaPosition.x,0, animDeltaPosition.z);
+        transform.position += new Vector3(animDeltaPosition.x, 0, animDeltaPosition.z);
     }
 }

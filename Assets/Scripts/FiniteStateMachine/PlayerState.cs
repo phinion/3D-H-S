@@ -49,10 +49,10 @@ public class PlayerState
 
     public virtual void LogicUpdate()
     {
-        if (!player.playerLocamotion.isGrounded)
+        /*if (!player.playerLocamotion.isGrounded)
         {
             stateMachine.ChangeState(player.fallState);
-        }
+        }*/
     }
 
     public virtual void PhysicsUpdate()

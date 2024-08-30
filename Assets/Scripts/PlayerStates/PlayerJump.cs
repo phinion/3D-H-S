@@ -11,8 +11,8 @@ public class PlayerJump : PlayerState
     public override void AnimationComboTrigger()
     {
         base.AnimationComboTrigger();
-        
-        player.playerLocamotion.Dash(100f, Vector3.up);
+
+        player.playerLocamotion.Jump();
     }
 
     public override void AnimationFinishTrigger()
