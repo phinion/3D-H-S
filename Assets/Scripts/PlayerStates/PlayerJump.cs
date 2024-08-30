@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerJump : PlayerState
 {
+    public bool canDoubleJump = true;
+    
     public PlayerJump(PlayerManager _player, PlayerStateMachine _stateMachine, string _animBoolName) : base(_player, _stateMachine, _animBoolName)
     {
     }

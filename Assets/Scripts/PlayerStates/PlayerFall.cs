@@ -40,7 +40,18 @@ public class PlayerFall : PlayerState
         if (player.playerLocamotion.isGrounded)
         {
             player.anim.SetBool(animBoolName, false);
+
+            if (!player.jumpState.canDoubleJump)
+            {
+                player.jumpState.canDoubleJump = true;
+            }
+            
             stateMachine.ChangeState(player.idleState);
+        }
+        else if (input.jump && player.jumpState.canDoubleJump)
+        {
+            player.jumpState.canDoubleJump = false;
+            stateMachine.ChangeState(player.jumpState);
         }
     }
 
