@@ -4258,22 +4258,50 @@ PrefabInstance:
       objectReference: {fileID: 9100000, guid: fbb0ef89e5231144e906ea199730cfbf, type: 2}
     - target: {fileID: 2888728660263822409, guid: 2a3ce65c965a4ff4d807d3c146a3fb65, type: 3}
       propertyPath: Moves.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2888728660263822409, guid: 2a3ce65c965a4ff4d807d3c146a3fb65, type: 3}
+      propertyPath: moves.Array.size
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2888728660263822409, guid: 2a3ce65c965a4ff4d807d3c146a3fb65, type: 3}
       propertyPath: Moves.Array.data[0].name
-      value: 2 Hit light
+      value: 3 hit light
       objectReference: {fileID: 0}
     - target: {fileID: 2888728660263822409, guid: 2a3ce65c965a4ff4d807d3c146a3fb65, type: 3}
       propertyPath: Moves.Array.data[1].name
       value: 3 hit light
       objectReference: {fileID: 0}
     - target: {fileID: 2888728660263822409, guid: 2a3ce65c965a4ff4d807d3c146a3fb65, type: 3}
+      propertyPath: moves.Array.data[0].name
+      value: Light Dash Attack
+      objectReference: {fileID: 0}
+    - target: {fileID: 2888728660263822409, guid: 2a3ce65c965a4ff4d807d3c146a3fb65, type: 3}
+      propertyPath: moves.Array.data[1].name
+      value: 3 Hit Light Attack Combo
+      objectReference: {fileID: 0}
+    - target: {fileID: 2888728660263822409, guid: 2a3ce65c965a4ff4d807d3c146a3fb65, type: 3}
+      propertyPath: availableMoves.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2888728660263822409, guid: 2a3ce65c965a4ff4d807d3c146a3fb65, type: 3}
+      propertyPath: availableMoves.Array.data[0].name
+      value: 3 Hit Light Attack Combo
+      objectReference: {fileID: 0}
+    - target: {fileID: 2888728660263822409, guid: 2a3ce65c965a4ff4d807d3c146a3fb65, type: 3}
       propertyPath: Moves.Array.data[0].combo.Array.size
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2888728660263822409, guid: 2a3ce65c965a4ff4d807d3c146a3fb65, type: 3}
       propertyPath: Moves.Array.data[1].combo.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2888728660263822409, guid: 2a3ce65c965a4ff4d807d3c146a3fb65, type: 3}
+      propertyPath: moves.Array.data[0].combo.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2888728660263822409, guid: 2a3ce65c965a4ff4d807d3c146a3fb65, type: 3}
+      propertyPath: moves.Array.data[1].combo.Array.size
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2888728660263822409, guid: 2a3ce65c965a4ff4d807d3c146a3fb65, type: 3}
@@ -4285,12 +4313,24 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2888728660263822409, guid: 2a3ce65c965a4ff4d807d3c146a3fb65, type: 3}
+      propertyPath: Moves.Array.data[0].combo.Array.data[0].Name
+      value: first
+      objectReference: {fileID: 0}
+    - target: {fileID: 2888728660263822409, guid: 2a3ce65c965a4ff4d807d3c146a3fb65, type: 3}
       propertyPath: Moves.Array.data[0].combo.Array.data[0].name
       value: Light 1
       objectReference: {fileID: 0}
     - target: {fileID: 2888728660263822409, guid: 2a3ce65c965a4ff4d807d3c146a3fb65, type: 3}
+      propertyPath: Moves.Array.data[0].combo.Array.data[1].Name
+      value: second
+      objectReference: {fileID: 0}
+    - target: {fileID: 2888728660263822409, guid: 2a3ce65c965a4ff4d807d3c146a3fb65, type: 3}
       propertyPath: Moves.Array.data[0].combo.Array.data[1].name
       value: Light 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2888728660263822409, guid: 2a3ce65c965a4ff4d807d3c146a3fb65, type: 3}
+      propertyPath: Moves.Array.data[0].combo.Array.data[2].Name
+      value: third
       objectReference: {fileID: 0}
     - target: {fileID: 2888728660263822409, guid: 2a3ce65c965a4ff4d807d3c146a3fb65, type: 3}
       propertyPath: Moves.Array.data[1].combo.Array.data[0].name
@@ -4303,6 +4343,106 @@ PrefabInstance:
     - target: {fileID: 2888728660263822409, guid: 2a3ce65c965a4ff4d807d3c146a3fb65, type: 3}
       propertyPath: Moves.Array.data[1].combo.Array.data[2].name
       value: Light 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2888728660263822409, guid: 2a3ce65c965a4ff4d807d3c146a3fb65, type: 3}
+      propertyPath: moves.Array.data[0].combo.Array.data[0].Anim
+      value: Light Dash Attack
+      objectReference: {fileID: 0}
+    - target: {fileID: 2888728660263822409, guid: 2a3ce65c965a4ff4d807d3c146a3fb65, type: 3}
+      propertyPath: moves.Array.data[1].combo.Array.data[0].Anim
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2888728660263822409, guid: 2a3ce65c965a4ff4d807d3c146a3fb65, type: 3}
+      propertyPath: availableMoves.Array.data[0].combo.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2888728660263822409, guid: 2a3ce65c965a4ff4d807d3c146a3fb65, type: 3}
+      propertyPath: Moves.Array.data[0].combo.Array.data[1].Input.Type
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2888728660263822409, guid: 2a3ce65c965a4ff4d807d3c146a3fb65, type: 3}
+      propertyPath: moves.Array.data[0].combo.Array.data[0].requiredInputs.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2888728660263822409, guid: 2a3ce65c965a4ff4d807d3c146a3fb65, type: 3}
+      propertyPath: moves.Array.data[0].combo.Array.data[1].requiredInputs.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2888728660263822409, guid: 2a3ce65c965a4ff4d807d3c146a3fb65, type: 3}
+      propertyPath: moves.Array.data[0].combo.Array.data[2].requiredInputs.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2888728660263822409, guid: 2a3ce65c965a4ff4d807d3c146a3fb65, type: 3}
+      propertyPath: moves.Array.data[1].combo.Array.data[0].requiredInputs.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2888728660263822409, guid: 2a3ce65c965a4ff4d807d3c146a3fb65, type: 3}
+      propertyPath: moves.Array.data[1].combo.Array.data[1].requiredInputs.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2888728660263822409, guid: 2a3ce65c965a4ff4d807d3c146a3fb65, type: 3}
+      propertyPath: moves.Array.data[1].combo.Array.data[2].requiredInputs.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2888728660263822409, guid: 2a3ce65c965a4ff4d807d3c146a3fb65, type: 3}
+      propertyPath: moves.Array.data[0].combo.Array.data[0].requiredInputs.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 71fba76594886744594e48c400d4aeb5, type: 2}
+    - target: {fileID: 2888728660263822409, guid: 2a3ce65c965a4ff4d807d3c146a3fb65, type: 3}
+      propertyPath: moves.Array.data[0].combo.Array.data[0].requiredInputs.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: 701b21eea6e04774b806b2eb040551db, type: 2}
+    - target: {fileID: 2888728660263822409, guid: 2a3ce65c965a4ff4d807d3c146a3fb65, type: 3}
+      propertyPath: moves.Array.data[0].combo.Array.data[1].requiredInputs.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 71fba76594886744594e48c400d4aeb5, type: 2}
+    - target: {fileID: 2888728660263822409, guid: 2a3ce65c965a4ff4d807d3c146a3fb65, type: 3}
+      propertyPath: moves.Array.data[0].combo.Array.data[2].requiredInputs.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 71fba76594886744594e48c400d4aeb5, type: 2}
+    - target: {fileID: 2888728660263822409, guid: 2a3ce65c965a4ff4d807d3c146a3fb65, type: 3}
+      propertyPath: moves.Array.data[1].combo.Array.data[0].requiredInputs.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 71fba76594886744594e48c400d4aeb5, type: 2}
+    - target: {fileID: 2888728660263822409, guid: 2a3ce65c965a4ff4d807d3c146a3fb65, type: 3}
+      propertyPath: moves.Array.data[1].combo.Array.data[0].requiredInputs.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: 701b21eea6e04774b806b2eb040551db, type: 2}
+    - target: {fileID: 2888728660263822409, guid: 2a3ce65c965a4ff4d807d3c146a3fb65, type: 3}
+      propertyPath: moves.Array.data[1].combo.Array.data[1].requiredInputs.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 71fba76594886744594e48c400d4aeb5, type: 2}
+    - target: {fileID: 2888728660263822409, guid: 2a3ce65c965a4ff4d807d3c146a3fb65, type: 3}
+      propertyPath: moves.Array.data[1].combo.Array.data[2].requiredInputs.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 71fba76594886744594e48c400d4aeb5, type: 2}
+    - target: {fileID: 2888728660263822409, guid: 2a3ce65c965a4ff4d807d3c146a3fb65, type: 3}
+      propertyPath: availableMoves.Array.data[0].combo.Array.data[0].requiredInputs.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2888728660263822409, guid: 2a3ce65c965a4ff4d807d3c146a3fb65, type: 3}
+      propertyPath: availableMoves.Array.data[0].combo.Array.data[1].requiredInputs.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2888728660263822409, guid: 2a3ce65c965a4ff4d807d3c146a3fb65, type: 3}
+      propertyPath: availableMoves.Array.data[0].combo.Array.data[2].requiredInputs.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2888728660263822409, guid: 2a3ce65c965a4ff4d807d3c146a3fb65, type: 3}
+      propertyPath: availableMoves.Array.data[0].combo.Array.data[0].requiredInputs.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 71fba76594886744594e48c400d4aeb5, type: 2}
+    - target: {fileID: 2888728660263822409, guid: 2a3ce65c965a4ff4d807d3c146a3fb65, type: 3}
+      propertyPath: availableMoves.Array.data[0].combo.Array.data[1].requiredInputs.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 71fba76594886744594e48c400d4aeb5, type: 2}
+    - target: {fileID: 2888728660263822409, guid: 2a3ce65c965a4ff4d807d3c146a3fb65, type: 3}
+      propertyPath: availableMoves.Array.data[0].combo.Array.data[2].requiredInputs.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 71fba76594886744594e48c400d4aeb5, type: 2}
+    - target: {fileID: 2888728660263822409, guid: 2a3ce65c965a4ff4d807d3c146a3fb65, type: 3}
+      propertyPath: availableMoves.Array.data[0].combo.Array.data[0].Input.requiredInputs.Array.size
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8215381508536638991, guid: 2a3ce65c965a4ff4d807d3c146a3fb65, type: 3}
       propertyPath: m_Name
