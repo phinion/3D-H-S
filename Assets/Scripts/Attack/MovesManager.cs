@@ -1,38 +1,28 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class MovesManager : MonoBehaviour
 {
-    [SerializeField] List<AttackCombo> Moves; // All available moves
-    [SerializeField]  List<AttackCombo> availableMoves;
+    [SerializeField] private List<AttackCombo> moves; // All available moves
+    [SerializeField] private List<AttackCombo> availableMoves; // Currently available moves during a combo
 
-    PlayerManager player;
+    private PlayerManager player;
+    private int comboCount = 0;
+    private bool inCombo = false;
 
-    int comboCount = 0;
-
-    AttackCombo nextMove = null;
-
-    bool inCombo = false;
-
-    // Start is called before the first frame update
     void Start()
     {
         availableMoves = new List<AttackCombo>();
-
         player = GetComponent<PlayerManager>();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        ResetAvailableMoves();
     }
 
     public void ResetAvailableMoves()
     {
         availableMoves.Clear();
-        availableMoves.AddRange(Moves);
+        availableMoves.AddRange(moves);
     }
 
     public void ClearAvailableMoves()
@@ -42,89 +32,51 @@ public class MovesManager : MonoBehaviour
         player.anim.SetInteger("comboCount", comboCount);
     }
 
-    public bool CheckAvailableMoves(AttackType _type)
+    public bool CheckAvailableMoves(AttackType attackType, Vector2 movementDirection, bool dash, bool dodge)
     {
-        ComboInput currentComboInput = new ComboInput(_type);
-
-        //List<AttackCombo> listToUse;
-        //if(availableMoves.Count == 0)
-        //{
-        //    listToUse = Moves;
-        //}
-        //else
-        //{
-        //    listToUse = availableMoves;
-        //}
-
-        //foreach (AttackCombo _c in listToUse)
-        //{
-        //    if (_c.ContinueCombo(currentComboInput, comboCount) && !availableMoves.Contains(_c))
-        //    {
-        //        availableMoves.Add(_c);
-        //        newMove = true;
-        //    }
-
-        //}
-
-        //if (availableMoves.Count > 0)
-        //{
-        //    return true;
-        //}
-        //else
-        //{
-        //    return false;
-        //}
-
-
-        if (availableMoves.Count != 0)
+        List<InputType> currentInputs = new List<InputType>
         {
-            List<AttackCombo> remove = new List<AttackCombo>();
+            new AttackInput { requiredAttackType = attackType },
+            //new MovementInput { requiredMovement = movementDirection },
+            new BoolInputType { requiredValue = dash },
+            new BoolInputType { requiredValue = dodge }
+        };
 
-            //if (availableMoves.Count == 0)
-            //{
-            //    ResetAvailableMoves();
-            //}
-
-
-            foreach (AttackCombo _c in availableMoves)
-            {
-                if (_c.ContinueCombo(currentComboInput, comboCount))
-                {
-
-                }
-                else
-                {
-                    remove.Add(_c);
-                }
-            }
-
-            foreach (AttackCombo _c in remove) availableMoves.Remove(_c);
-
-        }
+        availableMoves = availableMoves
+            .Where(move => move.CurrentComboInput(comboCount)?.ExistsIn(currentInputs) == true)
+            .ToList();
 
         if (availableMoves.Count > 0)
         {
             inCombo = true;
+            Debug.Log("Available moves filtered, continuing combo.");
             return true;
         }
-        else
-        {
-            return false;
-        }
+
+        //ClearAvailableMoves();
+        return false;
+
     }
+
     public bool IsMoveAvailable()
     {
-        if(availableMoves.Count > 0 && inCombo)
-        {
-            return true;
-        }
-        return false;
+        bool testboo = availableMoves.Count > 0 && inCombo;
+        Debug.Log($"IsMoveAvailable {testboo}");
+        return testboo;
     }
 
     public void DoNextMove()
     {
         player.anim.SetInteger("comboCount", comboCount);
         comboCount++;
+
+        string anim = availableMoves[0].combo[comboCount].Anim;
+        if(anim != "")
+        {
+            player.anim.Play(anim);
+        }
+
+        
         inCombo = false;
     }
 }

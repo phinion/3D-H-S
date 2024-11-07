@@ -75,55 +75,27 @@ public class InputManager : MonoBehaviour
 
     private void PrimaryAttack(InputAction.CallbackContext context)
     {
-        //switch (context.interaction)
-        //{
-        //    case HoldInteraction:
-        //        break;
-        //    default:
-        //        break;
-        //}
-
         if (context.performed)
         {
-            //Check if hold threshhold is reached then
-            // call primary hold
+            Vector2 movementDirection = movementInput;
+            bool dashPressed = run;  
+            bool dodgePressed = dodge;
 
-            //attack = true;
-
-
-            if (movesManager.CheckAvailableMoves(AttackType.light))
+            if (movesManager.CheckAvailableMoves(AttackType.light, movementDirection, dashPressed, dodgePressed))
             {
                 //movesManager.DoNextMove();
             }
-            else
+            /*else
             {
-                //movesManager.ClearAvailableMoves();
-            }
-
-
-
-
-            //call activationcheck for attack
+                movesManager.ClearAvailableMoves();
+            }*/
         }
         else if (context.canceled)
         {
             attack = false;
         }
-
-        //if (context.interaction is HoldInteraction)
-        //{
-        //    Debug.Log("Hold performed");
-        //}
-        //if (context.interaction is SlowTapInteraction)
-        //{
-        //    Debug.Log("Slow Tap performed");
-        //}
-        //if (context.interaction is TapInteraction)
-        //{
-        //    Debug.Log("Tap performed");
-        //}
-
     }
+
 
     private void OnDisable()
     {
