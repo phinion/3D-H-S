@@ -51,6 +51,7 @@ public class PlayerMove : PlayerState
         //{
         if (player.movesManager.IsMoveAvailable())
         {
+            
             stateMachine.ChangeState(player.attackState);
             player.movesManager.DoNextMove();
         }

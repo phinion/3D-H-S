@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -20,6 +21,8 @@ public class InputManager : MonoBehaviour
 
     public float verticalInput;
     public float horizontalInput;
+    
+    public event Action OnAttack;
 
     public bool attack;
     public bool defend;
@@ -77,18 +80,8 @@ public class InputManager : MonoBehaviour
     {
         if (context.performed)
         {
-            Vector2 movementDirection = movementInput;
-            bool dashPressed = run;  
-            bool dodgePressed = dodge;
-
-            if (movesManager.CheckAvailableMoves(AttackType.light, movementDirection, dashPressed, dodgePressed))
-            {
-                //movesManager.DoNextMove();
-            }
-            /*else
-            {
-                movesManager.ClearAvailableMoves();
-            }*/
+            attack = true;
+            OnAttack?.Invoke();
         }
         else if (context.canceled)
         {

@@ -14,7 +14,7 @@ public class PlayerAttack : PlayerState
         //base.AnimationFinishTrigger();
 
         isAnimationFinished = true;
-
+        
         //if movesmanager.canmove
         // move
         // else 

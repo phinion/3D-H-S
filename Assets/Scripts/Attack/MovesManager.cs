@@ -2,12 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class MovesManager : MonoBehaviour
 {
     [SerializeField] private List<AttackCombo> moves; // All available moves
     [SerializeField] private List<AttackCombo> availableMoves; // Currently available moves during a combo
 
+    private InputManager input;
     private PlayerManager player;
     private int comboCount = 0;
     private bool inCombo = false;
@@ -16,12 +18,19 @@ public class MovesManager : MonoBehaviour
     {
         availableMoves = new List<AttackCombo>();
         player = GetComponent<PlayerManager>();
+        input = GetComponent<InputManager>();
+        input.OnAttack += HandleAttackInput;
         ResetAvailableMoves();
+    }
+    
+    private void OnDestroy()
+    {
+        input.OnAttack -= HandleAttackInput;
     }
 
     public void ResetAvailableMoves()
     {
-        availableMoves.Clear();
+        ClearAvailableMoves();
         availableMoves.AddRange(moves);
     }
 
@@ -29,17 +38,29 @@ public class MovesManager : MonoBehaviour
     {
         availableMoves.Clear();
         comboCount = 0;
+        inCombo = false;
         player.anim.SetInteger("comboCount", comboCount);
     }
 
-    public bool CheckAvailableMoves(AttackType attackType, Vector2 movementDirection, bool dash, bool dodge)
+    private void HandleAttackInput()
+    {
+        if (CheckAvailableMoves())
+        {
+            //DoNextMove(); we let the states decide
+        }
+        else
+        {
+            ClearAvailableMoves();
+        }
+    }
+
+    private bool CheckAvailableMoves()
     {
         List<InputType> currentInputs = new List<InputType>
         {
-            new AttackInput { requiredAttackType = attackType },
-            //new MovementInput { requiredMovement = movementDirection },
-            new BoolInputType { requiredValue = dash },
-            new BoolInputType { requiredValue = dodge }
+            new AttackInput { requiredAttackType = AttackType.light },
+            new BoolInputType { requiredValue = input.run },
+            new BoolInputType { requiredValue = input.dodge }
         };
 
         availableMoves = availableMoves
@@ -49,34 +70,47 @@ public class MovesManager : MonoBehaviour
         if (availableMoves.Count > 0)
         {
             inCombo = true;
-            Debug.Log("Available moves filtered, continuing combo.");
             return true;
         }
 
-        //ClearAvailableMoves();
         return false;
-
     }
 
     public bool IsMoveAvailable()
     {
         bool testboo = availableMoves.Count > 0 && inCombo;
-        Debug.Log($"IsMoveAvailable {testboo}");
         return testboo;
     }
 
     public void DoNextMove()
     {
-        player.anim.SetInteger("comboCount", comboCount);
-        comboCount++;
-
-        string anim = availableMoves[0].combo[comboCount].Anim;
-        if(anim != "")
+        if (availableMoves.Count > 0 && comboCount < availableMoves[0].combo.Count)
         {
-            player.anim.Play(anim);
+            string anim = availableMoves[0].combo[comboCount].Anim;
+            if (!string.IsNullOrEmpty(anim))
+            {
+                player.anim.Play(anim);
+            }
+            player.anim.SetInteger("comboCount", comboCount);
+            comboCount++;
+            inCombo = false;
         }
-
-        
-        inCombo = false;
     }
+    
+    #region comboReset Timer
+    private float comboResetTime = 1.0f; // Customize as needed
+    private Coroutine comboResetCoroutine;
+
+    private void StartComboResetTimer()
+    {
+        if (comboResetCoroutine != null) StopCoroutine(comboResetCoroutine);
+        comboResetCoroutine = StartCoroutine(ResetComboAfterDelay(comboResetTime));
+    }
+
+    private IEnumerator ResetComboAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        ClearAvailableMoves();
+    }
+    #endregion
 }
