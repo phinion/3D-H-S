@@ -8,6 +8,7 @@ public class Attack
 {
     public string Name;
     public string Anim;
+    public bool MaintainMomentum;
     [SerializeField] private List<InputType> requiredInputs;
 
     // Checks if all required inputs are met in the current inputs, ignoring extra inputs
@@ -15,7 +16,7 @@ public class Attack
     {
         return requiredInputs.All(
             inputType => currentInputs.Exists(
-                input => inputType.Matches(input)));
+                input => input.Matches(inputType)));
     }
 }
 

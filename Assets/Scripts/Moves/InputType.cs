@@ -11,13 +11,11 @@ public enum MovementType
     left = 4
 }
 
-// Generic base class for input types
 public abstract class InputType : ScriptableObject
 {
     public abstract bool Matches(object instance);
 }
 
-// Specific implementation for attack input
 [CreateAssetMenu(menuName = "InputTypes/AttackInput")]
 public class AttackInput : InputType
 {
@@ -25,7 +23,6 @@ public class AttackInput : InputType
 
     public override bool Matches(object instance)
     {
-        // Cast to AttackType and check for a match
         if (instance is AttackInput attackInput)
         {
             return requiredAttackType == attackInput.requiredAttackType;
@@ -34,7 +31,6 @@ public class AttackInput : InputType
     }
 }
 
-// Movement input type with MovementType
 [CreateAssetMenu(menuName = "InputTypes/MovementInput")]
 public class MovementInput : InputType
 {
@@ -42,7 +38,6 @@ public class MovementInput : InputType
 
     public override bool Matches(object instance)
     {
-        // Cast to MovementType and check for a match
         if (instance is MovementInput movementInput)
         {
             return requiredMovement == movementInput.requiredMovement;
@@ -51,7 +46,6 @@ public class MovementInput : InputType
     }
 }
 
-// Bool-based input type (used for dash, dodge, etc.)
 [CreateAssetMenu(menuName = "InputTypes/BoolInputType")]
 public class BoolInputType : InputType
 {
@@ -63,6 +57,22 @@ public class BoolInputType : InputType
         if (instance is bool boolValue)
         {
             return requiredValue == boolValue;
+        }
+        return false;
+    }
+}
+
+[CreateAssetMenu(menuName = "InputTypes/NameInputType")]
+public class NameInputType : InputType
+{
+    public string requiredValue;
+
+    public override bool Matches(object instance)
+    {
+        // Cast to bool and check for a match
+        if (instance is NameInputType nameInputType)
+        {
+            return requiredValue == nameInputType.requiredValue;
         }
         return false;
     }

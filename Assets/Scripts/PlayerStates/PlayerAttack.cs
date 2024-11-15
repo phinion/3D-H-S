@@ -14,7 +14,7 @@ public class PlayerAttack : PlayerState
         //base.AnimationFinishTrigger();
 
         isAnimationFinished = true;
-        
+
         //if movesmanager.canmove
         // move
         // else 
@@ -40,9 +40,18 @@ public class PlayerAttack : PlayerState
         //}
         //else
         //{
-        player.movesManager.ClearAvailableMoves();
+
+        // if (input.movementInput != Vector2.zero)
+        // {
+        //     stateMachine.ChangeState(player.moveState);
+        // }
+        // else
+        // {
+            player.movesManager.ClearAvailableMoves();
             stateMachine.ChangeState(player.idleState);
-            
+        //}
+
+
         //}
 
 
@@ -52,7 +61,7 @@ public class PlayerAttack : PlayerState
 
     public override void AnimationTrigger()
     {
-        //base.AnimationTrigger();
+        base.AnimationTrigger();
         player.anim.SetTrigger(animBoolName);
     }
 
@@ -100,12 +109,12 @@ public class PlayerAttack : PlayerState
                 stateMachine.ChangeState(this);
                 player.movesManager.DoNextMove();
             }
-            //else if (input.movementInput != Vector2.zero)
-            //{
-            //    player.movesManager.ClearAvailableMoves();
-            //    stateMachine.ChangeState(player.moveState);
-                
-            //}
+            else if (player.movesManager.CurrentAttackMaintainsMomentum() && input.movementInput != Vector2.zero)
+            {
+                player.movesManager.ClearAvailableMoves();
+                anim.CrossFade("Movement", 0.2f);
+                stateMachine.ChangeState(player.moveState);
+            }
         }
     }
 

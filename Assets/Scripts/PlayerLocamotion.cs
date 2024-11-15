@@ -45,6 +45,7 @@ public class PlayerLocamotion : MonoBehaviour
     private void FixedUpdate()
     {
         HandleDragAndGravity();
+        HandleMovementAnimation();
     }
 
     private void OnDrawGizmos()
@@ -84,7 +85,7 @@ public class PlayerLocamotion : MonoBehaviour
         //rb.velocity = movementVelocity;
         rb.AddForce(movementVelocity * movementMultiplier, ForceMode.Acceleration);
 
-        HandleMovementAnimation();
+        //HandleMovementAnimation();
     }
 
     private void HandleDragAndGravity()
@@ -158,7 +159,7 @@ public class PlayerLocamotion : MonoBehaviour
         //rb.velocity = movementVelocity;
         rb.AddForce(movementVelocity * movementMultiplier, ForceMode.Acceleration);
 
-        HandleMovementAnimation();
+        //HandleMovementAnimation();
     }
 
     public void HandleRotation(Vector3 _normalizedTargetDirection)
