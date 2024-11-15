@@ -4361,6 +4361,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2888728660263822409, guid: 2a3ce65c965a4ff4d807d3c146a3fb65, type: 3}
+      propertyPath: moves.Array.data[0].combo.Array.data[0].forwardImpulse
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 2888728660263822409, guid: 2a3ce65c965a4ff4d807d3c146a3fb65, type: 3}
       propertyPath: moves.Array.data[0].combo.Array.data[0].MaintainMomentum
       value: 1
       objectReference: {fileID: 0}
