@@ -56,12 +56,7 @@ public class MovesManager : MonoBehaviour
 
     private bool CheckAvailableMoves()
     {
-        List<InputType> currentInputs = new List<InputType>
-        {
-            new AttackInput { requiredAttackType = AttackType.light },
-            new BoolInputType { requiredValue = input.run },
-            new BoolInputType { requiredValue = input.dodge }
-        };
+        var currentInputs = GetInputs();
 
         availableMoves = availableMoves
             .Where(move => move.CurrentComboInput(comboCount)?.ExistsIn(currentInputs) == true)
@@ -74,6 +69,26 @@ public class MovesManager : MonoBehaviour
         }
 
         return false;
+    }
+
+    public List<InputType> GetInputs()
+    {
+        List<InputType> currentInputs = new List<InputType>
+        {
+            new AttackInput { requiredAttackType = AttackType.light }
+        };
+
+        if (input.run)
+        {
+            currentInputs.Add(new NameInputType { requiredValue = "run" });
+        }
+        
+        if (input.dodge)
+        {
+            currentInputs.Add(new NameInputType { requiredValue = "dodge" });
+        }
+        
+        return currentInputs;
     }
 
     public bool IsMoveAvailable()
@@ -95,6 +110,17 @@ public class MovesManager : MonoBehaviour
             comboCount++;
             inCombo = false;
         }
+    }
+    
+    public bool CurrentAttackMaintainsMomentum()
+    {
+        if (availableMoves.Count > 0)
+        {
+            bool currentAttackMaintainsMomentum = availableMoves[0].combo[comboCount - 1].MaintainMomentum;
+            Debug.Log($"Current Attack Maintains momentum {currentAttackMaintainsMomentum} Combocount: {comboCount} + Current anim {availableMoves[0].combo[comboCount - 1].Anim}");
+            return currentAttackMaintainsMomentum;
+        }
+        return false;
     }
     
     #region comboReset Timer
