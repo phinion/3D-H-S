@@ -122,6 +122,15 @@ public class MovesManager : MonoBehaviour
         }
         return false;
     }
+
+    public Attack CurrentAttack()
+    {
+        if (availableMoves.Count > 0)
+        {
+            return availableMoves[0].combo[comboCount - 1];
+        }
+        return null;
+    }
     
     #region comboReset Timer
     private float comboResetTime = 1.0f; // Customize as needed

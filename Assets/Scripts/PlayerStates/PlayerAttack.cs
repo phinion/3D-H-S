@@ -88,6 +88,8 @@ public class PlayerAttack : PlayerState
 
         player.objectsHit.Clear();
         Debug.Log("PlayerAttack");
+
+        player.playerLocamotion.DashForward(player.movesManager.CurrentAttack().forwardImpulse);
     }
 
     public override void Exit()

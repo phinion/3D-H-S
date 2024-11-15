@@ -46,8 +46,8 @@ public class PlayerIdle : PlayerState
             stateMachine.ChangeState(player.moveState);
         }else if (player.movesManager.IsMoveAvailable())
         {
-            stateMachine.ChangeState(player.attackState);
             player.movesManager.DoNextMove();
+            stateMachine.ChangeState(player.attackState);
         }
         else if (input.defend)
         {

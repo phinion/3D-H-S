@@ -178,6 +178,11 @@ public class PlayerLocamotion : MonoBehaviour
     }
 
     #endregion
+    
+    public void DashForward(float _force){
+        Vector3 moveDir = GetNormalizedMoveDirection();
+        Dash(_force,moveDir);  
+    }
 
     public void Dash(float _force, Vector3 _normalizedTargetDirection)
     {
