@@ -4350,7 +4350,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2888728660263822409, guid: 2a3ce65c965a4ff4d807d3c146a3fb65, type: 3}
       propertyPath: moves.Array.data[1].combo.Array.data[0].Anim
-      value: 
+      value: Attack Combo 1
       objectReference: {fileID: 0}
     - target: {fileID: 2888728660263822409, guid: 2a3ce65c965a4ff4d807d3c146a3fb65, type: 3}
       propertyPath: availableMoves.Array.data[0].combo.Array.size
@@ -4359,6 +4359,10 @@ PrefabInstance:
     - target: {fileID: 2888728660263822409, guid: 2a3ce65c965a4ff4d807d3c146a3fb65, type: 3}
       propertyPath: Moves.Array.data[0].combo.Array.data[1].Input.Type
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2888728660263822409, guid: 2a3ce65c965a4ff4d807d3c146a3fb65, type: 3}
+      propertyPath: moves.Array.data[0].combo.Array.data[0].MaintainMomentum
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2888728660263822409, guid: 2a3ce65c965a4ff4d807d3c146a3fb65, type: 3}
       propertyPath: moves.Array.data[0].combo.Array.data[0].requiredInputs.Array.size
@@ -4391,7 +4395,7 @@ PrefabInstance:
     - target: {fileID: 2888728660263822409, guid: 2a3ce65c965a4ff4d807d3c146a3fb65, type: 3}
       propertyPath: moves.Array.data[0].combo.Array.data[0].requiredInputs.Array.data[1]
       value: 
-      objectReference: {fileID: 11400000, guid: 701b21eea6e04774b806b2eb040551db, type: 2}
+      objectReference: {fileID: 11400000, guid: 1495759a338380c49bd2839e5238eb82, type: 2}
     - target: {fileID: 2888728660263822409, guid: 2a3ce65c965a4ff4d807d3c146a3fb65, type: 3}
       propertyPath: moves.Array.data[0].combo.Array.data[1].requiredInputs.Array.data[0]
       value: 
