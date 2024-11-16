@@ -6,6 +6,7 @@ public class PlayerMove : PlayerState
 {
     private bool UseRootAnim = false;
     bool isRun = false;
+    bool isWalk = false;
     bool transitionToIdle = false;
 
     public PlayerMove(PlayerManager _player, PlayerStateMachine _stateMachine, string _animBoolName) : base(_player, _stateMachine, _animBoolName)
@@ -35,6 +36,19 @@ public class PlayerMove : PlayerState
         UseRootAnim = false;
         transitionToIdle = false;
         player.movesManager.ResetAvailableMoves();
+
+        player.inputManager.OnRun += OnRun;
+        player.inputManager.OnWalk += OnWalk;
+    }
+
+    void OnRun()
+    {
+        isRun = input.run;
+    }
+
+    void OnWalk()
+    {
+        isWalk = input.walk;
     }
 
     public override void Exit()
@@ -42,8 +56,11 @@ public class PlayerMove : PlayerState
         base.Exit();
 
         player.anim.SetBool(animBoolName, false);
-
+        transitionToIdle = false;
         //player.playerLocamotion.rb.velocity = Vector3.zero;
+        
+        player.inputManager.OnRun -= OnRun;
+        player.inputManager.OnWalk -= OnWalk;
     }
 
     public override void LogicUpdate()
@@ -67,16 +84,17 @@ public class PlayerMove : PlayerState
         }
         else if (input.movementInput == Vector2.zero && UseRootAnim == false)
         {
+            // find out current speed and forward
             player.anim.SetBool(animBoolName, false);
             UseRootAnim = true;
             transitionToIdle = true;
         }
-        else if (input.movementInput != Vector2.zero && UseRootAnim == true)
+        /*else if (input.movementInput != Vector2.zero && UseRootAnim == true)
         {
             player.anim.SetBool(animBoolName, true);
             UseRootAnim = false;
             transitionToIdle = false;
-        }
+        }*/
         else if (input.jump && player.playerLocamotion.isGrounded)
         {
             stateMachine.ChangeState(player.jumpState);
@@ -89,24 +107,25 @@ public class PlayerMove : PlayerState
 
         //if (player.anim.GetBool(animBoolName) == false)
         //    return;
-
-        if (input.run || (isRun && transitionToIdle))
+        
+        if(transitionToIdle)
         {
-            if (!isRun)
-            {
-                isRun = true;
-            }
-            
-            player.playerLocamotion.HandleMovement(player.playerLocamotion.runningSpeed, !transitionToIdle);
+            // if(isRun)
+            // {
+                float movementMultiplier = player.anim.GetFloat("MovementMultiplier");
+                var speed = player.playerLocamotion.runningSpeed * movementMultiplier;
+                player.playerLocamotion.HandleMovement(speed, true);
+            //}
+            return;
+        }
+
+        if (isRun)
+        {
+            player.playerLocamotion.HandleMovement(player.playerLocamotion.runningSpeed);
             player.playerLocamotion.HandleRotation(true, true);
         }
-        else if (input.walk)
+        else if (isWalk)
         {
-            if (isRun)
-            {
-                isRun = false;
-            }
-            
             player.playerLocamotion.HandleAllMovement(player.playerLocamotion.walkingSpeed);
         }
         else

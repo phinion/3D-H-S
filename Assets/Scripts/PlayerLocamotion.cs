@@ -17,18 +17,18 @@ public class PlayerLocamotion : MonoBehaviour
     public float walkingSpeed = 3f;
     public float movementSpeed = 7f;
     public float runningSpeed = 14f;
-    
+
     public float rotationSpeed = 15f;
-    
+
     public float jumpForce = 5f;
 
     public float dodgeForce = 20f;
-    
+
     public float movementMultiplier = 10f;
     public float groundDrag = 6f;
     public float airDrag = 0.5f;
     public float fallMultiplier = 2.5f;
-    
+
     [Header("Ground Check Settings")] 
     public float groundedDistanceCheck = 0.2f;
     public bool isGrounded = false;
@@ -59,7 +59,8 @@ public class PlayerLocamotion : MonoBehaviour
 
     public void DoPhysicsChecks()
     {
-        isGrounded = Physics.Raycast(transform.position + (Vector3.up * 0.5f), Vector3.down,
+        isGrounded = Physics.Raycast(
+            transform.position + (Vector3.up * 0.5f), Vector3.down,
             0.5f + groundedDistanceCheck);
     }
 
@@ -81,10 +82,9 @@ public class PlayerLocamotion : MonoBehaviour
 
     #region Movement and Rotation given input
 
-    public void HandleMovement(float _speed, bool useCharacterForward = false)
+    public void HandleMovement(float _speed, bool useForward = false)
     {
-        Vector3 movementVelocity =
-            (useCharacterForward ? GetNormalizedMoveDirection() : transform.forward) * _speed;
+        Vector3 movementVelocity = (useForward ? transform.forward : GetNormalizedMoveDirection()) * _speed;
 
         //rb.velocity = movementVelocity;
         rb.AddForce(movementVelocity * movementMultiplier, ForceMode.Acceleration);
@@ -182,10 +182,11 @@ public class PlayerLocamotion : MonoBehaviour
     }
 
     #endregion
-    
-    public void DashForward(float _force){
+
+    public void DashForward(float _force)
+    {
         Vector3 moveDir = GetNormalizedMoveDirection();
-        Dash(_force,moveDir);  
+        Dash(_force, moveDir);
     }
 
     public void Dash(float _force, Vector3 _normalizedTargetDirection)

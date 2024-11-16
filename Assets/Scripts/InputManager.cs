@@ -23,12 +23,14 @@ public class InputManager : MonoBehaviour
     public float horizontalInput;
     
     public event Action OnAttack;
+    public event Action OnRun;
+    public event Action OnWalk;
 
     public bool attack;
     public bool defend;
     public bool dodge;
     public bool run;
-    public bool walk;
+    public bool walk = false;
     public bool jump;
 
     private float moveAmount;
@@ -63,10 +65,22 @@ public class InputManager : MonoBehaviour
             playerControls.PlayerCombat.Attack.performed += i => PrimaryAttack(i);
             playerControls.PlayerCombat.Attack.canceled += i => PrimaryAttack(i);
             //Debug.Log("Enable 2");
-            playerControls.PlayerMovement.Run.performed += i => run = true;
-            playerControls.PlayerMovement.Run.canceled += i => run = false;
+            playerControls.PlayerMovement.Run.performed += i => 
+            {
+                run = true; 
+                OnRun?.Invoke();
+            };
+            playerControls.PlayerMovement.Run.canceled += i => 
+            {
+                run = false; 
+                OnRun?.Invoke();
+            };
 
-            playerControls.PlayerMovement.Walk.performed += i => walk = !walk;
+            playerControls.PlayerMovement.Walk.performed += i =>
+            {
+                walk = !walk;
+                OnWalk?.Invoke();
+            };
 
             playerControls.PlayerCombat.TargetLock.performed += i => TargetLock(i);
         }

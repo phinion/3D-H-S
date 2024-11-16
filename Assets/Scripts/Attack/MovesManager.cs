@@ -104,7 +104,7 @@ public class MovesManager : MonoBehaviour
             string anim = availableMoves[0].combo[comboCount].Anim;
             if (!string.IsNullOrEmpty(anim))
             {
-                player.anim.Play(anim);
+                player.anim.CrossFade(anim, 0.1f, 0, 0f);
             }
             player.anim.SetInteger("comboCount", comboCount);
             comboCount++;
@@ -117,7 +117,6 @@ public class MovesManager : MonoBehaviour
         if (availableMoves.Count > 0)
         {
             bool currentAttackMaintainsMomentum = availableMoves[0].combo[comboCount - 1].MaintainMomentum;
-            Debug.Log($"Current Attack Maintains momentum {currentAttackMaintainsMomentum} Combocount: {comboCount} + Current anim {availableMoves[0].combo[comboCount - 1].Anim}");
             return currentAttackMaintainsMomentum;
         }
         return false;
