@@ -2918,7 +2918,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 2.3802177e+20, y: 0, z: 0, w: 8e-44}
+  m_BoundingSphereOverride: {x: 1.02e-43, y: 6e-44, z: 2.1e-44, w: 6.003e-41}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
@@ -3151,10 +3151,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 0}
+  walkingSpeed: 3
   movementSpeed: 7
   runningSpeed: 14
   rotationSpeed: 15
   jumpForce: 5
+  dodgeForce: 20
   movementMultiplier: 10
   groundDrag: 6
   airDrag: 0.5
@@ -3182,6 +3184,7 @@ MonoBehaviour:
   defend: 0
   dodge: 0
   run: 0
+  walk: 0
   jump: 0
 --- !u!114 &919132148516302891
 MonoBehaviour:
@@ -4465,8 +4468,24 @@ PrefabInstance:
       value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 8216630236203811969, guid: 2a3ce65c965a4ff4d807d3c146a3fb65, type: 3}
+      propertyPath: dodgeForce
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 8216630236203811969, guid: 2a3ce65c965a4ff4d807d3c146a3fb65, type: 3}
+      propertyPath: runningSpeed
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8216630236203811969, guid: 2a3ce65c965a4ff4d807d3c146a3fb65, type: 3}
+      propertyPath: walkingSpeed
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8216630236203811969, guid: 2a3ce65c965a4ff4d807d3c146a3fb65, type: 3}
+      propertyPath: movementSpeed
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8216630236203811969, guid: 2a3ce65c965a4ff4d807d3c146a3fb65, type: 3}
       propertyPath: animatorSpeedModifier
-      value: 0.25
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 8216630236203811971, guid: 2a3ce65c965a4ff4d807d3c146a3fb65, type: 3}
       propertyPath: m_Enabled
