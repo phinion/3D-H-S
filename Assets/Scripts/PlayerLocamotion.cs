@@ -13,13 +13,16 @@ public class PlayerLocamotion : MonoBehaviour
     EnemyLockOn enemyTargetting;
     Transform cameraObject;
 
-    [Header("Movement Settings")]
+    [Header("Movement Settings")] 
+    public float walkingSpeed = 3f;
     public float movementSpeed = 7f;
     public float runningSpeed = 14f;
     
     public float rotationSpeed = 15f;
     
-    public float jumpForce = 5f;     
+    public float jumpForce = 5f;
+
+    public float dodgeForce = 20f;
     
     public float movementMultiplier = 10f;
     public float groundDrag = 6f;
@@ -78,9 +81,10 @@ public class PlayerLocamotion : MonoBehaviour
 
     #region Movement and Rotation given input
 
-    public void HandleMovement(float _speed)
+    public void HandleMovement(float _speed, bool useCharacterForward = false)
     {
-        Vector3 movementVelocity = GetNormalizedMoveDirection() * _speed;
+        Vector3 movementVelocity =
+            (useCharacterForward ? GetNormalizedMoveDirection() : transform.forward) * _speed;
 
         //rb.velocity = movementVelocity;
         rb.AddForce(movementVelocity * movementMultiplier, ForceMode.Acceleration);
@@ -222,7 +226,7 @@ public class PlayerLocamotion : MonoBehaviour
 
         moveDir *= (rb.velocity.magnitude * animatorSpeedModifier);
 
-        animatorManager.UpdateAnimatorValues(moveDir.x, moveDir.z);
+        animatorManager.UpdateAnimatorValues(moveDir.x, moveDir.z, rb.velocity.magnitude);
     }
 
     public void RootAnimMove(Vector3 animDeltaPosition)

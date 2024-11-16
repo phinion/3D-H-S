@@ -28,6 +28,7 @@ public class InputManager : MonoBehaviour
     public bool defend;
     public bool dodge;
     public bool run;
+    public bool walk;
     public bool jump;
 
     private float moveAmount;
@@ -64,6 +65,8 @@ public class InputManager : MonoBehaviour
             //Debug.Log("Enable 2");
             playerControls.PlayerMovement.Run.performed += i => run = true;
             playerControls.PlayerMovement.Run.canceled += i => run = false;
+
+            playerControls.PlayerMovement.Walk.performed += i => walk = !walk;
 
             playerControls.PlayerCombat.TargetLock.performed += i => TargetLock(i);
         }

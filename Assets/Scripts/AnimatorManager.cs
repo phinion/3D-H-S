@@ -8,6 +8,7 @@ public class AnimatorManager : MonoBehaviour
     Animator animator;
     int horizontal;
     int vertical;
+    int magnitude;
 
     private void Awake()
     {
@@ -15,9 +16,10 @@ public class AnimatorManager : MonoBehaviour
         animator = GetComponentInChildren<Animator>();
         horizontal = Animator.StringToHash("Horizontal");
         vertical = Animator.StringToHash("Vertical");
+        magnitude = Animator.StringToHash("moveMagnitude");
     }
 
-    public void UpdateAnimatorValues(float horizontalMovement,float verticalMovement)
+    public void UpdateAnimatorValues(float horizontalMovement,float verticalMovement, float moveMagnitude = 0f)
     {
         //Animation Snapping
         float snappedHorizontal;
@@ -75,7 +77,7 @@ public class AnimatorManager : MonoBehaviour
 
         animator.SetFloat(horizontal, snappedHorizontal, 0.1f,Time.deltaTime);
         animator.SetFloat(vertical, snappedVertical, 0.1f, Time.deltaTime);
-
+        animator.SetFloat(magnitude, moveMagnitude, 0.1f, Time.deltaTime);
     }
 
     private void OnAnimatorMove()

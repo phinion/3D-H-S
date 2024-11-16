@@ -40,8 +40,12 @@ public class PlayerIdle : PlayerState
     public override void LogicUpdate()
     {
         base.LogicUpdate();
-
-        if(input.movementInput != Vector2.zero)
+        
+        if (!player.IsGrounded)
+        {
+            stateMachine.ChangeState(player.fallState);
+        }
+        else if(input.movementInput != Vector2.zero)
         {
             stateMachine.ChangeState(player.moveState);
         }else if (player.movesManager.IsMoveAvailable())

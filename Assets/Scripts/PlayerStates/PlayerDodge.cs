@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerDodge : PlayerState
 {
     Vector3 normalizedMoveDir;
+    bool isRun = false;
 
     public PlayerDodge(PlayerManager _player, PlayerStateMachine _stateMachine, string _animBoolName) : base(_player, _stateMachine, _animBoolName)
     {
@@ -22,7 +23,7 @@ public class PlayerDodge : PlayerState
         //}
         //else
         //{
-        stateMachine.ChangeState(player.moveState);
+        stateMachine.ChangeState(player.idleState);
         //}
 
     }
@@ -55,6 +56,8 @@ public class PlayerDodge : PlayerState
             else
                 player.anim.SetInteger("comboCount", 3);
         }
+
+        isRun = input.run;
     }
 
     public override void Exit()
@@ -83,13 +86,15 @@ public class PlayerDodge : PlayerState
 
         if (!canCombo)
         {
-            player.playerLocamotion.Dash(20f, normalizedMoveDir);
+            player.playerLocamotion.Dash(player.playerLocamotion.dodgeForce, normalizedMoveDir);
         }
         else
         {
             player.playerLocamotion.HandleMovement(normalizedMoveDir);
         }
-
-        player.playerLocamotion.HandleRotation(false);
+        if(!isRun)
+        {
+            player.playerLocamotion.HandleRotation(false);
+        }
     }
 }

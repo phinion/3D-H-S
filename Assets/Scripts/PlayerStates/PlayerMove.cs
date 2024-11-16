@@ -5,6 +5,8 @@ using UnityEngine;
 public class PlayerMove : PlayerState
 {
     private bool UseRootAnim = false;
+    bool isRun = false;
+    bool transitionToIdle = false;
 
     public PlayerMove(PlayerManager _player, PlayerStateMachine _stateMachine, string _animBoolName) : base(_player, _stateMachine, _animBoolName)
     {
@@ -31,6 +33,7 @@ public class PlayerMove : PlayerState
     {
         base.Enter();
         UseRootAnim = false;
+        transitionToIdle = false;
         player.movesManager.ResetAvailableMoves();
     }
 
@@ -66,11 +69,13 @@ public class PlayerMove : PlayerState
         {
             player.anim.SetBool(animBoolName, false);
             UseRootAnim = true;
+            transitionToIdle = true;
         }
         else if (input.movementInput != Vector2.zero && UseRootAnim == true)
         {
             player.anim.SetBool(animBoolName, true);
             UseRootAnim = false;
+            transitionToIdle = false;
         }
         else if (input.jump && player.playerLocamotion.isGrounded)
         {
@@ -85,10 +90,24 @@ public class PlayerMove : PlayerState
         //if (player.anim.GetBool(animBoolName) == false)
         //    return;
 
-        if (input.run)
+        if (input.run || (isRun && transitionToIdle))
         {
-            player.playerLocamotion.HandleMovement(player.playerLocamotion.runningSpeed);
+            if (!isRun)
+            {
+                isRun = true;
+            }
+            
+            player.playerLocamotion.HandleMovement(player.playerLocamotion.runningSpeed, !transitionToIdle);
             player.playerLocamotion.HandleRotation(true, true);
+        }
+        else if (input.walk)
+        {
+            if (isRun)
+            {
+                isRun = false;
+            }
+            
+            player.playerLocamotion.HandleAllMovement(player.playerLocamotion.walkingSpeed);
         }
         else
         {
