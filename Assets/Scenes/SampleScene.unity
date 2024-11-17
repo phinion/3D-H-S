@@ -4277,11 +4277,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2888728660263822409, guid: 2a3ce65c965a4ff4d807d3c146a3fb65, type: 3}
       propertyPath: moves.Array.data[0].name
-      value: Light Dash Attack
+      value: Light Dash to Light Attack Combo 23
       objectReference: {fileID: 0}
     - target: {fileID: 2888728660263822409, guid: 2a3ce65c965a4ff4d807d3c146a3fb65, type: 3}
       propertyPath: moves.Array.data[1].name
       value: 3 Hit Light Attack Combo
+      objectReference: {fileID: 0}
+    - target: {fileID: 2888728660263822409, guid: 2a3ce65c965a4ff4d807d3c146a3fb65, type: 3}
+      propertyPath: moves.Array.data[2].name
+      value: Light Dash Attack
       objectReference: {fileID: 0}
     - target: {fileID: 2888728660263822409, guid: 2a3ce65c965a4ff4d807d3c146a3fb65, type: 3}
       propertyPath: availableMoves.Array.size
@@ -4301,11 +4305,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2888728660263822409, guid: 2a3ce65c965a4ff4d807d3c146a3fb65, type: 3}
       propertyPath: moves.Array.data[0].combo.Array.size
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2888728660263822409, guid: 2a3ce65c965a4ff4d807d3c146a3fb65, type: 3}
       propertyPath: moves.Array.data[1].combo.Array.size
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2888728660263822409, guid: 2a3ce65c965a4ff4d807d3c146a3fb65, type: 3}
+      propertyPath: moves.Array.data[2].combo.Array.size
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2888728660263822409, guid: 2a3ce65c965a4ff4d807d3c146a3fb65, type: 3}
       propertyPath: Moves.Array.data[0].inputs.Array.size
@@ -4316,6 +4324,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 23ee3b706179b1046af84f2b5ca50474, type: 2}
     - target: {fileID: 2888728660263822409, guid: 2a3ce65c965a4ff4d807d3c146a3fb65, type: 3}
+      propertyPath: moves.Array.data[0].combo.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: 7ffe94fbcef0a894999d0e2389155847, type: 2}
+    - target: {fileID: 2888728660263822409, guid: 2a3ce65c965a4ff4d807d3c146a3fb65, type: 3}
+      propertyPath: moves.Array.data[0].combo.Array.data[2]
+      value: 
+      objectReference: {fileID: 11400000, guid: 1e05e235c9a74b3409264fa88b90613a, type: 2}
+    - target: {fileID: 2888728660263822409, guid: 2a3ce65c965a4ff4d807d3c146a3fb65, type: 3}
       propertyPath: moves.Array.data[1].combo.Array.data[0]
       value: 
       objectReference: {fileID: 11400000, guid: 051a8490aee232544bd31dc30e5935e9, type: 2}
@@ -4325,6 +4341,18 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: 7ffe94fbcef0a894999d0e2389155847, type: 2}
     - target: {fileID: 2888728660263822409, guid: 2a3ce65c965a4ff4d807d3c146a3fb65, type: 3}
       propertyPath: moves.Array.data[1].combo.Array.data[2]
+      value: 
+      objectReference: {fileID: 11400000, guid: 1e05e235c9a74b3409264fa88b90613a, type: 2}
+    - target: {fileID: 2888728660263822409, guid: 2a3ce65c965a4ff4d807d3c146a3fb65, type: 3}
+      propertyPath: moves.Array.data[2].combo.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 23ee3b706179b1046af84f2b5ca50474, type: 2}
+    - target: {fileID: 2888728660263822409, guid: 2a3ce65c965a4ff4d807d3c146a3fb65, type: 3}
+      propertyPath: moves.Array.data[2].combo.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: 7ffe94fbcef0a894999d0e2389155847, type: 2}
+    - target: {fileID: 2888728660263822409, guid: 2a3ce65c965a4ff4d807d3c146a3fb65, type: 3}
+      propertyPath: moves.Array.data[2].combo.Array.data[2]
       value: 
       objectReference: {fileID: 11400000, guid: 1e05e235c9a74b3409264fa88b90613a, type: 2}
     - target: {fileID: 2888728660263822409, guid: 2a3ce65c965a4ff4d807d3c146a3fb65, type: 3}
