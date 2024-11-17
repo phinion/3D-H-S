@@ -11,7 +11,7 @@ public class MovesManager : MonoBehaviour
 
     private InputManager input;
     private PlayerManager player;
-    private int comboCount = 0;
+    private int comboCount = -1;
     private bool inCombo = false;
 
     void Start()
@@ -37,7 +37,7 @@ public class MovesManager : MonoBehaviour
     public void ClearAvailableMoves()
     {
         availableMoves.Clear();
-        comboCount = 0;
+        comboCount = -1;
         inCombo = false;
         player.anim.SetInteger("comboCount", comboCount);
     }
@@ -76,7 +76,7 @@ public class MovesManager : MonoBehaviour
         var currentInputs = GetInputs();
 
         availableMoves = availableMoves
-            .Where(move => move.CurrentComboInput(comboCount)?.ExistsIn(currentInputs) == true)
+            .Where(move => move.CurrentComboInput(comboCount + 1)?.ExistsIn(currentInputs) == true)
             .ToList();
 
         if (availableMoves.Count > 0)
@@ -116,8 +116,10 @@ public class MovesManager : MonoBehaviour
 
     public void DoNextMove()
     {
-        if (availableMoves.Count > 0 && comboCount < availableMoves[0].combo.Count)
+        if (availableMoves.Count > 0 && comboCount + 1 < availableMoves[0].combo.Count)
         {
+            comboCount++;
+            Debug.Log("Testing ComboCOuntDoNEXTNMOVE " + comboCount);
             var attack = availableMoves[0].combo[comboCount];
             string anim = attack.Anim;
             if (!string.IsNullOrEmpty(anim))
@@ -128,7 +130,6 @@ public class MovesManager : MonoBehaviour
             
             FilterAvailableMoves(attack);
             
-            comboCount++;
             inCombo = false;
             
         }
@@ -138,7 +139,7 @@ public class MovesManager : MonoBehaviour
     {
         if (availableMoves.Count > 0)
         {
-            bool currentAttackMaintainsMomentum = availableMoves[0].combo[comboCount - 1].MaintainMomentum;
+            bool currentAttackMaintainsMomentum = availableMoves[0].combo[comboCount].MaintainMomentum;
             return currentAttackMaintainsMomentum;
         }
         return false;
@@ -148,7 +149,8 @@ public class MovesManager : MonoBehaviour
     {
         if (availableMoves.Count > 0)
         {
-            return availableMoves[0].combo[comboCount - 1];
+            Debug.Log("Testing ComboCOunt " + comboCount);
+            return availableMoves[0].combo[comboCount];
         }
         return null;
     }

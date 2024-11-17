@@ -108,8 +108,8 @@ public class PlayerAttack : PlayerState
         {
             if (player.movesManager.IsMoveAvailable())
             {
-                stateMachine.ChangeState(this);
                 player.movesManager.DoNextMove();
+                stateMachine.ChangeState(this);
             }
             else if (player.movesManager.CurrentAttackMaintainsMomentum() && input.movementInput != Vector2.zero)
             {
