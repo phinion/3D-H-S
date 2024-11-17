@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 0}
+  m_Name: DashAttack_Light
+  m_EditorClassIdentifier: Assembly-CSharp::Attack
+  Name: Light Dash Attack
+  Anim: Light Dash Attack
+  MaintainMomentum: 1
+  forwardImpulse: 200
+  requiredInputs:
+  - {fileID: 11400000, guid: 71fba76594886744594e48c400d4aeb5, type: 2}
+  - {fileID: 11400000, guid: 1495759a338380c49bd2839e5238eb82, type: 2}

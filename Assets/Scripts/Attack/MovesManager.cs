@@ -42,6 +42,23 @@ public class MovesManager : MonoBehaviour
         player.anim.SetInteger("comboCount", comboCount);
     }
 
+    private void FilterAvailableMoves(Attack _attack)
+    {
+        var modifiedList = availableMoves.ToList();
+        
+        // TODO LINQ this
+        for (var i = modifiedList.Count - 1; i >= 0; i--)
+        {
+            var attackCombo = modifiedList[i];
+            if (attackCombo.combo[comboCount] != _attack)
+            {
+                modifiedList.Remove(attackCombo);
+            }
+        }
+
+        availableMoves = modifiedList;
+    }
+
     private void HandleAttackInput()
     {
         if (CheckAvailableMoves())
@@ -101,14 +118,19 @@ public class MovesManager : MonoBehaviour
     {
         if (availableMoves.Count > 0 && comboCount < availableMoves[0].combo.Count)
         {
-            string anim = availableMoves[0].combo[comboCount].Anim;
+            var attack = availableMoves[0].combo[comboCount];
+            string anim = attack.Anim;
             if (!string.IsNullOrEmpty(anim))
             {
                 player.anim.CrossFade(anim, 0.1f, 0, 0f);
             }
             player.anim.SetInteger("comboCount", comboCount);
+            
+            FilterAvailableMoves(attack);
+            
             comboCount++;
             inCombo = false;
+            
         }
     }
     

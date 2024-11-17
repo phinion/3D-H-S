@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-[System.Serializable]
-public class Attack
+[CreateAssetMenu(fileName = "Attack", menuName = "Moves/Attack")]
+public class Attack : ScriptableObject
 {
     public string Name;
     public string Anim;
@@ -26,6 +26,7 @@ public class AttackCombo
 {
     public string name;
     public List<Attack> combo;
+    public List<int> transitionTimes;
 
     public bool ContinueCombo(List<InputType> currentInputs, int comboCount)
     {

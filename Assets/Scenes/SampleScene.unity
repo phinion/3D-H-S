@@ -2918,7 +2918,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 1.02e-43, y: 6e-44, z: 2.1e-44, w: 6.003e-41}
+  m_BoundingSphereOverride: {x: 9.08e-43, y: 1e-45, z: 0, w: 0}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
@@ -4311,6 +4311,22 @@ PrefabInstance:
       propertyPath: Moves.Array.data[0].inputs.Array.size
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 2888728660263822409, guid: 2a3ce65c965a4ff4d807d3c146a3fb65, type: 3}
+      propertyPath: moves.Array.data[0].combo.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 23ee3b706179b1046af84f2b5ca50474, type: 2}
+    - target: {fileID: 2888728660263822409, guid: 2a3ce65c965a4ff4d807d3c146a3fb65, type: 3}
+      propertyPath: moves.Array.data[1].combo.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 051a8490aee232544bd31dc30e5935e9, type: 2}
+    - target: {fileID: 2888728660263822409, guid: 2a3ce65c965a4ff4d807d3c146a3fb65, type: 3}
+      propertyPath: moves.Array.data[1].combo.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: 7ffe94fbcef0a894999d0e2389155847, type: 2}
+    - target: {fileID: 2888728660263822409, guid: 2a3ce65c965a4ff4d807d3c146a3fb65, type: 3}
+      propertyPath: moves.Array.data[1].combo.Array.data[2]
+      value: 
+      objectReference: {fileID: 11400000, guid: 1e05e235c9a74b3409264fa88b90613a, type: 2}
     - target: {fileID: 2888728660263822409, guid: 2a3ce65c965a4ff4d807d3c146a3fb65, type: 3}
       propertyPath: Moves.Array.data[0].attackCombo.Array.size
       value: 1
