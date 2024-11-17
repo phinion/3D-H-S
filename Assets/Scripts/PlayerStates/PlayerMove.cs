@@ -39,6 +39,9 @@ public class PlayerMove : PlayerState
 
         player.inputManager.OnRun += OnRun;
         player.inputManager.OnWalk += OnWalk;
+
+        OnRun();
+        OnWalk();
     }
 
     void OnRun()
