@@ -11,5 +11,5 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 0}
   m_Name: Dash_InputType
-  m_EditorClassIdentifier: Assembly-CSharp::BoolInputType
-  requiredValue: 0
+  m_EditorClassIdentifier: Assembly-CSharp::NameInputType
+  requiredValue: 
