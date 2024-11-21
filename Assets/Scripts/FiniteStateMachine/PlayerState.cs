@@ -32,7 +32,7 @@ public class PlayerState
         AnimationTrigger();
         startTime = Time.time;
 
-        Debug.Log(this.ToString());
+       // Debug.Log(this.ToString());
 
         isAnimationFinished = false;
         isExitingState = false;

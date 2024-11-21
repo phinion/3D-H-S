@@ -87,7 +87,6 @@ public class PlayerAttack : PlayerState
         base.Enter();
 
         player.objectsHit.Clear();
-        Debug.Log("PlayerAttack");
 
         player.playerLocamotion.DashForward(player.movesManager.CurrentAttack().forwardImpulse);
     }

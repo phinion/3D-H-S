@@ -119,7 +119,7 @@ public class MovesManager : MonoBehaviour
         if (availableMoves.Count > 0 && comboCount + 1 < availableMoves[0].combo.Count)
         {
             comboCount++;
-            Debug.Log("Testing ComboCOuntDoNEXTNMOVE " + comboCount);
+
             var attack = availableMoves[0].combo[comboCount];
             string anim = attack.Anim;
             if (!string.IsNullOrEmpty(anim))
@@ -149,7 +149,6 @@ public class MovesManager : MonoBehaviour
     {
         if (availableMoves.Count > 0)
         {
-            Debug.Log("Testing ComboCOunt " + comboCount);
             return availableMoves[0].combo[comboCount];
         }
         return null;
