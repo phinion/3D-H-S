@@ -90,10 +90,17 @@ public class MovesManager : MonoBehaviour
 
     public List<InputType> GetInputs()
     {
-        List<InputType> currentInputs = new List<InputType>
+        List<InputType> currentInputs = new List<InputType>();
+        
+        if (input.attack)
         {
-            new AttackInput { requiredAttackType = AttackType.light }
-        };
+            currentInputs.Add(new AttackInput { requiredAttackType = AttackType.light });
+        }
+        
+        if (input.heavyAttack)
+        {
+            currentInputs.Add(new AttackInput { requiredAttackType = AttackType.heavy });
+        }
 
         if (input.run)
         {
