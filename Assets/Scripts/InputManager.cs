@@ -13,15 +13,26 @@ public class InputManager : MonoBehaviour
     MovesManager movesManager;
 
     EnemyLockOn enemyTargetting;
-    public Vector2 movementInput { get; private set; }
-    public Vector2 cameraInput { get; private set; }
+
 
     public float cameraInputX;
     public float cameraInputY;
 
     public float verticalInput;
     public float horizontalInput;
-    
+
+    public float movementInputDeadZone = 0.1f; 
+    public Vector2 MovementInput
+    {
+        get
+        {
+            float x = Mathf.Abs(horizontalInput) > movementInputDeadZone ? horizontalInput : 0f;
+            float y = Mathf.Abs(verticalInput) > movementInputDeadZone ? verticalInput : 0f;
+            return new Vector2(x, y);
+        }
+    }
+    public Vector2 CameraInput => new Vector2(cameraInputX, cameraInputY);
+
     public event Action OnAttack;
     public event Action OnRun;
     public event Action OnWalk;
@@ -33,7 +44,13 @@ public class InputManager : MonoBehaviour
     public bool walk = false;
     public bool jump;
 
+    Vector2 movementInput;
+    Vector2 cameraInput;
+
     private float moveAmount;
+    private Vector2 lastMovementInput; // Stores the previous movement input
+    private float neutralStateTimer = 0f; // Timer to track how long joystick is in neutral state
+    private float neutralStateDelay = 0.2f; // Delay before registering neutral state (in seconds)
 
     private void Awake()
     {
@@ -65,14 +82,14 @@ public class InputManager : MonoBehaviour
             playerControls.PlayerCombat.Attack.performed += i => PrimaryAttack(i);
             playerControls.PlayerCombat.Attack.canceled += i => PrimaryAttack(i);
             //Debug.Log("Enable 2");
-            playerControls.PlayerMovement.Run.performed += i => 
+            playerControls.PlayerMovement.Run.performed += i =>
             {
-                run = true; 
+                run = true;
                 OnRun?.Invoke();
             };
-            playerControls.PlayerMovement.Run.canceled += i => 
+            playerControls.PlayerMovement.Run.canceled += i =>
             {
-                run = false; 
+                run = false;
                 OnRun?.Invoke();
             };
 
@@ -124,15 +141,27 @@ public class InputManager : MonoBehaviour
         verticalInput = movementInput.y;
         horizontalInput = movementInput.x;
 
-        //Debug.Log("movement Input: " + movementInput);
+        if (movementInput == Vector2.zero)
+        {
+            neutralStateTimer += Time.deltaTime;
+
+            if (neutralStateTimer >= neutralStateDelay)
+            {
+                Debug.Log("MovementZero InputTimer");
+                lastMovementInput = movementInput;
+                moveAmount = 0f;
+            }
+        }
+        else
+        {
+            neutralStateTimer = 0f;
+
+            lastMovementInput = movementInput;
+            moveAmount = Mathf.Clamp01(Mathf.Abs(horizontalInput) + Mathf.Abs(verticalInput));
+        }
 
         cameraInputY = cameraInput.y;
         cameraInputX = cameraInput.x;
-
-        moveAmount = Mathf.Clamp01(Mathf.Abs(horizontalInput) + Mathf.Abs(verticalInput));
-
-        //Vector3 relativeDirection = CameraManager.instance.transform.InverseTransformDirection(playerLocamotion.GetNormalizedMoveDirection());
-
-        //animatorManager.UpdateAnimatorValues(0f, verticalInput);
     }
+
 }

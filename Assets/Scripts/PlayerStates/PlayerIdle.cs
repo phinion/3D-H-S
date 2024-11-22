@@ -45,7 +45,7 @@ public class PlayerIdle : PlayerState
         {
             stateMachine.ChangeState(player.fallState);
         }
-        else if(input.movementInput != Vector2.zero)
+        else if(input.MovementInput != Vector2.zero)
         {
             stateMachine.ChangeState(player.moveState);
         }else if (player.movesManager.IsMoveAvailable())

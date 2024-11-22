@@ -36,4 +36,9 @@ public class PlayerDefend : PlayerState
             player.anim.SetInteger("comboCount",1);
         }
     }
+    
+    public override void OnAnimatorMove()
+    {
+        player.playerLocamotion.RootAnimMove(player.anim.deltaPosition);
+    }
 }

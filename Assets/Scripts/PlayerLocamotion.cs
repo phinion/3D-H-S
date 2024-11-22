@@ -75,8 +75,8 @@ public class PlayerLocamotion : MonoBehaviour
         Vector3 moveDir;
         moveDir = cameraObject.forward * inputManager.verticalInput;
         moveDir = moveDir + cameraObject.right * inputManager.horizontalInput;
-        moveDir.Normalize();
         moveDir.y = 0;
+        moveDir.Normalize();
         return moveDir;
     }
 

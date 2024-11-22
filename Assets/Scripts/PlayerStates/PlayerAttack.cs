@@ -110,7 +110,7 @@ public class PlayerAttack : PlayerState
                 player.movesManager.DoNextMove();
                 stateMachine.ChangeState(this);
             }
-            else if (player.movesManager.CurrentAttackMaintainsMomentum() && input.movementInput != Vector2.zero)
+            else if (player.movesManager.CurrentAttackMaintainsMomentum() && input.MovementInput != Vector2.zero)
             {
                 player.movesManager.ClearAvailableMoves();
                 anim.CrossFade("Movement", 0.2f);

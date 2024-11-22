@@ -16,7 +16,18 @@ public class PlayerMove : PlayerState
     {
         base.AnimationFinishTrigger();
 
-        stateMachine.ChangeState(player.idleState);
+        Vector3 moveDirection = player.playerLocamotion.GetNormalizedMoveDirection();
+
+        // If no movement input, transition to idle
+        if (moveDirection.sqrMagnitude > 0)
+        {
+            stateMachine.ChangeState(player.moveState);
+        }
+        else
+        {
+            Debug.Log("NO MOVEMENTE RETURNING TO IDLE");
+            stateMachine.ChangeState(player.idleState);
+        }
     }
 
     public override void AnimationComboTrigger()
@@ -60,8 +71,7 @@ public class PlayerMove : PlayerState
 
         player.anim.SetBool(animBoolName, false);
         transitionToIdle = false;
-        //player.playerLocamotion.rb.velocity = Vector3.zero;
-        
+
         player.inputManager.OnRun -= OnRun;
         player.inputManager.OnWalk -= OnWalk;
     }
@@ -85,19 +95,20 @@ public class PlayerMove : PlayerState
         {
             stateMachine.ChangeState(player.defendState);
         }
-        else if (input.movementInput == Vector2.zero && UseRootAnim == false)
+        else if (input.MovementInput == Vector2.zero && transitionToIdle == false)
         {
+            Debug.Log("NO MOVEMENTE RETURNING TO IDLE IN LOGIC");
             // find out current speed and forward
             player.anim.SetBool(animBoolName, false);
             UseRootAnim = true;
             transitionToIdle = true;
         }
-        /*else if (input.movementInput != Vector2.zero && UseRootAnim == true)
+        else if (input.MovementInput != Vector2.zero && UseRootAnim == true)
         {
             player.anim.SetBool(animBoolName, true);
             UseRootAnim = false;
             transitionToIdle = false;
-        }*/
+        }
         else if (input.jump && player.playerLocamotion.isGrounded)
         {
             stateMachine.ChangeState(player.jumpState);
@@ -108,19 +119,14 @@ public class PlayerMove : PlayerState
     {
         base.PhysicsUpdate();
 
-        //if (player.anim.GetBool(animBoolName) == false)
-        //    return;
-        
-        if(transitionToIdle)
+        /*if (transitionToIdle)
         {
-            // if(isRun)
-            // {
-                float movementMultiplier = player.anim.GetFloat("MovementMultiplier");
-                var speed = player.playerLocamotion.runningSpeed * movementMultiplier;
-                player.playerLocamotion.HandleMovement(speed, true);
-            //}
+            float movementMultiplier = player.anim.GetFloat("MovementMultiplier");
+            var speed = player.playerLocamotion.runningSpeed * movementMultiplier;
+            player.playerLocamotion.HandleMovement(speed, true);
             return;
         }
+        */
 
         if (isRun)
         {
@@ -134,10 +140,18 @@ public class PlayerMove : PlayerState
         else
         {
             player.playerLocamotion.HandleAllMovement(player.playerLocamotion.movementSpeed);
-            //Debug.Log("Current Magnitude: " + player.playerLocamotion.rb.velocity.magnitude);
         }
 
     }
 
+    bool AreVectorsFacingAway(Vector3 vector1, Vector3 vector2, float angleThreshold = 135f)
+    {
+        vector1.Normalize();
+        vector2.Normalize();
+
+        float dotProduct = Vector3.Dot(vector1, vector2);
+        float angle = Mathf.Acos(dotProduct) * Mathf.Rad2Deg;
+        return angle > (180f - angleThreshold);
+    }
 
 }
