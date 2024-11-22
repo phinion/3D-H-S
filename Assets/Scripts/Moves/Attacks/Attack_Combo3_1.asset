@@ -16,4 +16,5 @@ MonoBehaviour:
   Anim: Attack Combo 1
   MaintainMomentum: 0
   forwardImpulse: 0
-  requiredInputs: []
+  requiredInputs:
+  - {fileID: 11400000, guid: 71fba76594886744594e48c400d4aeb5, type: 2}
