@@ -12,9 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 0}
   m_Name: Attack_Combo3_1
   m_EditorClassIdentifier: Assembly-CSharp::Attack
-  Name: Attack Combo3 1
+  Name: Attack Combo 3 1
   Anim: Attack Combo 1
   MaintainMomentum: 0
   forwardImpulse: 0
-  requiredInputs:
-  - {fileID: 11400000, guid: 71fba76594886744594e48c400d4aeb5, type: 2}
+  requiredInputs: []
