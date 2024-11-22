@@ -346,6 +346,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""HeavyAttack"",
+                    ""type"": ""Button"",
+                    ""id"": ""fa149a40-2e0e-40d0-aa3b-314b0a1e87de"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -436,6 +445,17 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""action"": ""Dodge"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c25fa217-7e1a-409e-9a81-db1cebd25b24"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""HeavyAttack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -455,6 +475,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_PlayerCombat_Defend = m_PlayerCombat.FindAction("Defend", throwIfNotFound: true);
         m_PlayerCombat_TargetLock = m_PlayerCombat.FindAction("TargetLock", throwIfNotFound: true);
         m_PlayerCombat_Dodge = m_PlayerCombat.FindAction("Dodge", throwIfNotFound: true);
+        m_PlayerCombat_HeavyAttack = m_PlayerCombat.FindAction("HeavyAttack", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -598,6 +619,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_PlayerCombat_Defend;
     private readonly InputAction m_PlayerCombat_TargetLock;
     private readonly InputAction m_PlayerCombat_Dodge;
+    private readonly InputAction m_PlayerCombat_HeavyAttack;
     public struct PlayerCombatActions
     {
         private @PlayerControls m_Wrapper;
@@ -606,6 +628,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         public InputAction @Defend => m_Wrapper.m_PlayerCombat_Defend;
         public InputAction @TargetLock => m_Wrapper.m_PlayerCombat_TargetLock;
         public InputAction @Dodge => m_Wrapper.m_PlayerCombat_Dodge;
+        public InputAction @HeavyAttack => m_Wrapper.m_PlayerCombat_HeavyAttack;
         public InputActionMap Get() { return m_Wrapper.m_PlayerCombat; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -627,6 +650,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Dodge.started += instance.OnDodge;
             @Dodge.performed += instance.OnDodge;
             @Dodge.canceled += instance.OnDodge;
+            @HeavyAttack.started += instance.OnHeavyAttack;
+            @HeavyAttack.performed += instance.OnHeavyAttack;
+            @HeavyAttack.canceled += instance.OnHeavyAttack;
         }
 
         private void UnregisterCallbacks(IPlayerCombatActions instance)
@@ -643,6 +669,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Dodge.started -= instance.OnDodge;
             @Dodge.performed -= instance.OnDodge;
             @Dodge.canceled -= instance.OnDodge;
+            @HeavyAttack.started -= instance.OnHeavyAttack;
+            @HeavyAttack.performed -= instance.OnHeavyAttack;
+            @HeavyAttack.canceled -= instance.OnHeavyAttack;
         }
 
         public void RemoveCallbacks(IPlayerCombatActions instance)
@@ -674,5 +703,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         void OnDefend(InputAction.CallbackContext context);
         void OnTargetLock(InputAction.CallbackContext context);
         void OnDodge(InputAction.CallbackContext context);
+        void OnHeavyAttack(InputAction.CallbackContext context);
     }
 }

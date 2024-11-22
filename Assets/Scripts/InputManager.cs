@@ -38,6 +38,7 @@ public class InputManager : MonoBehaviour
     public event Action OnWalk;
 
     public bool attack;
+    public bool heavyAttack;
     public bool defend;
     public bool dodge;
     public bool run;
@@ -81,6 +82,9 @@ public class InputManager : MonoBehaviour
             //Debug.Log("Enable 1");
             playerControls.PlayerCombat.Attack.performed += i => PrimaryAttack(i);
             playerControls.PlayerCombat.Attack.canceled += i => PrimaryAttack(i);
+            
+            playerControls.PlayerCombat.HeavyAttack.performed += i => SecondaryAttack(i);
+            playerControls.PlayerCombat.HeavyAttack.canceled += i => SecondaryAttack(i);
             //Debug.Log("Enable 2");
             playerControls.PlayerMovement.Run.performed += i =>
             {
@@ -120,6 +124,19 @@ public class InputManager : MonoBehaviour
         else if (context.canceled)
         {
             attack = false;
+        }
+    }
+    
+    private void SecondaryAttack(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            heavyAttack = true;
+            OnAttack?.Invoke();
+        }
+        else if (context.canceled)
+        {
+            heavyAttack = false;
         }
     }
 
