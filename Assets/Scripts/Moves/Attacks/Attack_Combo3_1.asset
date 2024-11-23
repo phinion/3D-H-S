@@ -17,4 +17,4 @@ MonoBehaviour:
   MaintainMomentum: 0
   forwardImpulse: 0
   requiredInputs:
-  - {fileID: 11400000, guid: 71fba76594886744594e48c400d4aeb5, type: 2}
+  - {fileID: 11400000, guid: c234441fe5a375045a481b91eeddb4f6, type: 2}

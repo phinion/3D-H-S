@@ -16,7 +16,7 @@ public abstract class InputType : ScriptableObject
     public abstract bool Matches(object instance);
 }
 
-[CreateAssetMenu(menuName = "InputTypes/AttackInput")]
+[CreateAssetMenu(fileName = "AttackInput",menuName = "InputTypes/AttackInput")]
 public class AttackInput : InputType
 {
     public AttackType requiredAttackType;
@@ -31,7 +31,7 @@ public class AttackInput : InputType
     }
 }
 
-[CreateAssetMenu(menuName = "InputTypes/MovementInput")]
+[CreateAssetMenu(fileName = "MovementInput",menuName = "InputTypes/MovementInput")]
 public class MovementInput : InputType
 {
     public MovementType requiredMovement;
@@ -46,7 +46,7 @@ public class MovementInput : InputType
     }
 }
 
-[CreateAssetMenu(menuName = "InputTypes/BoolInputType")]
+[CreateAssetMenu(fileName = "BoolInputType",menuName = "InputTypes/BoolInputType")]
 public class BoolInputType : InputType
 {
     public bool requiredValue;
@@ -62,7 +62,7 @@ public class BoolInputType : InputType
     }
 }
 
-[CreateAssetMenu(menuName = "InputTypes/NameInputType")]
+[CreateAssetMenu(fileName = "NameInputType",menuName = "InputTypes/NameInputType")]
 public class NameInputType : InputType
 {
     public string requiredValue;

@@ -18,4 +18,4 @@ MonoBehaviour:
   forwardImpulse: 350
   requiredInputs:
   - {fileID: 11400000, guid: 1495759a338380c49bd2839e5238eb82, type: 2}
-  - {fileID: 11400000, guid: 50cc94ad1dd90904fa7dc1891193f00d, type: 2}
+  - {fileID: 11400000, guid: 5ecd0c610f32c1b45bf41f5407eb112b, type: 2}
