@@ -10,6 +10,7 @@ public class Attack : ScriptableObject
     public string Anim;
     public bool MaintainMomentum;
     public float forwardImpulse = 0f;
+    public bool useRootY = false;
     [SerializeField] private List<InputType> requiredInputs;
 
     // Checks if all required inputs are met in the current inputs, ignoring extra inputs

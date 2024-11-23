@@ -13,8 +13,7 @@ public class PlayerLocamotion : MonoBehaviour
     EnemyLockOn enemyTargetting;
     Transform cameraObject;
 
-    [Header("Movement Settings")] 
-    public float walkingSpeed = 3f;
+    [Header("Movement Settings")] public float walkingSpeed = 3f;
     public float movementSpeed = 7f;
     public float runningSpeed = 14f;
 
@@ -29,8 +28,7 @@ public class PlayerLocamotion : MonoBehaviour
     public float airDrag = 0.5f;
     public float fallMultiplier = 2.5f;
 
-    [Header("Ground Check Settings")] 
-    public float groundedDistanceCheck = 0.2f;
+    [Header("Ground Check Settings")] public float groundedDistanceCheck = 0.2f;
     public bool isGrounded = false;
 
     public float animatorSpeedModifier = 0.5f;
@@ -230,8 +228,8 @@ public class PlayerLocamotion : MonoBehaviour
         animatorManager.UpdateAnimatorValues(moveDir.x, moveDir.z, rb.velocity.magnitude);
     }
 
-    public void RootAnimMove(Vector3 animDeltaPosition)
+    public void RootAnimMove(Vector3 animDeltaPosition, bool useY = false)
     {
-        transform.position += new Vector3(animDeltaPosition.x, 0, animDeltaPosition.z);
+        transform.position += new Vector3(animDeltaPosition.x, (useY ? animDeltaPosition.y : 0), animDeltaPosition.z);
     }
 }

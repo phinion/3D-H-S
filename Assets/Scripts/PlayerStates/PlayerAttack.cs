@@ -5,6 +5,8 @@ using UnityEngine;
 public class PlayerAttack : PlayerState
 {
 
+    bool useAnimY = false;
+
     public PlayerAttack(PlayerManager _player, PlayerStateMachine _stateMachine, string _animBoolName) : base(_player, _stateMachine, _animBoolName)
     {
     }
@@ -79,7 +81,7 @@ public class PlayerAttack : PlayerState
 
     public override void OnAnimatorMove()
     {
-        player.playerLocamotion.RootAnimMove(player.anim.deltaPosition);
+        player.playerLocamotion.RootAnimMove(player.anim.deltaPosition, useAnimY);
     }
 
     public override void Enter()
@@ -89,6 +91,8 @@ public class PlayerAttack : PlayerState
         player.objectsHit.Clear();
 
         player.playerLocamotion.DashForward(player.movesManager.CurrentAttack().forwardImpulse);
+
+        useAnimY = player.movesManager.CurrentAttack().useRootY;
     }
 
     public override void Exit()

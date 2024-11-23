@@ -91,6 +91,11 @@ public class MovesManager : MonoBehaviour
     public List<InputType> GetInputs()
     {
         List<InputType> currentInputs = new List<InputType>();
+
+        if (input.MovementInput.y < 0)
+        {
+            currentInputs.Add(new NameInputType { requiredValue = "south" });
+        }
         
         if (input.attack)
         {
