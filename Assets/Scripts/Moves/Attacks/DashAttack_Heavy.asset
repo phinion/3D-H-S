@@ -10,11 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 0}
-  m_Name: Special_E
+  m_Name: DashAttack_Heavy
   m_EditorClassIdentifier: Assembly-CSharp::Attack
-  Name: Special E
-  Anim: Standing Heavy Special E
-  MaintainMomentum: 0
-  forwardImpulse: 0
+  Name: Heavy Dash Attack
+  Anim: Heavy Dash Attack
+  MaintainMomentum: 1
+  forwardImpulse: 350
   requiredInputs:
+  - {fileID: 11400000, guid: 1495759a338380c49bd2839e5238eb82, type: 2}
   - {fileID: 11400000, guid: 50cc94ad1dd90904fa7dc1891193f00d, type: 2}
