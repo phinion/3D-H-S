@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Attack;
 using Moves;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -43,7 +44,7 @@ public class MovesManager : MonoBehaviour
         player.anim.SetInteger("comboCount", comboCount);
     }
 
-    private void FilterAvailableMoves(Attack _attack)
+    private void FilterAvailableMoves(AttackSO _attack)
     {
         var modifiedList = availableMoves.ToList();
         
@@ -158,7 +159,7 @@ public class MovesManager : MonoBehaviour
         return false;
     }
 
-    public Attack CurrentAttack()
+    public AttackSO CurrentAttack()
     {
         if (availableMoves.Count > 0)
         {
