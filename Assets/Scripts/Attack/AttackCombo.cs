@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Moves;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Attack", menuName = "Moves/Attack")]
@@ -11,10 +12,10 @@ public class Attack : ScriptableObject
     public bool MaintainMomentum;
     public float forwardImpulse = 0f;
     public bool useRootY = false;
-    [SerializeField] private List<InputType> requiredInputs;
+    [SerializeField] private List<BaseInputType> requiredInputs;
 
     // Checks if all required inputs are met in the current inputs, ignoring extra inputs
-    public bool ExistsIn(List<InputType> currentInputs)
+    public bool ExistsIn(List<BaseInputType> currentInputs)
     {
         return requiredInputs.All(
             inputType => currentInputs.Exists(
@@ -29,7 +30,7 @@ public class AttackCombo
     public List<Attack> combo;
     public List<int> transitionTimes;
 
-    public bool ContinueCombo(List<InputType> currentInputs, int comboCount)
+    public bool ContinueCombo(List<BaseInputType> currentInputs, int comboCount)
     {
         var currentComboInput = CurrentComboInput(comboCount);
         if (currentComboInput != null && currentComboInput.ExistsIn(currentInputs))

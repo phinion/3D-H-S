@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Moves;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -88,13 +89,13 @@ public class MovesManager : MonoBehaviour
         return false;
     }
 
-    public List<InputType> GetInputs()
+    public List<BaseInputType> GetInputs()
     {
-        List<InputType> currentInputs = new List<InputType>();
+        List<BaseInputType> currentInputs = new List<BaseInputType>();
 
         if (input.MovementInput.y < 0)
         {
-            currentInputs.Add(new NameInputType { requiredValue = "south" });
+            currentInputs.Add(new InputType { RequiredValue = "south" });
         }
         
         if (input.attack)
@@ -109,12 +110,12 @@ public class MovesManager : MonoBehaviour
 
         if (input.run)
         {
-            currentInputs.Add(new NameInputType { requiredValue = "run" });
+            currentInputs.Add(new InputType { RequiredValue = "run" });
         }
         
         if (input.dodge)
         {
-            currentInputs.Add(new NameInputType { requiredValue = "dodge" });
+            currentInputs.Add(new InputType { RequiredValue = "dodge" });
         }
         
         return currentInputs;

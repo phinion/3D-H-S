@@ -16,6 +16,7 @@ MonoBehaviour:
   Anim: Heavy Dash Attack
   MaintainMomentum: 1
   forwardImpulse: 350
+  useRootY: 0
   requiredInputs:
   - {fileID: 11400000, guid: 1495759a338380c49bd2839e5238eb82, type: 2}
   - {fileID: 11400000, guid: 5ecd0c610f32c1b45bf41f5407eb112b, type: 2}
