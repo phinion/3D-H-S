@@ -16,7 +16,8 @@ MonoBehaviour:
   Anim: Upper Attack
   MaintainMomentum: 0
   forwardImpulse: 0
-  useRootY: 0
+  useRootY: 1
+  isLauncher: 1
   requiredInputs:
   - {fileID: 11400000, guid: d3814d8a10821934398b885d4993a488, type: 2}
   - {fileID: 11400000, guid: 5ecd0c610f32c1b45bf41f5407eb112b, type: 2}

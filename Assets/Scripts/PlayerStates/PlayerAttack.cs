@@ -6,59 +6,54 @@ public class PlayerAttack : PlayerState
 {
 
     bool useAnimY = false;
+    bool gravityDisabled = false;
+    float launchVelocityY = 50f;
 
     public PlayerAttack(PlayerManager _player, PlayerStateMachine _stateMachine, string _animBoolName) : base(_player, _stateMachine, _animBoolName)
     {
     }
 
+    public override void Enter()
+    {
+        base.Enter();
+
+        player.objectsHit.Clear();
+
+        var currentAttack = player.movesManager.CurrentAttack();
+        if (currentAttack != null)
+        {
+            player.playerLocamotion.DashForward(currentAttack.forwardImpulse);
+
+            useAnimY = currentAttack.useRootY;
+
+            if (currentAttack.isLauncher)
+            {
+                gravityDisabled = true;
+                player.playerLocamotion.rb.useGravity = false;
+                player.playerLocamotion.rb.velocity = Vector3.zero;
+            }
+        }
+    }
+
+    public override void Exit()
+    {
+        base.Exit();
+
+        if (gravityDisabled)
+        {
+            gravityDisabled = false;
+            player.playerLocamotion.rb.useGravity = true;
+        }
+
+        player.anim.ResetTrigger(animBoolName);
+    }
+
     public override void AnimationFinishTrigger()
     {
-        //base.AnimationFinishTrigger();
-
         isAnimationFinished = true;
 
-        //if movesmanager.canmove
-        // move
-        // else 
-        //return to idle or movestate
-
-        //if (input.attack && combocount < 3)
-        //{
-        //    combocount++;
-        //    stateMachine.ChangeState(player.attackState);
-        //}
-        //else
-        //{
-        //if (player.movesManager.IsMoveAvailable())
-        //{
-        //    stateMachine.ChangeState(this);
-        //    player.movesManager.DoNextMove();
-        //} else
-
-        //if (input.movementInput == Vector2.zero)
-        //{
-        //    stateMachine.ChangeState(player.idleState);
-        //    player.movesManager.ClearAvailableMoves();
-        //}
-        //else
-        //{
-
-        // if (input.movementInput != Vector2.zero)
-        // {
-        //     stateMachine.ChangeState(player.moveState);
-        // }
-        // else
-        // {
-            player.movesManager.ClearAvailableMoves();
-            stateMachine.ChangeState(player.idleState);
-        //}
-
-
-        //}
-
-
-        //}
-
+        player.movesManager.ClearAvailableMoves();
+        stateMachine.ChangeState(player.idleState);
     }
 
     public override void AnimationTrigger()
@@ -67,8 +62,7 @@ public class PlayerAttack : PlayerState
         player.anim.SetTrigger(animBoolName);
     }
 
-
-
+    
     public override void DoChecks()
     {
         base.DoChecks();
@@ -81,26 +75,21 @@ public class PlayerAttack : PlayerState
 
     public override void OnAnimatorMove()
     {
-        player.playerLocamotion.RootAnimMove(player.anim.deltaPosition, useAnimY);
-    }
+        if (player.movesManager.CurrentAttack() is not null)
+        {
+            var currentAttack = player.movesManager.CurrentAttack();
 
-    public override void Enter()
-    {
-        base.Enter();
+            if (currentAttack.isLauncher && gravityDisabled && !canCombo)
+            {
+                Vector3 launchVelocity = new Vector3(0, launchVelocityY, 0);
+                float verticalCurveValue = player.anim.GetFloat("VerticalCurve");
+                player.playerLocamotion.rb.velocity = launchVelocity * verticalCurveValue;
+            }
+        }
 
-        player.objectsHit.Clear();
-
-        player.playerLocamotion.DashForward(player.movesManager.CurrentAttack().forwardImpulse);
-
-        useAnimY = player.movesManager.CurrentAttack().useRootY;
-    }
-
-    public override void Exit()
-    {
-        base.Exit();
-
-
-        player.anim.ResetTrigger(animBoolName);
+        Vector3 movement = player.anim.deltaPosition;
+        movement.y = useAnimY ? movement.y : 0;
+        player.playerLocamotion.RootAnimMove(movement, useAnimY);
     }
 
     public override void LogicUpdate()

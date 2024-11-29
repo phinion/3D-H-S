@@ -13,6 +13,7 @@ namespace Attack
         public bool MaintainMomentum;
         public float forwardImpulse = 0f;
         public bool useRootY = false;
+        public bool isLauncher = false;
         [SerializeField] private List<BaseInputType> requiredInputs;
 
         // Checks if all required inputs are met in the current inputs, ignoring extra inputs
