@@ -9,14 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
+  m_Script: {fileID: 11500000, guid: 3bae03b7a2c6417cbc92b6f74e82243a, type: 3}
   m_Name: UpperAttack
   m_EditorClassIdentifier: Assembly-CSharp::Attack
   Name: Upper Attack
   Anim: Upper Attack
   MaintainMomentum: 0
   forwardImpulse: 0
-  useRootY: 1
+  useRootY: 0
   requiredInputs:
   - {fileID: 11400000, guid: d3814d8a10821934398b885d4993a488, type: 2}
   - {fileID: 11400000, guid: 5ecd0c610f32c1b45bf41f5407eb112b, type: 2}

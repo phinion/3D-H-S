@@ -1,48 +1,29 @@
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using Moves;
-using UnityEngine;
 
-[CreateAssetMenu(fileName = "Attack", menuName = "Moves/Attack")]
-public class Attack : ScriptableObject
+namespace Attack
 {
-    public string Name;
-    public string Anim;
-    public bool MaintainMomentum;
-    public float forwardImpulse = 0f;
-    public bool useRootY = false;
-    [SerializeField] private List<BaseInputType> requiredInputs;
-
-    // Checks if all required inputs are met in the current inputs, ignoring extra inputs
-    public bool ExistsIn(List<BaseInputType> currentInputs)
+    [System.Serializable]
+    public class AttackCombo
     {
-        return requiredInputs.All(
-            inputType => currentInputs.Exists(
-                input => input.Matches(inputType)));
-    }
-}
+        public string name;
+        public List<AttackSO> combo;
+        public List<int> transitionTimes;
 
-[System.Serializable]
-public class AttackCombo
-{
-    public string name;
-    public List<Attack> combo;
-    public List<int> transitionTimes;
-
-    public bool ContinueCombo(List<BaseInputType> currentInputs, int comboCount)
-    {
-        var currentComboInput = CurrentComboInput(comboCount);
-        if (currentComboInput != null && currentComboInput.ExistsIn(currentInputs))
+        public bool ContinueCombo(List<BaseInputType> currentInputs, int comboCount)
         {
-            return true;
+            var currentComboInput = CurrentComboInput(comboCount);
+            if (currentComboInput != null && currentComboInput.ExistsIn(currentInputs))
+            {
+                return true;
+            }
+            return false;
         }
-        return false;
-    }
 
-    public Attack CurrentComboInput(int comboCount)
-    {
-        if (comboCount >= combo.Count) return null;
-        return combo[comboCount];
+        public AttackSO CurrentComboInput(int comboCount)
+        {
+            if (comboCount >= combo.Count) return null;
+            return combo[comboCount];
+        }
     }
 }
