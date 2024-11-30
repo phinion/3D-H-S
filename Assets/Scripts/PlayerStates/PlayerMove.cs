@@ -97,8 +97,6 @@ public class PlayerMove : PlayerState
         }
         else if (input.MovementInput == Vector2.zero && transitionToIdle == false)
         {
-            Debug.Log("NO MOVEMENTE RETURNING TO IDLE IN LOGIC");
-            // find out current speed and forward
             player.anim.SetBool(animBoolName, false);
             UseRootAnim = true;
             transitionToIdle = true;

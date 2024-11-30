@@ -144,7 +144,6 @@ public class InputManager : MonoBehaviour
     private void OnDisable()
     {
         playerControls.Disable();
-        Debug.Log("Disable");
     }
 
     public void HandleAllInput()
@@ -164,7 +163,6 @@ public class InputManager : MonoBehaviour
 
             if (neutralStateTimer >= neutralStateDelay)
             {
-                Debug.Log("MovementZero InputTimer");
                 lastMovementInput = movementInput;
                 moveAmount = 0f;
             }

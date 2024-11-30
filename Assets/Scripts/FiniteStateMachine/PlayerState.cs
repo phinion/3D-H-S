@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -66,7 +67,10 @@ public class PlayerState
 
     public virtual void AnimationTrigger()
     {
-        player.anim.SetBool(animBoolName, true);
+        if(!string.IsNullOrEmpty(animBoolName))
+        {
+            player.anim.SetBool(animBoolName, true);
+        }
     }
 
     public virtual void OnAnimatorMove()

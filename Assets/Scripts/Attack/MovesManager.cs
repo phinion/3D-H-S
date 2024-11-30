@@ -24,7 +24,7 @@ public class MovesManager : MonoBehaviour
         input.OnAttack += HandleAttackInput;
         ResetAvailableMoves();
     }
-    
+
     private void OnDestroy()
     {
         input.OnAttack -= HandleAttackInput;
@@ -47,7 +47,7 @@ public class MovesManager : MonoBehaviour
     private void FilterAvailableMoves(AttackSO _attack)
     {
         var modifiedList = availableMoves.ToList();
-        
+
         // TODO LINQ this
         for (var i = modifiedList.Count - 1; i >= 0; i--)
         {
@@ -96,36 +96,46 @@ public class MovesManager : MonoBehaviour
 
         if (input.MovementInput.y < 0)
         {
-            currentInputs.Add(new InputType { RequiredValue = "south" });
+            var inputType = ScriptableObject.CreateInstance<InputType>();
+            inputType.RequiredValue = "south";
+            currentInputs.Add(inputType);
         }
-        
+
         if (input.attack)
         {
-            currentInputs.Add(new AttackInput { requiredAttackType = AttackType.light });
+            var attackInputType = ScriptableObject.CreateInstance<AttackInput>();
+            attackInputType.requiredAttackType = AttackType.light;
+            currentInputs.Add(attackInputType);
         }
-        
+
         if (input.heavyAttack)
         {
-            currentInputs.Add(new AttackInput { requiredAttackType = AttackType.heavy });
+            var attackInputType = ScriptableObject.CreateInstance<AttackInput>();
+            attackInputType.requiredAttackType = AttackType.heavy;
+            currentInputs.Add(attackInputType);
         }
 
         if (input.run)
         {
-            currentInputs.Add(new InputType { RequiredValue = "run" });
+            var inputType = ScriptableObject.CreateInstance<InputType>();
+            inputType.RequiredValue = "run";
+            currentInputs.Add(inputType);
         }
-        
+
         if (input.dodge)
         {
-            currentInputs.Add(new InputType { RequiredValue = "dodge" });
+            var inputType = ScriptableObject.CreateInstance<InputType>();
+            inputType.RequiredValue = "dodge";
+            currentInputs.Add(inputType);
         }
-        
+
         return currentInputs;
     }
 
     public bool IsMoveAvailable()
     {
-        bool testboo = availableMoves.Count > 0 && inCombo;
-        return testboo;
+        bool moveAvailable = availableMoves.Count > 0 && inCombo;
+        return moveAvailable;
     }
 
     public void DoNextMove()
@@ -141,14 +151,14 @@ public class MovesManager : MonoBehaviour
                 player.anim.CrossFade(anim, 0.1f, 0, 0f);
             }
             player.anim.SetInteger("comboCount", comboCount);
-            
+
             FilterAvailableMoves(attack);
-            
+
             inCombo = false;
-            
+
         }
     }
-    
+
     public bool CurrentAttackMaintainsMomentum()
     {
         if (availableMoves.Count > 0)
@@ -167,8 +177,9 @@ public class MovesManager : MonoBehaviour
         }
         return null;
     }
-    
+
     #region comboReset Timer
+
     private float comboResetTime = 1.0f; // Customize as needed
     private Coroutine comboResetCoroutine;
 
@@ -183,5 +194,7 @@ public class MovesManager : MonoBehaviour
         yield return new WaitForSeconds(delay);
         ClearAvailableMoves();
     }
+
     #endregion
+
 }
