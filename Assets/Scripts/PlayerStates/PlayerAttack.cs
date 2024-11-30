@@ -7,7 +7,6 @@ public class PlayerAttack : PlayerState
 
     bool useAnimY = false;
     bool gravityDisabled = false;
-    float launchVelocityY = 50f;
 
     public PlayerAttack(PlayerManager _player, PlayerStateMachine _stateMachine, string _animBoolName) : base(_player, _stateMachine, _animBoolName)
     {
@@ -62,7 +61,7 @@ public class PlayerAttack : PlayerState
         player.anim.SetTrigger(animBoolName);
     }
 
-    
+
     public override void DoChecks()
     {
         base.DoChecks();
@@ -81,7 +80,7 @@ public class PlayerAttack : PlayerState
 
             if (currentAttack.isLauncher && gravityDisabled && !canCombo)
             {
-                Vector3 launchVelocity = new Vector3(0, launchVelocityY, 0);
+                Vector3 launchVelocity = new Vector3(0, currentAttack.launchForceY, 0);
                 float verticalCurveValue = player.anim.GetFloat("VerticalCurve");
                 player.playerLocamotion.rb.velocity = launchVelocity * verticalCurveValue;
             }

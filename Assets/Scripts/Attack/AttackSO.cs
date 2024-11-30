@@ -14,6 +14,7 @@ namespace Attack
         public float forwardImpulse = 0f;
         public bool useRootY = false;
         public bool isLauncher = false;
+        public float launchForceY = 0f;
         [SerializeField] private List<BaseInputType> requiredInputs;
 
         // Checks if all required inputs are met in the current inputs, ignoring extra inputs
