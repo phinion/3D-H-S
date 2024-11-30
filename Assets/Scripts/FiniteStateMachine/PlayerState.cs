@@ -42,7 +42,6 @@ public class PlayerState
     public virtual void Exit()
     {
         //player.anim.SetBool(animBoolName, false);
-        player.anim.SetBool("combo", false);
         isExitingState = true;
         canCombo = false;
     }

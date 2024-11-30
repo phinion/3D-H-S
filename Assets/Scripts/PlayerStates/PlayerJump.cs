@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerJump : PlayerState
 {
     public bool canDoubleJump = true;
-    
+
     public PlayerJump(PlayerManager _player, PlayerStateMachine _stateMachine, string _animBoolName) : base(_player, _stateMachine, _animBoolName)
     {
     }
@@ -19,7 +19,7 @@ public class PlayerJump : PlayerState
 
     public override void AnimationFinishTrigger()
     {
-        base.AnimationFinishTrigger();
+        isAnimationFinished = true;
 
         stateMachine.ChangeState(player.fallState);
     }
@@ -32,6 +32,11 @@ public class PlayerJump : PlayerState
     public override void Enter()
     {
         base.Enter();
+
+        if (!canDoubleJump)
+        {
+            player.anim.SetInteger("comboCount", 1);
+        }
     }
 
     public override void Exit()

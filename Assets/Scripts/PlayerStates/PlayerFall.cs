@@ -11,6 +11,7 @@ public class PlayerFall : PlayerState
     public override void AnimationFinishTrigger()
     {
         base.AnimationFinishTrigger();
+        
         stateMachine.ChangeState(player.idleState);
     }
 
@@ -29,7 +30,7 @@ public class PlayerFall : PlayerState
     public override void Exit()
     {
         base.Exit();
-
+        
         //player.anim.applyRootMotion = false;
     }
 
@@ -39,14 +40,13 @@ public class PlayerFall : PlayerState
 
         if (player.playerLocamotion.isGrounded)
         {
+            player.anim.SetBool("jump", false);
             player.anim.SetBool(animBoolName, false);
 
             if (!player.jumpState.canDoubleJump)
             {
                 player.jumpState.canDoubleJump = true;
             }
-            
-            stateMachine.ChangeState(player.idleState);
         }
         else if (input.jump && player.jumpState.canDoubleJump)
         {
