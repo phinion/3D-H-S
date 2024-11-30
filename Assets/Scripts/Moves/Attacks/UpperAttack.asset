@@ -18,6 +18,7 @@ MonoBehaviour:
   forwardImpulse: 0
   useRootY: 1
   isLauncher: 1
+  launchForceY: 35
   requiredInputs:
   - {fileID: 11400000, guid: d3814d8a10821934398b885d4993a488, type: 2}
   - {fileID: 11400000, guid: 5ecd0c610f32c1b45bf41f5407eb112b, type: 2}
